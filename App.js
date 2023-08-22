@@ -29,10 +29,10 @@ import Nav from './Screens/navigate';
 
 
 
-
+//The constant below allows the usage of the tab navigator
 const Tab = createBottomTabNavigator();
 
-
+//I am planning to nest the stack navigation below into the tab navigation in the App() function
 function Others () {
 
   return(
@@ -89,7 +89,6 @@ export default function App() {
         options={{title:"Me",tabBarIcon: ({ color, size }) => (
             <FontAwesomeIcon icon={faUser} size={32} color='black' />
           ),
-          // Set the presentation mode to modal for our modal route.
           headerTintColor:'white',headerShadowVisible:false, headerStyle: {
             elevation:0,shadowOpacity:0,borderBottomWidth:0,
             backgroundColor:'#00f',}
