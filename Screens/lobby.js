@@ -48,7 +48,7 @@ function Lobby ({navigation}) {
 
  <Text style={{
   fontWeight:600,
-  marginTop:219,
+  marginTop:70,
   marginLeft:66,
   fontSize:20,
   color:'white'
@@ -56,7 +56,7 @@ function Lobby ({navigation}) {
                    </View>
   <Text style={{
     position:'absolute',
-    top:70,
+    top:120,
     left:128,
     fontSize:20,
     fontWeight:800,
@@ -67,7 +67,7 @@ function Lobby ({navigation}) {
     justifyContent:'center',
     alignItems:'center',
     position:'absolute',
-    top:1,
+    top:32,
     right:39,
     borderRadius:99,
     borderTopColor:'white',
@@ -124,9 +124,15 @@ function Lobby ({navigation}) {
                        )}
       </View>
       */}
-      <ScrollView>
+      <View style={{
+        marginTop:30,
+        height:150,
+        width:340,
+        flex:0.4,
+        marginBottom:-110
+      }}>
       {Updates(false,{navigation})}
-      </ScrollView>
+      </View>
 </View>
 
     );

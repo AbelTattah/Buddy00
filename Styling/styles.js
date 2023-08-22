@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet,StatusBar } from "react-native";
 
 const styles = StyleSheet.create({
     Homepage:{
@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     },
     lobbyQuotes: {
       marginTop:100,
-      flex:0.7,
+      flex:3,
       backgroundColor:'#fff',
       borderWidth:1,
       borderRadius:30,
@@ -63,18 +63,18 @@ const styles = StyleSheet.create({
       marginBottom:-6
     },
     updates:{
-      flex:1.1,
+      flex:0.15,
       flexDirection:'row',
       backgroundColor:'#00f',
-      height:5,
+      height:500,
       width:500,
       borderRadius:15,
       borderBottomWidth:5,
       borderBottomColor:'white',
       borderRightWidth:5,
       borderRightColor:'#000',
-      marginBottom:100,
-      marginTop:-200
+      marginBottom:120,
+      marginTop:-207
     },
     up1 :{
       width:260,
@@ -108,11 +108,36 @@ const styles = StyleSheet.create({
       marginTop:10
       
     },
-    wea: {
-      fontSize:20,
-      fontWeight:800,
+    ScrollView: {
+      backgroundColor:'blue',
+      height:300
+    },
+    contentContainer:{
+      paddingVertical: 20,
+      marginTop:100,
+      flex:1,
+      backgroundColor:'#fff',
+      borderWidth:1,
+      borderRadius:30,
+      height:350,
+      width:340,
+      padding:0,
+      justifyContent:'center',
+    },
+    contentContainer1:{
+      paddingTop: StatusBar.currentHeight,
+      flex:1,
+      backgroundColor:'#fff',
+      borderWidth:1,
+      borderRadius:30,
+      height:250,
+      width:340,
+      padding:0,
+      justifyContent:'center',
+      marginBottom:10,
+      position:'absolute',
+      top:120
     }
-      
       
   
 
