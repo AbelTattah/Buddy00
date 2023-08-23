@@ -39,30 +39,7 @@ const styles = StyleSheet.create({
      
 
     },
-    button1: {
-      flex:1,
-      justifyContent:'center',
-      alignItems:'center',
-      backgroundColor:'#000',
-      width:19,
-      height:34,
-      borderRadius:15,
-      borderBottomWidth:5,
-      borderBottomColor:'#000',
-      borderRightWidth:5,
-      borderRightColor:'#000'
-    },
-    Options: {
-      gap:8,
-      marginTop:0,
-      margin:10,
-      justifyContent:'space-evenly',
-      flex:4,
-      flexDirection:'row',
-      marginTop:20,
-      marginBottom:-6
-    },
-    updates:{
+    dashboardTopSection:{
       flex:0.15,
       flexDirection:'row',
       backgroundColor:'#00f',
@@ -76,37 +53,25 @@ const styles = StyleSheet.create({
       marginBottom:120,
       marginTop:-207
     },
-    up1 :{
-      width:260,
-      borderRightWidth:1,
-      borderRightColor:'#ffd70099'
-    },
-    up2 :{
-      width:140,
-      height:170,
-      borderBottomWidth:1,
-      borderBottomColor:'#ffd70099'
-    },
-    nextc: {
-      marginTop:-18,
-      backgroundColor:'#000',
-      width:90,
-      height:10,
-      borderTopWidth:5,
-      borderTopColor:'blue',
-      borderRightWidth:5,
-      borderTopRightRadius:20,
-      borderTopLeftRadius:20,
-      borderRightColor:'blue'
-    },
-    headerr: {
-      flex:1,
-      flexDirection:'row',
-      marginRight:80,
-      marginLeft:10,
-      gap:10,
-      marginTop:10
+    dashboardName: {
+      position:'absolute',
+      top:120,
+      left:128,
+      fontSize:20,
       
+      
+    },
+    dashboardAvatar:{
+      justifyContent:'center',
+      alignItems:'center',
+      position:'absolute',
+      top:32,
+      right:39,
+      borderRadius:99,
+      borderTopColor:'white',
+      height:133,
+      width:133,
+      backgroundColor:'#888'
     },
     ScrollView: {
       backgroundColor:'blue',
@@ -137,7 +102,53 @@ const styles = StyleSheet.create({
       marginBottom:10,
       position:'absolute',
       top:120
-    }
+    },
+    lobbyGreeting : {
+      marginTop:70,
+      marginLeft:66,
+      fontSize:20,
+      color:'white'
+    },
+    lobbyWeather: {
+      position:'absolute',
+    top:200,
+    left:60
+    },
+    lobbyMiniUpdates: {
+      marginTop:30,
+      height:150,
+      width:340,
+      flex:0.4,
+      marginBottom:-110
+    }, 
+    lobbyMiniUpdatesTop: {
+      flexDirection:'row',
+      height:20,
+      justifyContent:'space-evenly',
+      width: 320,
+      marginBottom:20
+    },
+    container1: {
+      flex: 4,
+      paddingTop: StatusBar.currentHeight,
+      borderWidth:1,
+      marginTop:20,
+      borderRadius:40,
+      height:300,
+      paddingBottom:30
+    },
+    scrollView1: {
+      backgroundColor: 'white',
+      marginHorizontal: 0,
+      
+    },
+    text1: {
+      padding:10,
+      fontSize: 17,
+      margin:10,
+      backgroundColor:'#8889',
+      borderRadius:30
+    },
       
   
 

@@ -22,7 +22,6 @@ export default function Weather() {
             .then(()=>console.log(
                 "Hello world"
             ))
-            .then(()=>console.log(dataa))
             .catch((error)=>console.log())
             .finally(()=>setLdd(false));
         };
