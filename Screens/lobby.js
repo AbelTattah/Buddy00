@@ -6,7 +6,7 @@ import { useState,useEffect } from "react";
 import Weather from "../Components/weather";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
-import Updates from "./updates";
+import Updates from "../Updates/updates";
  
 
 

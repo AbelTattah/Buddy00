@@ -15,12 +15,15 @@ import { faMugSaucer } from '@fortawesome/free-solid-svg-icons/faMugSaucer';
 import { faGear } from '@fortawesome/free-solid-svg-icons/faGear';
 import { View } from 'react-native';
 import styles from './Styling/styles';
-import Updates from './Screens/updates';
+import Updates from './Updates/updates';
 import { Text } from 'react-native';
 import Settings from './Screens/settings';
 const Stack = createNativeStackNavigator();
 import { faLocation, faUser } from '@fortawesome/free-solid-svg-icons';
 import Nav from './Screens/navigate';
+import Me from './Screens/me';
+import Updatesscreen from './Screens/updatesScreen';
+import PersonalTimetable from './Timetables/personalTimetable';
 
 
 
@@ -33,24 +36,8 @@ import Nav from './Screens/navigate';
 const Tab = createBottomTabNavigator();
 
 //I am planning to nest the stack navigation below into the tab navigation in the App() function
-function Others () {
 
-  return(
-    <NavigationContainer>    
-    <Stack.Navigator>
-    <Stack.Screen 
-        name='Updates'
-        component={Updates}
-        options = {{title:'Updates',headerTintColor:'white',headerShadowVisible:false, headerStyle: {
-            elevation:0,shadowOpacity:0,borderBottomWidth:0,
-            backgroundColor:'blue',
-          }}} />
-    </Stack.Navigator>
-    </NavigationContainer>
-
-  );
-}
-function HeaderTitlee() {
+function LobbyTitle() {
   return(
     <View>
       <Text style={{
@@ -63,17 +50,30 @@ function HeaderTitlee() {
   );
 };
 
+
+function MeTitle() {
+  return(
+    <View>
+      <Text style={{
+        marginLeft:26,
+      fontWeight:700,
+      fontSize:23,
+      color:'white'
+      }}>Me</Text>
+    </View>
+  );
+};
 export default function App() {
   return (<>
   
-    <NavigationContainer>
+    <NavigationContainer independent={true}>
     
     <Tab.Navigator>
     <Tab.Screen 
           name="Lobby" 
          
           component={Lobby} gestureEnabled={true}
-          options = { {headerTitle:()=><HeaderTitlee />,tabBarIcon: ({ color, size }) => (
+          options = { {headerTitle:()=><LobbyTitle />,tabBarIcon: ({ color, size }) => (
             <FontAwesomeIcon icon={faMugSaucer} size={32} color='black' />
           ),
            headerShadowVisible:false,headerTintColor:'white', headerStyle: {
@@ -84,21 +84,21 @@ export default function App() {
            
         />
         <Tab.Screen
-        component={Nxtclass}
-        name="Nxtclass"
-        options={{title:"Me",tabBarIcon: ({ color, size }) => (
+        component={Me}
+        name="Me"
+        options={{headerTitle:()=><MeTitle />,tabBarIcon: ({ color, size }) => (
             <FontAwesomeIcon icon={faUser} size={32} color='black' />
           ),
           headerTintColor:'white',headerShadowVisible:false, headerStyle: {
             elevation:0,shadowOpacity:0,borderBottomWidth:0,
-            backgroundColor:'#00f',}
+            backgroundColor:'blue',}
         }}
       />
       
          <Tab.Screen 
         name='Updates'
-        component={Updates} 
-        options = {{title:'Updates',
+        component={Updatesscreen} 
+        options = {{title:'Update',
         tabBarIcon: ({ color, size }) => (
             <FontAwesomeIcon icon={faRepeat} size={32} color='black' />
           ),headerTintColor:'white',headerShadowVisible:false, headerStyle: {
@@ -135,8 +135,6 @@ export default function App() {
     </>
   );
 }
-
-
 
 /*TODO : 
 

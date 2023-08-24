@@ -1,3 +1,4 @@
+import { height } from "@fortawesome/free-solid-svg-icons/faRepeat";
 import { StyleSheet,StatusBar } from "react-native";
 
 const styles = StyleSheet.create({
@@ -148,6 +149,99 @@ const styles = StyleSheet.create({
       margin:10,
       backgroundColor:'#8889',
       borderRadius:30
+    },
+    meContentContainer:{
+      flex:1,
+      width:400,
+      height:600
+    },
+    meTopSection: {
+      flex:3,
+      height:100,
+      width:400,
+      backgroundColor:'blue',
+    
+    },
+    meMiddeSection: {
+      flex:1.5,
+      height:100,
+      width:400,
+      backgroundColor:'white',
+      borderTopLeftRadius:70,
+      marginTop:-50
+    },
+    meBottomSection: {
+      flex:1,
+      height:80,
+      width:300,
+      margin:20,
+      borderWidth:2,
+      backgroundColor:'blue',
+      borderBottomWidth:1,
+      borderBottomColor:'white',
+      borderTopLeftRadius:30,
+      borderBottomRightRadius:30,
+    },
+    me : {
+      marginTop:-3,
+    flex:6,
+    justifyContent:'center',
+    alignItems:'center',
+    
+    },
+    meTopButtons: {
+      width :300,
+      height:36,
+      borderWidth:3,
+      borderColor:'white',
+      borderRadius:20
+    },
+    meTopButtonView: {
+      flex:1,
+      justifyContent:"center",
+      alignItems:'center',
+      gap:10
+    },
+    meTopButtonText :{
+      color:'white',
+      fontFamily:'verdana',
+      fontSize:20,
+      textAlign:"center",
+    
+    },
+    meMiddleButtons: {
+      width :300,
+      height:36,
+      borderWidth:3,
+      borderColor:'blue',
+      borderRadius:20
+    },
+    meMiddleButtonView: {
+      flex:1,
+      justifyContent:"center",
+      alignItems:'center',
+      gap:5
+    },
+    meMiddleButtonText :{
+      color:'black',
+      fontFamily:'verdana',
+      fontSize:20,
+      textAlign:"center"
+    },
+    meMiddeTopText: {
+      fontFamily:'verdana',
+      fontSize:20,
+      textAlign:"center",
+      marginTop:17
+    },
+    meTopText :{
+      color:'white',
+      fontFamily:'verdana',
+      fontSize:20,
+      textAlign:"center",
+      marginBottom:-37,
+      marginTop:-4
+    
     },
       
   

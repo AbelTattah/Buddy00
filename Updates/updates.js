@@ -13,7 +13,8 @@ export default function Updates(props,{navigation})  {
   <>
  {props.show?(
     <>
-      <View><Text>This is the recents page.</Text></View>
+      <View><Text>This is the updates page.</Text></View>
+      <View><Text>This is page will be a mini social media app for students</Text></View>
      
     </>
 ):(
@@ -29,7 +30,7 @@ export default function Updates(props,{navigation})  {
   <Text style={styles.text1}>
    MATH123: The results for MATH123 first semester 2023 have been released
   </Text>
-  <Text style={styles.text}>
+  <Text style={styles.text1}>
    DCIT102: Mr Abdullai Aziz Has been banned from setting exam questions
   </Text>
   <Text style={styles.text1}>
