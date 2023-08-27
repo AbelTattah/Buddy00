@@ -123,8 +123,9 @@ const styles = StyleSheet.create({
       marginBottom:-110
     }, 
     lobbyMiniUpdatesTop: {
+      flex:3,
       flexDirection:'row',
-      height:20,
+      height:300,
       justifyContent:'space-evenly',
       width: 320,
       marginBottom:20
@@ -204,7 +205,6 @@ const styles = StyleSheet.create({
     },
     meTopButtonText :{
       color:'white',
-      fontFamily:'verdana',
       fontSize:20,
       textAlign:"center",
     
@@ -224,26 +224,28 @@ const styles = StyleSheet.create({
     },
     meMiddleButtonText :{
       color:'black',
-      fontFamily:'verdana',
       fontSize:20,
       textAlign:"center"
     },
     meMiddeTopText: {
-      fontFamily:'verdana',
       fontSize:20,
       textAlign:"center",
       marginTop:17
     },
     meTopText :{
       color:'white',
-      fontFamily:'verdana',
       fontSize:20,
       textAlign:"center",
       marginBottom:-37,
       marginTop:-4
     
     },
-      
+    Input: {
+      height: 40,
+      margin: 12,
+      borderWidth: 1,
+      padding: 10,
+    }
   
 
   });

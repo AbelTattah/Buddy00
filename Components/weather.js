@@ -36,17 +36,13 @@ export default function Weather() {
          </>):
          (<View style={{
             flexDirection:'row'
-         }}>{/*
-            <Text style={{
-                 fontSize:20,
-                 fontWeight:800,
-            }}> {dataa.weather[0].main} </Text>*/}
+         }}>
           {(dataa.weather[0].main=='Rain')?
           (<FontAwesomeIcon icon={faCloudRain} color="gray" size={40}/>)
           :
           (dataa.weather[0].main=='Clouds')?(<FontAwesomeIcon icon={faCloud} color="gray" size={40}/>)
           :(dataa.weather[0].main=='Sunny')?(<FontAwesomeIcon icon={faSun} color="gray" size={40}/>):(<Text>Nuin</Text>)}
-            <Text> {Math.round((5/9)*(dataa.main.temp-32)).toFixed(1)} C</Text>
+            <Text> {Math.round(dataa.main.temp-273.15).toFixed(1)} C</Text>
        
 
          </View>)
