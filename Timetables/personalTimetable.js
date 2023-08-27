@@ -3,7 +3,8 @@ import { useState,useEffect } from "react";
 import styles from "../Styling/styles";
 import { ActivityIndicator } from "react-native";
 
-/*const Haha = [
+/*
+const Haha = [
     {
         "_id": "64e8b822b87d837a917a3779",
         "Subject": {
@@ -99,6 +100,7 @@ import { ActivityIndicator } from "react-native";
   ]
 
   suds[a]["Subject"]["Math126"][b][1]
+
  */
 
 
@@ -112,7 +114,7 @@ export default function PersonalTimetable({navigation}){
     var [sid,setSid] = useState('');
     var [suds,setSuds] = useState({});
     var [disp,setDisp] = useState('Yet to generate');
-    var [lddd,setLddd] = useState('no');
+    var [lddd,setLddd] = useState('yes');
     
 
     useEffect(() => {
@@ -125,12 +127,12 @@ export default function PersonalTimetable({navigation}){
             .finally(()=>setLddd('yes'));
         };
         fetchAata();
-    }, []);
+   }, []);
 
   async function FindTime(){
         for (var a=0; a<3 ;a++){
             for (var b=0; a<=2; b++) {
-            if(
+            if  (
                 sid-suds[a]["Subject"]["Math126"][b].high>0 && sid-suds[a]["Subject"]["Math126"][b].low ==0 ||
                 sid-suds[a]["Subject"]["Math126"][b].high==0 && sid-suds[a]["Subject"]["Math126"][b].low >0  ||
                 sid-suds[a]["Subject"]["Math126"][b].high<0 && sid-suds[a]["Subject"]["Math126"][b].low >0 
@@ -139,10 +141,10 @@ export default function PersonalTimetable({navigation}){
                 {
                 console.log("It worked");
                 setDisp("Math126          "+suds[a]["Subject"]["Math126"][b].time)
-              
+               break;
                 }
                 else
-              {
+                {
                   console.log("Nope");
                   continue;
                 }    
@@ -160,7 +162,7 @@ export default function PersonalTimetable({navigation}){
     };
     async function Diss()
     {
-console.log(suds[1]["Subject"]["Math126"][1].high)
+console.log(suds[2]["Subject"]["Math126"][1].high)
     };
 
 
@@ -188,8 +190,8 @@ console.log(suds[1]["Subject"]["Math126"][1].high)
                 <Text>Enter your SID :</Text>
                 <TextInput onChangeText={(value)=>setSid(value)} style={styles.Input}></TextInput>
                 <Button title="Find" onPress={FindTime()}></Button>
-                <Button title="Find" onPress={FindTime()}></Button>
-                <Button title="Find" onPress={FindTime()}></Button>
+                <Button title="Find" onPress={fetchAata()}></Button>
+                <Button title="Find" onPress={Diss()}></Button>
               </View>
               <View><Text>wagyimi anaa?</Text></View>
               </View>

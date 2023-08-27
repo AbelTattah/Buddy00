@@ -14,16 +14,15 @@ import { faBell } from '@fortawesome/free-solid-svg-icons/faBell';
 import { faMugSaucer } from '@fortawesome/free-solid-svg-icons/faMugSaucer';
 import { faGear } from '@fortawesome/free-solid-svg-icons/faGear';
 import { View } from 'react-native';
-import styles from './Styling/styles';
-import Updates from './Updates/updates';
+
 import { Text } from 'react-native';
 import Settings from './Screens/settings';
 const Stack = createNativeStackNavigator();
-import { faLocation, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faCalendarDay, faLocation, faUser } from '@fortawesome/free-solid-svg-icons';
 import Nav from './Screens/navigate';
-import Me from './Screens/me';
-import Updatesscreen from './Screens/updatesScreen';
-import PersonalTimetable from './Timetables/personalTimetable';
+import TODO from './Screens/toDo';
+import Resources from './Screens/resources';
+import Timetables from './Screens/timetables';
 
 
 
@@ -59,7 +58,7 @@ function MeTitle() {
       fontWeight:700,
       fontSize:23,
       color:'white'
-      }}>Me</Text>
+      }}>Timetables</Text>
     </View>
   );
 };
@@ -68,7 +67,19 @@ export default function App() {
   
     <NavigationContainer independent={true}>
     
-    <Tab.Navigator>
+    <Tab.Navigator initialRouteName='Lobby'>
+  
+           <Tab.Screen 
+        name='Updates'
+        component={TODO} 
+        options = {{title:'TODO',
+        tabBarIcon: ({ color, size }) => (
+            <FontAwesomeIcon icon={faBell} size={32} color='black' />
+          ),headerTintColor:'white',headerShadowVisible:false, headerStyle: {
+            elevation:0,shadowOpacity:0,borderBottomWidth:0,
+            backgroundColor:'#00f'
+            ,
+        }}} />
     <Tab.Screen 
           name="Lobby" 
          
@@ -83,29 +94,20 @@ export default function App() {
           }
            
         />
-        <Tab.Screen
-        component={Me}
-        name="Me"
+      
+      
+      
+          <Tab.Screen
+        component={Timetables}
+        name="Timetables"
         options={{headerTitle:()=><MeTitle />,tabBarIcon: ({ color, size }) => (
-            <FontAwesomeIcon icon={faUser} size={32} color='black' />
+            <FontAwesomeIcon icon={faCalendarDay} size={32} color='black' />
           ),
           headerTintColor:'white',headerShadowVisible:false, headerStyle: {
             elevation:0,shadowOpacity:0,borderBottomWidth:0,
             backgroundColor:'blue',}
         }}
       />
-      
-         <Tab.Screen 
-        name='Updates'
-        component={Updatesscreen} 
-        options = {{title:'Update',
-        tabBarIcon: ({ color, size }) => (
-            <FontAwesomeIcon icon={faRepeat} size={32} color='black' />
-          ),headerTintColor:'white',headerShadowVisible:false, headerStyle: {
-            elevation:0,shadowOpacity:0,borderBottomWidth:0,
-            backgroundColor:'#00f'
-            ,
-        }}} />
          <Tab.Screen 
         name='Navigator'
         component={Nav} 

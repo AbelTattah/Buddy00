@@ -5,10 +5,10 @@ import Updates from "../Updates/updates";
 
 
 
-export default function Updatesscreen() {
+export default function TODO({navigation}) {
     return (
         <View>
-       <Updates show ={true} />
+        <Text>TODO page</Text>
         </View>
     );
 }

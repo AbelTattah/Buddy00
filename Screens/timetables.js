@@ -56,7 +56,7 @@ function MeTitle() {
       </View>
     );
   };
-export default function Me({navigation}) {
+export default function Timetables({navigation}) {
     return (
         <NavigationContainer independent={true}>
          <stack.Navigator>
