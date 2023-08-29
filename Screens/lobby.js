@@ -7,12 +7,26 @@ import Weather from "../Components/weather";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import Updates from "../Updates/updates";
- 
-
+import { useFonts } from "expo-font";
+import AppLoading from "expo-app-loading";
 
 
 
 export default function Lobby ({navigation}) {
+let [fontsLoaded] = useFonts({
+    "FredokaBold":require("../fonts/FredokaBold.ttf"),
+});
+
+
+if (!fontsLoaded){
+    return <AppLoading />;
+}
+
+
+
+
+
+
 
     return (
 <View style={styles.Homepage}>

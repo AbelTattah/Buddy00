@@ -1,10 +1,7 @@
-
-
 import * as React from 'react';
 import Lobby from './Screens/lobby';
 import { NavigationContainer, TabRouter } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-
 import { Button,TouchableOpacity } from 'react-native';
 import Nxtclass from './Screens/nxtclass';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -14,7 +11,6 @@ import { faBell } from '@fortawesome/free-solid-svg-icons/faBell';
 import { faMugSaucer } from '@fortawesome/free-solid-svg-icons/faMugSaucer';
 import { faGear } from '@fortawesome/free-solid-svg-icons/faGear';
 import { View } from 'react-native';
-
 import { Text } from 'react-native';
 import Settings from './Screens/settings';
 const Stack = createNativeStackNavigator();
@@ -23,6 +19,11 @@ import Nav from './Screens/navigate';
 import TODO from './Screens/toDo';
 import Resources from './Screens/resources';
 import Timetables from './Screens/timetables';
+// Rest of the import statements
+import { useFonts } from 'expo-font';
+import AppLoading from 'expo-app-loading';
+
+
 
 
 
@@ -54,6 +55,8 @@ function MeTitle() {
   return(
     <View>
       <Text style={{
+        marginTop:29,
+        FontFamily:"FredokaBold",
         marginLeft:26,
       fontWeight:700,
       fontSize:23,
@@ -63,6 +66,19 @@ function MeTitle() {
   );
 };
 export default function App() {
+
+
+  let [fontsLoaded] = useFonts({
+    "FredokaBold":require("./fonts/FredokaBold.ttf"),
+});
+
+
+if (!fontsLoaded){
+    return <AppLoading />;
+}
+
+
+
   return (<>
   
     <NavigationContainer independent={true}>
@@ -142,7 +158,7 @@ export default function App() {
 
         Apply A little bit of Object oriented approach.
         Make the Quotes change.
-         1. Bottom Navigation
+         1. Bottom Navigation     :Done 
          2. Add swiping features that will enable user to navigate to other options.
          3. Make the maps component find the location of the user instantly.
       */

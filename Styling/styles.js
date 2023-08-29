@@ -59,6 +59,7 @@ const styles = StyleSheet.create({
       top:120,
       left:128,
       fontSize:20,
+      fontFamily:'FredokaBold'
       
       
     },
@@ -108,7 +109,8 @@ const styles = StyleSheet.create({
       marginTop:70,
       marginLeft:66,
       fontSize:20,
-      color:'white'
+      color:'white',
+      fontFamily:'FredokaBold'
     },
     lobbyWeather: {
       position:'absolute',
@@ -123,15 +125,15 @@ const styles = StyleSheet.create({
       marginBottom:-110
     }, 
     lobbyMiniUpdatesTop: {
-      flex:3,
+      flex:1,
       flexDirection:'row',
       height:300,
       justifyContent:'space-evenly',
       width: 320,
-      marginBottom:20
+      marginBottom:31
     },
     container1: {
-      flex: 4,
+      flex: 5,
       paddingTop: StatusBar.currentHeight,
       borderWidth:1,
       marginTop:20,
@@ -145,6 +147,8 @@ const styles = StyleSheet.create({
       
     },
     text1: {
+       
+      fontFamily:'FredokaLight',
       padding:10,
       fontSize: 17,
       margin:10,
@@ -161,6 +165,7 @@ const styles = StyleSheet.create({
       height:100,
       width:400,
       backgroundColor:'blue',
+      marginTop:-40
     
     },
     meMiddeSection: {
@@ -192,21 +197,26 @@ const styles = StyleSheet.create({
     },
     meTopButtons: {
       width :300,
-      height:36,
+      height:86,
       borderWidth:3,
-      borderColor:'white',
-      borderRadius:20
+      borderColor:'black',
+      borderRadius:20,
+      justifyContent:'center',
+      backgroundColor:'#ddd'
+
     },
     meTopButtonView: {
       flex:1,
       justifyContent:"center",
       alignItems:'center',
-      gap:10
+      gap:30
     },
     meTopButtonText :{
-      color:'white',
+      justifyContent:'center',
+      color:'black',
       fontSize:20,
       textAlign:"center",
+      fontFamily:'FredokaBold'
     
     },
     meMiddleButtons: {
@@ -245,6 +255,39 @@ const styles = StyleSheet.create({
       margin: 12,
       borderWidth: 1,
       padding: 10,
+    },
+    personalTimetableTopButton:{
+      width:300,
+      height:200,
+      margin:300
+    },
+    personalTimetableTopButtonView:{
+      margin:22,
+      gap:5,
+      marginLeft:300
+    },
+    perTMainview :{
+      height:460,
+      width:380,
+      justifyContent:'center',
+      alignItems:'center',
+      borderWidth:3,
+      backgroundColor:'#ccc',
+      gap:20,
+      
+    },
+    perTviews :{
+      height:40,
+      width:340,
+      justifyContent:'center',
+      alignItems:'center',
+      borderWidth:3,
+      backgroundColor:'#ccc',
+      gap:10,
+      
+    },
+    perT: {
+      fontFamily:'FredokaBold'
     }
   
 

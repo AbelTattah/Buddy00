@@ -5,7 +5,8 @@ import { useState,useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faBell } from "@fortawesome/free-solid-svg-icons";
 import { ActivityIndicator } from "react-native";
-
+import { useFonts } from "expo-font";
+import AppLoading from "expo-app-loading";
 
 
 
@@ -30,7 +31,16 @@ export default function Updates(props,{navigation})  {
       fetchDataa();
     }, []);
 
-
+    let [fontsLoaded] = useFonts({
+      "FredokaBold":require("../fonts/FredokaBold.ttf"),
+      "FredokaLight":require("../fonts/static/Fredoka-Light.ttf")
+  });
+  
+  
+  if (!fontsLoaded){
+      return <AppLoading />;
+  }
+  
 
 
 
@@ -72,10 +82,22 @@ export default function Updates(props,{navigation})  {
 
 <View style={styles.container1}>
 <View 
-  style={styles.lobbyMiniUpdatesTop}><Text 
+  style={styles.lobbyMiniUpdatesTop}>
+   <FontAwesomeIcon
    style={{
-    fontSize:18
-   }}>What's new (99+)</Text><FontAwesomeIcon icon={faBell} color="black" size={32}/></View>
+    marginLeft:190
+   }} 
+   icon={faBell} color="black" size={32}/>
+   <Text 
+   style={{
+    position:"absolute",
+    left:20,
+    fontSize:18,
+    fontFamily:'FredokaBold',
+    color:'black',
+  
+   }}>What's new (99+)</Text>
+</View>
 <ScrollView contentContainerStyle={styles.scrollView1}>
   <Text style={styles.text1}>
    MATH123: The results for MATH123 first semester 2023 have been released
