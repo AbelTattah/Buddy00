@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "Buddy",
-    "slug": "Buddy",
+    "slug": "buddy",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -10,7 +10,7 @@
       "image": "./assets/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff",
-      "owner":"buddy00"
+      "owner": "buddy00"
     },
     "assetBundlePatterns": [
       "**/*"
@@ -30,8 +30,9 @@
     },
     "extra": {
       "eas": {
-        "projectId": "c88b6cc0-b298-486e-9e8d-b8436969a42e"
+        "projectId": "c2946f54-010c-4eb0-ad2c-d7b365387fdd"
       }
-    }
+    },
+    "owner": "buddy00"
   }
 }
