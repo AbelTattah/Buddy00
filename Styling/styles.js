@@ -288,7 +288,61 @@ const styles = StyleSheet.create({
     },
     perT: {
       fontFamily:'FredokaBold'
-    }
+    },
+    //To do SECTION. Any code beyon this point is to style the todo page until any comment says otherwise
+    todoContainer:{
+      backgroundColor: '#0000Ff',
+      height: '100%',
+    },
+    todoItemsContainer:{
+
+      width: '100%',
+      backgroundColor: '#ecf3f7',
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'space-evenly',
+      alignItems: 'flex-end',
+ 
+    },
+//This section is used to specify the style of each individual to do item/task
+taskItem:{
+  backgroundColor: '#ecf3f7',
+  borderTopWidth: 0.8,
+  borderColor: '#8889',
+  width: 350,
+  padding: 2,
+  display: 'flex',
+  flexDirection: 'row',
+  paddingTop: 1,
+  height: 65,
+  margin: 1,
+  alignItems: 'center',
+  justifyContent: 'space-between',
+},
+taskTime:{
+  width: '20%',
+  height: '100%',
+  backgroundColor: '#ecf3f7',
+},
+timetxt: {
+  fontSize: 16,
+},
+taskItemField:{
+  height: '100%',
+  width: '80%',
+  borderRadius: 10,
+  backgroundColor: '#adcbfb',
+  padding: '4px',
+},
+TaskInputField:{
+  height: '100%',
+  width: 0,
+  
+
+},
+addTask:{
+
+},
   
 
   });
