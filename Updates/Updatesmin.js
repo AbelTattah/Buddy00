@@ -13,16 +13,14 @@ import { Button } from "react-native";
 
 
 
-export default function Updates({route,navigation})  {
+export default function Updatesmin({route,navigation})  {
 
   const [data,setData] = useState(['Haha']);
   const [ld ,setLd] = useState(true);
   const [postt,setPostt] = useState('');
   const navigate = useNavigation; 
   const [nav,setNav] = useState(true);
-  const [id,setId] = useState("64f3c9671647d069a5f07cc1");
-  const [idn,setIdn] = useState("Hello world");
-  const {nava} =route.params;
+  
   useEffect(() => {
       async function fetchDataa() {
           fetch("https://buddy00.onrender.com/updattes")
@@ -46,67 +44,15 @@ export default function Updates({route,navigation})  {
   //  return(<ActivityIndicator />)
  // }
 
- function Updatedataa() {
-  fetch(`https://buddy00.onrender.com/updattes/${id}`,{
-    method:"PUT",
-    headers:{
-      "Content-Type": 'application/json'
-    },
-    body: JSON.stringify({Postt:idn})
-  })
-  .then(res => {console.log(res.status);
-      console.log(res.headers);})
-  .then(
-    (result)=>{
-      console.log(result);
-    },
-    (error)=> {
-      console.log(error);
-    }
-  )
-  
-};
-function Postdataa() {
-  fetch(`https://buddy00.onrender.com/updatte`,{
-    method:"POST",
-    headers:{
-      "Content-Type": 'application/json'
-    },
-    body: JSON.stringify({
-      Postt:postt,
-      Comment:["Hie"],
-      SID:11335775,
-      SName:"Stella Enam Tattah"
-
-    })
-  })
-  .then(res => {console.log(res.status);
-      console.log(res.headers);})
-  .then(
-    (result)=>{
-      console.log(result);
-    },
-    (error)=> {
-      console.log(error);
-    }
-  )
-  
-};
-function Deletedataa() {
-  fetch(`https://buddy00.onrender.com/updattes/${id}`,{
-    method:"DELETE",
-  })
-  .then(res => {console.log(res.status);
-      console.log(res.headers);})
-  .then(
-    (result)=>{
-      console.log(result);
-    },
-    (error)=> {
-      console.log(error);
-    }
-  )
-  
+ let fetchDataa=(id)=> {
+  fetch('https://buddy00.onrender.com/updattes/${id}')
+  .then((response)=>response.json())
+  .then((json) => setData(json))
+  .then(()=>console.log(
+      data[1].Update
+  ))
+  .catch((error)=>console.log())
+  .finally(()=>setLd(false));
 };
 
 
@@ -147,37 +93,7 @@ function Deletedataa() {
         </View>
  
       </ScrollView>
-      {(nava)?(
-      <View style={{
-         justifyContent:'center',
-         alignItems:'center',
-         gap:10,
-          height:110,
-          width:400,
-          backgroundColor:'#8888'
-        }}>
-
-  <>
-        <TextInput style={{
-          borderWidth:1,
-          width:300,
-          height:60
-        }} multiline={true}
-        onChangeText={(text)=>setPostt(text)}
-        >
-
-        </TextInput>
-        <View style={{
-       flexDirection:'row',
-       gap:20
-        }}>
-        <Button title="Post" onPress={()=>Postdataa()}></Button>
-        <Button title="Update Post" onPress={()=>Updatedataa()
-        }></Button>
-         <Button title="Delete Post" onPress={()=>Deletedataa()
-        }></Button>
-        </View></>
-      </View>):(<></>)}
+     
 </>
 
   )}
@@ -191,9 +107,7 @@ const style = StyleSheet.create({
     paddingTop: StatusBar.currentHeight,
   },
   scrollView: {
-    height:400,
-    width:400,
- marginBottom:100
+ marginBottom:200
   },
   text: {
     fontSize: 42,

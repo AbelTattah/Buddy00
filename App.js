@@ -22,7 +22,7 @@ import Timetables from './Screens/timetables';
 // Rest of the import statements
 import { useFonts } from 'expo-font';
 import AppLoading from 'expo-app-loading';
-
+import Login from './Screens/login'
 
 
 
@@ -65,7 +65,7 @@ function MeTitle() {
     </View>
   );
 };
-export default function App() {
+function App1() {
 
 
   let [fontsLoaded] = useFonts({
@@ -151,6 +151,29 @@ if (!fontsLoaded){
    
     </NavigationContainer>
     </>
+  );
+}
+
+
+
+export default function App (){
+  return(
+    <NavigationContainer>
+     
+          <Stack.Navigator>
+          
+        <Stack.Screen 
+        name='App1'
+        component={App1}
+        options={{headerShown:false}}
+         />
+        <Stack.Screen
+        name='Login'
+        component={Login}
+        options={{headerShown:false}}
+         />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 

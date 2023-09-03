@@ -3,65 +3,16 @@ import { StyleSheet,StatusBar } from "react-native";
 
 const styles = StyleSheet.create({
     Homepage:{
-      justifyContent:'center',
-      alignItems:'center',
-      flexDirection:'column',
-      flex:6,
-      backgroundColor:'white'
-    
-    },
-    quo: {
-      marginTop:100,
-      flex:0.4,
-      backgroundColor:'#000',
-      borderWidth:0,
-      borderRadius:20,
-      height:50,
-      borderBottomWidth:5,
-      borderBottomColor:'#000',
-      width:340,
-      padding:0,
-      justifyContent:'center',
-      borderRightWidth:5,
-      borderRightColor:'#000'
-
-    },
-    lobbyQuotes: {
-      marginTop:100,
-      flex:3,
-      backgroundColor:'#fff',
-      borderWidth:1,
-      borderRadius:30,
-      height:150,
-      width:340,
-      padding:0,
-      justifyContent:'center',
-      
-     
-
+  
     },
     dashboardTopSection:{
-      flex:0.15,
-      flexDirection:'row',
-      backgroundColor:'#00f',
-      height:500,
-      width:500,
-      borderRadius:15,
-      borderBottomWidth:5,
-      borderBottomColor:'white',
-      borderRightWidth:5,
-      borderRightColor:'#000',
-      marginBottom:120,
-      marginTop:-207
+      
+  backgroundColor:'blue'
     },
     dashboardName: {
-      position:'absolute',
-      top:120,
-      left:128,
-      fontSize:20,
-      fontFamily:'FredokaBold'
-      
-      
+fontFamily:'FredokaBold',
+fontSize:19,
+marginLeft:200
     },
     dashboardAvatar:{
       justifyContent:'center',
@@ -75,21 +26,16 @@ const styles = StyleSheet.create({
       width:133,
       backgroundColor:'#888'
     },
-    ScrollView: {
-      backgroundColor:'blue',
-      height:300
-    },
-    contentContainer:{
-      paddingVertical: 20,
-      marginTop:100,
-      flex:1,
-      backgroundColor:'#fff',
-      borderWidth:1,
-      borderRadius:30,
-      height:350,
-      width:340,
-      padding:0,
-      justifyContent:'center',
+
+    LobbyUpdates:{
+     height:300,
+     marginTop:200,
+     borderWidth:1,
+     borderRadius:50,
+     width:400,
+     padding:20
+    
+     
     },
     contentContainer1:{
       paddingTop: StatusBar.currentHeight,
@@ -107,7 +53,7 @@ const styles = StyleSheet.create({
     },
     lobbyGreeting : {
       marginTop:70,
-      marginLeft:66,
+      marginLeft:96,
       fontSize:20,
       color:'white',
       fontFamily:'FredokaBold'
@@ -118,12 +64,15 @@ const styles = StyleSheet.create({
     left:60
     },
     lobbyMiniUpdates: {
+    flex:2
+    }, 
+    lobbyMiniUpdates1: {
       marginTop:30,
       height:150,
       width:340,
       flex:0.4,
       marginBottom:-110
-    }, 
+    },
     lobbyMiniUpdatesTop: {
       flex:1,
       flexDirection:'row',
@@ -147,7 +96,7 @@ const styles = StyleSheet.create({
       
     },
     text1: {
-       
+      
       fontFamily:'FredokaLight',
       padding:10,
       fontSize: 17,
@@ -303,6 +252,11 @@ const styles = StyleSheet.create({
       justifyContent: 'space-evenly',
       alignItems: 'flex-end',
  
+    },
+    Login:{
+      flex:1,
+      justifyContent:'center',
+      alignItems:'center'
     },
 //This section is used to specify the style of each individual to do item/task
 taskItem:{
