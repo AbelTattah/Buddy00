@@ -71,6 +71,7 @@ export default function Updatesmin({route,navigation})  {
  return (
 <SafeAreaView>
    <View style={{
+    height:550,
     justifyContent:'center',
     alignItems:'center'
    }}>

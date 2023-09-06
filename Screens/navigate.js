@@ -3,14 +3,16 @@ import React from 'react';
 import { View,Text } from 'react-native';
 import MapView,{Marker,PROVIDER_GOOGLE} from 'react-native-maps';
 import { StyleSheet} from 'react-native';
-
-
+import { useSelector } from 'react-redux';
+import { Provider } from "react-redux";
+import { Store } from "../redux/store";
 
  export default function Nav({navigation}) {
+  const {namee,sidd} = useSelector(state=>state.userReducer);
   return (
     <>
     <View>
-   <Text>Where are you?</Text>
+   <Text>{namee} where are you?</Text>
    <Text>Where do you want to go?</Text>
     </View>
 

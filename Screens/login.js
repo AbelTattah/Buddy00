@@ -1,50 +1,63 @@
-import {View,Text,Button, KeyboardAvoidingView} from 'react-native';
+import {View,Text,Button, KeyboardAvoidingView,TextInput} from 'react-native';
 import styles from '../Styling/styles';
 import { useState } from 'react';
-import { TextInput } from 'react-native';
-import { getAuth, createUserWithEmailAndPassword,signInWithEmailAndPassword} from "firebase/auth";
 
 
 
-export default function Login({navigation}){
 
-   var [email,setEmail] = useState('');
-   var [password,setPassword] =useState('');
-   var [isLoggedIn,setIsLoggegIn]=useState(false);
+export default function Login({navigation}) {
+
+ var [sid,setSid] = useState(0);
+ var [nameid,setNameid] = useState('');
+ var [pass,setPass]= useState('');
+ var [course,setCourse]= useState([]);
+ var [suds,SetSuds] =useState({})
 
 
-const  SignUp=()=>{
-    const auth = getAuth();
-    createUserWithEmailAndPassword(auth,email,password)
-    .then((userCredentials)=>{
-        const user =userCredentials.user;
-        console.log(user.email);
-    })
-    .catch((error)=>alert(error.message));
-   }
+function Login(){
 
-   const  SignIn=()=>{
-    const auth = getAuth();
-    signInWithEmailAndPassword(auth,email,password)
-    .then((userCredentials)=>{
-        const user =userCredentials.user;
-        console.log(user.email);
-        navigation.navigate('App1')
-    })
-    .catch((error)=>alert(error.message));
-   }
+    async function fetchData()  {
+        fetch('https://buddy00.onrender.com/buddy') 
+        .then((response)=>response.json())
+        .then((json) => setSuds(json))
+        .then(()=>console.log(suds))
+        .catch((error)=>console.log("error"))          
+        .finally(()=>setLddd('yes'));
+    };
+
+   
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     return (
-     <View style={styles.Login}>
-        <Text>Login</Text>
-        <KeyboardAvoidingView behavior='padding'>
-        <TextInput value={email} placeholder='emai' autoCapitalize='none' onChangeText={(text)=>setEmail(text)} />
-        <TextInput value={password} placeholder='password' autoCapitalize='none' onChangeText={(text)=>setPassword(text)} />
+     <View style={styles.loginMain}>
+        <KeyboardAvoidingView style={styles.loginIn} behavior='padding'>
+        <TextInput style={styles.loginTextIn}  placeholder='Enter SID' autoCapitalize='none' onChangeText={(text)=>setSid(text)} />
+        <TextInput style={styles.loginTextIn} placeholder='password' autoCapitalize='none' onChangeText={(text)=>setPass(text)} />
         </KeyboardAvoidingView>
 
-        <Button title='Login' onPress={()=>SignIn()}></Button>
-        <Button title='Register' onPress={()=>SignUp()}></Button>
-        
+        <Button title='Login' onPress={()=>navigation.navigate('App1')}></Button>
+        <View style={styles.regButtonView}>
+        <Text>New to Buddy?</Text>
+        <Button  title='Register' onPress={()=>navigation.navigate('Register')}></Button>
+        </View>
      </View>
     );
 }

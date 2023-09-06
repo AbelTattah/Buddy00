@@ -28,12 +28,12 @@ marginLeft:200
     },
 
     LobbyUpdates:{
-     height:300,
+     height:400,
      marginTop:200,
      borderWidth:1,
      borderRadius:50,
      width:400,
-     padding:20
+     padding:10
     
      
     },
@@ -106,13 +106,13 @@ marginLeft:200
     },
     meContentContainer:{
       flex:1,
-      width:400,
+      width:600,
       height:600
     },
     meTopSection: {
       flex:3,
       height:100,
-      width:400,
+      width:600,
       backgroundColor:'blue',
       marginTop:-40
     
@@ -138,6 +138,7 @@ marginLeft:200
       borderBottomRightRadius:30,
     },
     me : {
+      
       marginTop:-3,
     flex:6,
     justifyContent:'center',
@@ -297,7 +298,41 @@ TaskInputField:{
 addTask:{
 
 },
-  
+
+
+//Login Page
+loginMain :{
+  flex:1,
+  justifyContent:'center',
+  alignItems:'center',
+  backgroundColor:'#00f8',
+},
+loginIn:{
+gap:20,
+margin:23
+},
+loginTextIn:{
+  backgroundColor:'#ddd',
+  width:400,
+  height:40
+
+},
+regButtonView:{
+  marginTop:100
+}
+,
+
+
+//Register
+regCheckmain:{
+flex:1,
+gap:10
+},
+
+regCheck:{
+flexDirection:'row',
+gap:5
+}
 
   });
 

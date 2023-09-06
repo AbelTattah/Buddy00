@@ -41,7 +41,7 @@ export default function PersonalTimetable({navigation}){
 },[]  )
 
 
-//Line 46 to 97 is the magical function that generates the values for the timetables
+//Line 47 to 98 is the magical function that generates the values for the timetables
 
 
 function Abacadabra() {

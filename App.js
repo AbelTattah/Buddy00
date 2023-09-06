@@ -16,16 +16,17 @@ import Settings from './Screens/settings';
 const Stack = createNativeStackNavigator();
 import { faCalendarDay, faLocation, faUser } from '@fortawesome/free-solid-svg-icons';
 import Nav from './Screens/navigate';
-import TODO from './Screens/toDo';
+import TODO from './Screens/todo';
 import Resources from './Screens/resources';
 import Timetables from './Screens/timetables';
 // Rest of the import statements
 import { useFonts } from 'expo-font';
 import AppLoading from 'expo-app-loading';
 import Login from './Screens/login'
-
-
-
+import { Provider } from 'react-redux';
+import { Store } from './redux/store';
+import Register from './Screens/register';
+import { useSelector } from 'react-redux';
 
 
 
@@ -65,7 +66,7 @@ function MeTitle() {
     </View>
   );
 };
-function App1() {
+function App1({navigation}) {
 
 
   let [fontsLoaded] = useFonts({
@@ -73,14 +74,12 @@ function App1() {
 });
 
 
-if (!fontsLoaded){
-    return <AppLoading />;
-}
-
+const {sin} = useSelector(state=>state.userReducer);
 
 
   return (<>
-  
+<Provider store={Store}>
+{(sin)?(
     <NavigationContainer independent={true}>
     
     <Tab.Navigator initialRouteName='Lobby'>
@@ -107,8 +106,9 @@ if (!fontsLoaded){
             elevation:0,shadowOpacity:0,borderBottomWidth:0,
             backgroundColor:'#00f'
           }}
+          
           }
-           
+       
         />
       
       
@@ -149,7 +149,14 @@ if (!fontsLoaded){
        
     </Tab.Navigator>
    
-    </NavigationContainer>
+    </NavigationContainer>   ):(<View style={{
+      flex:1,
+       justifyContent:'center',
+       alignItems:'center'
+    }}><Text>You are not Logged in!</Text>
+    <Button title='Return' onPress={()=>navigation.navigate('Login')}></Button> 
+    </View>)}
+  </Provider>
     </>
   );
 }
@@ -158,22 +165,29 @@ if (!fontsLoaded){
 
 export default function App (){
   return(
-    <NavigationContainer>
-     
+ <Provider store={Store}>  
+ <NavigationContainer> 
           <Stack.Navigator>
-          
+          <Stack.Screen
+        name='Login'
+        component={Login}
+        options={{headerShown:false}}
+         />
+             <Stack.Screen
+        name='Register'
+        component={Register}
+        options={{}}
+         />
         <Stack.Screen 
         name='App1'
         component={App1}
         options={{headerShown:false}}
          />
-        <Stack.Screen
-        name='Login'
-        component={Login}
-        options={{headerShown:false}}
-         />
+     
       </Stack.Navigator>
     </NavigationContainer>
+    </Provider>
+  
   );
 }
 
