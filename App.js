@@ -16,7 +16,7 @@ import Settings from './Screens/settings';
 const Stack = createNativeStackNavigator();
 import { faCalendarDay, faLocation, faUser } from '@fortawesome/free-solid-svg-icons';
 import Nav from './Screens/navigate';
-import TODO from './Screens/todo';
+import TODO from './Screens/toDo';
 import Resources from './Screens/resources';
 import Timetables from './Screens/timetables';
 // Rest of the import statements
@@ -26,8 +26,7 @@ import { Provider, createStoreHook, useDispatch } from 'react-redux';
 import { store } from './redux/store';
 import Register from './Screens/register';
 import { useSelector } from 'react-redux';
-
-
+import {useState} from 'react';
 
 
 //The constant below allows the usage of the tab navigator
@@ -70,12 +69,17 @@ function App1({navigation}) {
     "FredokaBold":require("./fonts/FredokaBold.ttf"),
 });
 
+
+
 const {sin}= useSelector(state =>state.userReducer)
+
 
 
   return (<>
 
+
 {(sin)?(
+
     <NavigationContainer independent={true}>
     
     <Tab.Navigator initialRouteName='Lobby'>
@@ -164,6 +168,11 @@ export default function App (){
 <Provider store={store}>
  <NavigationContainer> 
           <Stack.Navigator>
+          <Stack.Screen 
+          name='App1'
+        component={App1}
+        options={{headerShown:false}}
+         />
           <Stack.Screen
         name='Login'
         component={Login}
@@ -174,11 +183,7 @@ export default function App (){
         component={Register}
         options={{}}
          />
-        <Stack.Screen 
-        name='App1'
-        component={App1}
-        options={{headerShown:false}}
-         />
+        
      
       </Stack.Navigator>
     </NavigationContainer>

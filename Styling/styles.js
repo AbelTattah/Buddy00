@@ -1,6 +1,8 @@
-import { height } from "@fortawesome/free-solid-svg-icons/faRepeat";
+//import { height } from "@fortawesome/free-solid-svg-icons/faRepeat";
 import { StyleSheet,StatusBar } from "react-native";
+import { Dimensions } from "react-native";
 
+const { height } = Dimensions.get('window');
 const styles = StyleSheet.create({
     Homepage:{
   
@@ -240,66 +242,142 @@ marginLeft:200
       fontFamily:'FredokaBold'
     },
     //To do SECTION. Any code beyon this point is to style the todo page until any comment says otherwise
-    todoContainer:{
-      backgroundColor: '#0000Ff',
-      height: '100%',
-    },
+    
     todoItemsContainer:{
-
+      height: '100%',
       width: '100%',
-      backgroundColor: '#ecf3f7',
+      backgroundColor: '#0000ff',
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'space-evenly',
-      alignItems: 'flex-end',
- 
+      alignItems: 'center',
     },
-    Login:{
-      flex:1,
-      justifyContent:'center',
-      alignItems:'center'
+    taskContainer:{
+      height: '70%',
+      width: '100%',
+      borderTopLeftRadius: 40,
+      position: 'absolute',
+      bottom: 0,
+      backgroundColor: '#fff',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    adddTask:{
+      position: 'absolute',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      borderRadius: 5,
+      right: 20,
+      top: 100,
+      height: 45,
+      width: 45,
+      backgroundColor: '#fff',
+    },
+    addtxt:{
+      fontSize: 40,
+      position: 'relative',
+      top: -5,
+    },
+    today:{
+      color: '#fff',
     },
 //This section is used to specify the style of each individual to do item/task
 taskItem:{
+  width: '80%',
+  height: 70,
   backgroundColor: '#ecf3f7',
-  borderTopWidth: 0.8,
-  borderColor: '#8889',
-  width: 350,
-  padding: 2,
+  borderWidth: 0.5,
+  borderRadius: 20,
+  borderColor: '#000',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'space-evenly',
+  flexDirection: 'row',
+  padding: 5,
+  margin: 10,
+},
+taskLeft:{
+  width: '80%',
+  height: '100%',
   display: 'flex',
   flexDirection: 'row',
-  paddingTop: 1,
-  height: 65,
-  margin: 1,
   alignItems: 'center',
   justifyContent: 'space-between',
+},  
+
+taskCheck:{
+  width: 20,
+  height: 20,
+  borderRadius: 3,
+  backgroundColor: '#b2acb3'
 },
-taskTime:{
-  width: '20%',
-  height: '100%',
+
+taskText:{
+  height: '80%',
+  width: '85%',
   backgroundColor: '#ecf3f7',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  fontSize: 18,
+  paddingVertical: 10,
 },
-timetxt: {
-  fontSize: 16,
-},
-taskItemField:{
-  height: '100%',
-  width: '80%',
-  borderRadius: 10,
+tasksstate:{
+  width: 30,
+  height: '50%',
+  backgroundColor: '#0000ff',
+}
+//styles for todo modal
+,
+
+
+modalView:{
   backgroundColor: '#adcbfb',
-  padding: '4px',
+  height: '80%',
+  position: 'absolute',
+  bottom: 0,
+  width: '100%',
+  padding: 10,
+  borderTopRightRadius: 40,
+  borderTopLeftRadius: 40,
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  justifyContent: 'center',
 },
-TaskInputField:{
-  height: '100%',
-  width: 0,
-  
-
+taskTitleinModal:{
+  height: 80,
+  width: '80%',
+  backgroundColor: '#adcbfb',
+  fontSize: 30,
+  borderBottomColor: '#99a7b3',
+  borderBottomWidth: 1,
 },
-addTask:{
-
+taskReminderinModal:{
+  display: 'flex',
+  flexDirection: 'row',
+  width: '80%',
+  height: 65,
+  alignItems: 'center',
+  justifyContent: 'space-between',
+  padding: 10,
 },
-
-
+addLocation:{
+  display: 'flex',
+  flexDirection: 'row',
+  width: '80%',
+  height: 65,
+  alignItems: 'center',
+  justifyContent: 'space-between',
+  padding: 10,
+},
+locationImage:{
+  height: 30,
+  width: 30,
+}
+,
 //Login Page
 loginMain :{
   flex:1,
@@ -315,7 +393,6 @@ loginTextIn:{
   backgroundColor:'#ddd',
   width:400,
   height:40
-
 },
 regButtonView:{
   marginTop:100
