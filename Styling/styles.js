@@ -245,14 +245,21 @@ marginLeft:200
       height: '100%',
     },
     todoItemsContainer:{
-
+      height: '100%',
       width: '100%',
-      backgroundColor: '#ecf3f7',
+      backgroundColor: '#0000ff',
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'space-evenly',
       alignItems: 'flex-end',
  
+    },
+    taskContainer:{
+      height: '60%',
+      width: '100%',
+      position: 'absolute',
+      bottom: 0,
+      backgroundColor: '#fff',
     },
     Login:{
       flex:1,
@@ -261,44 +268,28 @@ marginLeft:200
     },
 //This section is used to specify the style of each individual to do item/task
 taskItem:{
-  backgroundColor: '#ecf3f7',
-  borderTopWidth: 0.8,
-  borderColor: '#8889',
-  width: 350,
-  padding: 2,
-  display: 'flex',
-  flexDirection: 'row',
-  paddingTop: 1,
-  height: 65,
-  margin: 1,
-  alignItems: 'center',
-  justifyContent: 'space-between',
-},
-taskTime:{
-  width: '20%',
-  height: '100%',
-  backgroundColor: '#ecf3f7',
-},
-timetxt: {
-  fontSize: 16,
-},
-taskItemField:{
-  height: '100%',
-  width: '80%',
-  borderRadius: 10,
-  backgroundColor: '#adcbfb',
-  padding: '4px',
-},
-TaskInputField:{
-  height: '100%',
-  width: 0,
-  
 
 },
-addTask:{
+taskLeft:{
+
+},  
+
+taskCheck:{
 
 },
 
+taskCheck:{
+
+}
+//styles for todo modal
+,
+modalView:{
+  backgroundColor: '#0000ff',
+  height: '100%',
+  width: '100%',
+  borderTopRightRadius: 35,
+  borderTopLeftRadius: 35,
+},
 
 //Login Page
 loginMain :{

@@ -1,16 +1,14 @@
 import React from "react";
-import { Text, View, TextInput} from "react-native";
+import { Text, View, TextInput, Checkbox} from "react-native";
 import styles from "../Styling/styles";
 
 
-const Task = (props) => {
+const Task = (onPress, props) => {
     return(
-        <View>
-            <View style = {styles.taskItem}>
-                <View style  = {styles.taskTime}>
-                    <Text style = {styles.timetxt}>{props.text}</Text>
-                </View>
-                <View style = {styles.taskItemField}>
+        <View style = {styles.taskItem}>
+            <View style = {styles.taskLeft}>
+                <View style  = {styles.taskCheck}></View>
+                <View style = {styles.taskText}>
                     <TextInput style = {styles.TaskInputField}/>
                 </View>
             </View>
