@@ -29,8 +29,6 @@ import { useSelector } from 'react-redux';
 import {useState} from 'react';
 
 
-
-
 //The constant below allows the usage of the tab navigator
 const Tab = createBottomTabNavigator();
 
@@ -70,14 +68,18 @@ function App1({navigation}) {
   let [fontsLoaded] = useFonts({
     "FredokaBold":require("./fonts/FredokaBold.ttf"),
 });
-const [siin, setSiin] = useState(true)
 
-//const {sin} = useSelector(state=>state.userReducer);
+
+
+const {sin}= useSelector(state =>state.userReducer)
+
 
 
   return (<>
 
-{(siin)?(
+
+{(sin)?(
+
     <NavigationContainer independent={true}>
     
     <Tab.Navigator initialRouteName='Lobby'>
@@ -154,6 +156,7 @@ const [siin, setSiin] = useState(true)
     }}><Text>You are not Logged in!</Text>
     <Button title='Login Screen' onPress={()=>navigation.navigate('Login')}></Button> 
     </View>)}
+
     </>
   );
 }
