@@ -20,7 +20,7 @@
     },
     "android": {
       "config":{
-      "googleMaps": { "apiKey": "AIzaSyAMdjgh8s0mdIYwESpFQxgI1-UYZVArWhE" }
+      "googleMaps": { "apiKey": "AIzaSyCKNI4L9etwS9wFMsSLa5qczJcmyyPnCbw" }
     },
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",

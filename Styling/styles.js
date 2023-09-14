@@ -325,8 +325,9 @@ regButtonView:{
 
 //Register
 regCheckmain:{
-flex:1,
-gap:10
+flex:0.4,
+gap:10,
+marginBottom:0
 },
 
 regCheck:{

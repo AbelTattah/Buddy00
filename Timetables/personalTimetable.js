@@ -5,14 +5,15 @@ import { ActivityIndicator } from "react-native";
 import { useFonts } from "expo-font";
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faArrowDown } from "@fortawesome/free-solid-svg-icons";
-
-
+import { UseSelector, useSelector } from "react-redux";
+import { store } from "../redux/store";
+import { Provider } from "react-redux";
 
 export default function PersonalTimetable({navigation}){
 
     
-
-    var [sid,setSid] = useState(11321000);
+   const  {sidd}= useSelector(state=>state.userReducer);
+    
     var [suds,setSuds] = useState({});
     var [disp1,setDisp1] = useState('Yet to generate');
     var [disp2,setDisp2] = useState('Yet to generate');
@@ -29,12 +30,12 @@ export default function PersonalTimetable({navigation}){
 
    useEffect(()=>{
     async function fetchData()  {
-        fetch('https://good-earrings-cow.cyclic.cloud/timetable')  // the link in the function connects to my api
+        fetch('https://buddy00.onrender.com/timetable')  // the link in the function connects to my api
         .then((response)=>response.json())
         .then((json) => setSuds(json))
         .then(()=>console.log(suds))
-        .catch((error)=>{console.log("error");setLddd('mm')})          
-        .finally(()=>setLddd('yes'));
+        .catch((error)=>console.log("error"))          
+       
     };
     fetchData()
 
@@ -45,6 +46,16 @@ export default function PersonalTimetable({navigation}){
 
 
 function Abacadabra() {
+
+    for (var d =0; d < suds.length ; d++ ) {
+
+        if ( suds[d]["SID"]==sidd ) {
+           setSubjects(suds[d]["Courses"]); 
+        }
+
+    }
+
+
 var a;
 for (  var c=0 ; c < subjects.length ; c++ ) {
  a = subjects[c];
@@ -52,9 +63,9 @@ for (  var c=0 ; c < subjects.length ; c++ ) {
         //I used some mathematics here. I used the Negative, positive numbers and closed intervals concepts
         //I think majoring or minoring in maths with CS will be a very good idea
             if  (
-                sid-suds[4]["Subject"][a][b]["high"]<0 && sid-suds[4]["Subject"][a][b]["low"] ==0 ||
-                sid-suds[4]["Subject"][a][b]["high"]==0 && sid-suds[4]["Subject"][a][b]["low"] >0 ||
-                sid-suds[4]["Subject"][a][b]["high"]<0 && sid-suds[4]["Subject"][a][b]["low"] >0 
+                sidd-suds[4]["Subject"][a][b]["high"]<0 && sidd-suds[4]["Subject"][a][b]["low"] ==0 ||
+                sidd-suds[4]["Subject"][a][b]["high"]==0 && sidd-suds[4]["Subject"][a][b]["low"] >0 ||
+                sidd-suds[4]["Subject"][a][b]["high"]<0 && sidd-suds[4]["Subject"][a][b]["low"] >0 
                 )  
                 {
                 console.log("It worked");
@@ -112,7 +123,7 @@ sett();
   
     return (
         <> 
-          
+          <Provider store={store}>
     <View style={{
                 justifyContent:'center',
                 alignItems:'center'
@@ -149,7 +160,7 @@ sett();
                </View>
              
               </View>
-           
+              </Provider>
         </>
 
      );
