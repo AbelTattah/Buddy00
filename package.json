@@ -42,7 +42,8 @@
     "redux": "^4.2.1",
     "redux-thunk": "^2.4.2",
     "expo-location": "~16.1.0",
-    "expo-updates": "~0.18.12"
+    "expo-updates": "~0.18.12",
+    "@react-native-community/datetimepicker": "7.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"
