@@ -3,7 +3,7 @@ import styles from "../Styling/styles";
 import Updates from "../Updates/updates";
 import Task from '../Components/todo';
 import { useState } from "react";
-import { text } from "@fortawesome/fontawesome-svg-core";
+//import { text } from "@fortawesome/fontawesome-svg-core";
 //import {DateTimePicker} from "@react-native-community/datetimepicker"
 //import { TextInput } from "react-native-gesture-handler";
 //import { TouchableWithoutFeedback } from "react-native-gesture-handler";
@@ -58,7 +58,7 @@ export default function TODO({navigation}) {
     return (  
             <View style = {styles.todoItemsContainer}>
                 <Text style = {styles.today}>Today</Text>
-                <TouchableOpacity style = {styles.adddTask} onPress={setIsOpen(true)}> 
+                <TouchableOpacity style = {styles.adddTask} > 
                     <View >
                             <Text style = {styles.addtxt}>+</Text>
                     </View>    
@@ -72,7 +72,7 @@ export default function TODO({navigation}) {
                 </View>    
                 
                 <Modal 
-                    visible={true}
+                    visible={false}
                     animationType="slide"
                     onRequestClose={() => {setIsOpen(false)}}
                     transparent={true}>

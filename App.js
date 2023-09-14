@@ -21,15 +21,12 @@ import Resources from './Screens/resources';
 import Timetables from './Screens/timetables';
 // Rest of the import statements
 import { useFonts } from 'expo-font';
-import AppLoading from 'expo-app-loading';
 import Login from './Screens/login'
-import { Provider } from 'react-redux';
-import { Store } from './redux/store';
+import { Provider, createStoreHook, useDispatch } from 'react-redux';
+import { store } from './redux/store';
 import Register from './Screens/register';
 import { useSelector } from 'react-redux';
 import {useState} from 'react';
-
-
 
 
 
@@ -155,7 +152,7 @@ const [siin, setSiin] = useState(true)
        justifyContent:'center',
        alignItems:'center'
     }}><Text>You are not Logged in!</Text>
-    <Button title='Return' onPress={()=>navigation.navigate('Login')}></Button> 
+    <Button title='Login Screen' onPress={()=>navigation.navigate('Login')}></Button> 
     </View>)}
     </>
   );
@@ -165,9 +162,14 @@ const [siin, setSiin] = useState(true)
 
 export default function App (){
   return(
- <Provider store={Store}>  
+<Provider store={store}>
  <NavigationContainer> 
           <Stack.Navigator>
+          <Stack.Screen 
+          name='App1'
+        component={App1}
+        options={{headerShown:false}}
+         />
           <Stack.Screen
         name='Login'
         component={Login}
@@ -178,15 +180,11 @@ export default function App (){
         component={Register}
         options={{}}
          />
-        <Stack.Screen 
-        name='App1'
-        component={App1}
-        options={{headerShown:false}}
-         />
+        
      
       </Stack.Navigator>
     </NavigationContainer>
-    </Provider>
+</Provider>   
   
   );
 }

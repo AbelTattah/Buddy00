@@ -2,16 +2,18 @@ import {View,Text,Button, KeyboardAvoidingView,TextInput, ActivityIndicator,Scro
 import styles from '../Styling/styles';
 import { useState,useEffect } from 'react';
 import CheckBox from 'react-native-check-box';
+import { beginAsyncEvent } from 'react-native/Libraries/Performance/Systrace';
 
 
 
+var course=[];
 
 export default function Register({navigation}) {
 
  var [sid,setSid] = useState(0);
  var [nameid,setNameid] = useState('');
  var [pass,setPass]= useState('');
- var course = [];
+ 
  var [suds,setSuds]= useState({});
  var [sud1,setSud1] =useState({})
  var [regg,setRegg] =useState('rnd');
@@ -21,7 +23,11 @@ export default function Register({navigation}) {
  var [check4,setCheck]=useState('DCIT102');
  var [check5,setCheck]=useState(false);
  var [check6,setCheck]=useState(false);
-
+ var [isC1,setIsC1] = useState(false);
+ var [isC2,setIsC2] = useState(false);
+ var [isC3,setIsC3] = useState(false);
+ var [isC4,setIsC4] = useState(false);
+ var [isC5,setIsC5] = useState(false);
 
  var c = 0 ;
  useEffect(()=>{
@@ -49,7 +55,7 @@ function fetchData()  {
 var count = 1;
 function fix()
 {
-    if (count < 5){
+    if (count < 3){
         count++
        fetchData(); 
         window.setTimeout(fix, 2000);
@@ -95,7 +101,7 @@ console.log(c);
         SID:sid,
         SName:nameid,
         Spass:pass,
-        Courses:["Wele","Banku"]
+        Courses:course
   
       })
     })
@@ -124,6 +130,64 @@ else {
 
 
 
+
+
+
+
+
+function Check(sub){
+  switch (sub) {
+    case 'MATH123':
+  if (isC1) {
+    setIsC1(false);
+    course.splice(course.indexOf('MATH123'),1);
+  }
+  else {
+    setIsC1(true);
+    course.push(sub);
+    console.log(course);
+  }
+  break;
+  case 'MATH126':
+    if (isC2) {
+      setIsC2(false);
+      course.splice(course.indexOf('MATH126'),1);
+    }
+    else {
+      setIsC2(true);
+      course.push(sub);
+      console.log(course);
+    }
+    break;
+    case 'DCIT101':
+      if (isC3) {
+        setIsC3(false);
+        course.splice(course.indexOf('DCIT101'),1);
+      }
+      else {
+        setIsC3(true);
+        course.push(sub);
+        console.log(course);
+      }
+      break;
+      case 'UGRC150':
+        if (isC4) {
+          setIsC4(false);
+          course.splice(course.indexOf('UGRC150'),1);
+        }
+        else {
+          setIsC4(true);
+          course.push(sub);
+          console.log(course);
+        }
+       break;
+       default :
+       console.log("This will not happen");
+
+
+}
+}
+
     return (
      <View style={styles.loginMain}>
         <Text>Register</Text>
@@ -131,10 +195,49 @@ else {
         <TextInput style={styles.loginTextIn}  placeholder=' SID' autoCapitalize='none' onChangeText={(text)=>setSid(text)} />
         <TextInput style={styles.loginTextIn} placeholder=' name' autoCapitalize='none' onChangeText={(text)=>setNameid(text)} />
         <TextInput style={styles.loginTextIn} placeholder='password' autoCapitalize='none' onChangeText={(text)=>setPass(text)} />
-        <TextInput style={styles.loginTextIn} placeholder='courses' autoCapitalize='none' onChangeText={(text)=>setPassword(text)} />
         </KeyboardAvoidingView>
+        <View style={styles.regCheckmain}>
+        <Text>Select Courses:</Text>
+           <View style={styles.regCheck}>
+ <Text>MATH123 </Text><CheckBox
+  
+    onClick={()=>{
+      Check('MATH123');
+    }}
+    isChecked={isC1}
+/>
+           </View>
+           <View style={styles.regCheck}>
+ <Text>MATH126 </Text><CheckBox
+  
+    onClick={()=>{
+      Check('MATH126');
+    }}
+    isChecked={isC2}
+/>
+           </View>
+           <View style={styles.regCheck}>
+ <Text>DCIT101</Text><CheckBox
+  
+    onClick={()=>{
+      Check('DCIT101');
+    }}
+    isChecked={isC3}
+/>
+           </View>
+           <View style={styles.regCheck}>
+ <Text>UGRC150  </Text><CheckBox
+  
+    onClick={()=>{
+      Check('UGRC150');
+    }}
+    isChecked={isC4}
+/>
+           </View>
+        </View>
          
         <Button title='Register' onPress={()=>Reg()}></Button>
+        <Button title='Consolelogcourse' onPress={()=>console.log(course)}></Button>
         <>{(regg=='inp')?(<>
 <Text>Signing you up... <ActivityIndicator color='white'/></Text>
         </>):(regg =='prob')?(<>

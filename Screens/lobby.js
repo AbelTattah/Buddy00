@@ -12,13 +12,9 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useNavigation } from "@react-navigation/native";
 import Updatesmin from "../Updates/Updatesmin";
-import { useSelector,useDispatch } from "react-redux";
-import { setName,setSid } from "../redux/actions";
-import { Provider } from "react-redux";
-import { Store } from "../redux/store";
+
 
  function Lobby1 ({navigation}) {
-    const {namee,sidd} = useSelector(state=>state.userReducer);
 let [fontsLoaded] = useFonts({
     "FredokaBold":require("../fonts/FredokaBold.ttf"),
 });
@@ -37,11 +33,11 @@ if (!fontsLoaded){
         <View style={styles.Homepage}>
 
     <View style={styles.dashboardTopSection}>
-    <Provider store={Store}>
+
         <Text style={styles.lobbyGreeting}>
-         {namee}
+    
         </Text>
-        </Provider>
+    
     </View>
 
         <Text style={styles.dashboardName}>Kobina</Text>
@@ -77,7 +73,7 @@ const stack = createNativeStackNavigator();
 export default function Lobby({navigation}){
    // const {namee} = useSelector(state=>state.userReducer);
     return(
-        <Provider store={Store}>
+        
         <NavigationContainer independent={true}>
         <stack.Navigator>
             <stack.Screen
@@ -91,7 +87,7 @@ export default function Lobby({navigation}){
             
         </stack.Navigator>
         </NavigationContainer>
-        </Provider> 
+     
        
     )
 }

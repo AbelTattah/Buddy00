@@ -1,10 +1,11 @@
-import { SID,SNAME,SIN } from "./actions";
+import { SID,SNAME,SIN,COURSE } from "./actions";
 
 
 const initialState ={
-    namee:'Good Morning',
+    namee:'Abel',
     sidd:0,
-    sin:false
+    sin:false,
+    course:{},
 }
 
 
@@ -16,6 +17,8 @@ function userReducer(state = initialState,action) {
             return {...state,sidd:action.payload};
         case SIN:
             return {...state,sin:action.payload};
+        case COURSE:
+            return {...state,course:action.payload};
         default:
             return state;
 
