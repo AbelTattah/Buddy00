@@ -146,6 +146,7 @@ const {sin}= useSelector(state =>state.userReducer)
             backgroundColor:'#00f'
             ,
         }}} />
+
        
     </Tab.Navigator>
    
@@ -168,11 +169,7 @@ export default function App (){
 <Provider store={store}>
  <NavigationContainer> 
           <Stack.Navigator>
-          <Stack.Screen 
-          name='App1'
-        component={App1}
-        options={{headerShown:false}}
-         />
+       
           <Stack.Screen
         name='Login'
         component={Login}
@@ -182,6 +179,11 @@ export default function App (){
         name='Register'
         component={Register}
         options={{}}
+         />
+          <Stack.Screen 
+          name='App1'
+        component={App1}
+        options={{headerShown:false}}
          />
         
      

@@ -410,6 +410,10 @@ marginBottom:0
 regCheck:{
 flexDirection:'row',
 gap:5
+},
+directionModal:{
+
+
 }
 
   });
