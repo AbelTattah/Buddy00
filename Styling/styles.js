@@ -253,39 +253,40 @@ marginLeft:200
       alignItems: 'center',
     },
     taskContainer:{
-      height: '70%',
+      height: '80%',
       width: '100%',
-      borderTopLeftRadius: 40,
+      borderTopLeftRadius: 35,
       position: 'absolute',
       bottom: 0,
       backgroundColor: '#fff',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
+      overflow: 'hidden',
     },
     adddTask:{
       position: 'absolute',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      borderRadius: 5,
+      borderRadius: 15,
       right: 20,
-      top: 100,
+      top: 60,
       height: 45,
-      width: 45,
+      width: 100,
       backgroundColor: '#fff',
     },
     addtxt:{
-      fontSize: 40,
-      position: 'relative',
-      top: -5,
+      fontSize: 15,
+      color: '#0909af',
+      fontWeight: '550',
     },
     today:{
       color: '#fff',
     },
 //This section is used to specify the style of each individual to do item/task
 taskItem:{
-  width: '80%',
+  width: '90%',
   height: 70,
   backgroundColor: '#ecf3f7',
   borderWidth: 0.5,
@@ -307,13 +308,10 @@ taskLeft:{
   justifyContent: 'space-between',
 },  
 
-taskCheck:{
-  width: 20,
-  height: 20,
-  borderRadius: 3,
-  backgroundColor: '#b2acb3'
+ringerIndicatorImage:{
+  height: 30,
+  width: 30,
 },
-
 taskText:{
   height: '80%',
   width: '85%',
@@ -324,10 +322,27 @@ taskText:{
   fontSize: 18,
   paddingVertical: 10,
 },
-tasksstate:{
+deleteSlider:{
+  width: '10%',
+  height: 70,
+  backgroundColor: '#ecf3f7',
+  borderRadius: 10,
+  overflow: 'visible',
+  padding: 0,
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+},
+taskItemHolder:{
+
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'space-evenly',
+  flexDirection: 'row',
+},
+deleteSliderIcon:{
+  height: 32,
   width: 30,
-  height: '50%',
-  backgroundColor: '#0000ff',
 }
 //styles for todo modal
 ,
@@ -376,7 +391,48 @@ addLocation:{
 locationImage:{
   height: 30,
   width: 30,
+},
+closeModal:{
+  height: 30,
+  width: 30,
+},
+saveTask:{
+  height: 35,
+  width: 70,
+  backgroundColor: '#0000ff',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  borderRadius: 10,
+},
+saveTaskText:{
+  color:'#fff',
+  fontSize: 20,
+  display: 'relative',
+  top: -2,
+}, 
+modalSectionOne:{
+  //position: 'absolute',
+  //top: 30,
+  width: '90%',
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  justifyContent: 'space-between',
+  padding: 5,
+  borderWidth: 2,
+  borderColor: '#000',
+  borderStyle: 'solid',
+
+},
+modalSectionOneBtns:{
+  width: '100%',
+  display: 'flex',
+  flexDirection: 'row',
+  alignItems: 'center',
+  justifyContent: "space-between",
 }
+
 ,
 //Login Page
 loginMain :{

@@ -69,16 +69,16 @@ function App1({navigation}) {
     "FredokaBold":require("./fonts/FredokaBold.ttf"),
 });
 
+const [siin, setSiin] = useState(true);
 
-
-const {sin}= useSelector(state =>state.userReducer)
+//const {sin}= useSelector(state =>state.userReducer)
 
 
 
   return (<>
 
 
-{(sin)?(
+{(siin)?(
 
     <NavigationContainer independent={true}>
     
@@ -169,6 +169,11 @@ export default function App (){
 <Provider store={store}>
  <NavigationContainer> 
           <Stack.Navigator>
+          <Stack.Screen 
+          name='App1'
+        component={App1}
+        options={{headerShown:false}}
+         />        
        
           <Stack.Screen
         name='Login'
@@ -180,11 +185,7 @@ export default function App (){
         component={Register}
         options={{}}
          />
-          <Stack.Screen 
-          name='App1'
-        component={App1}
-        options={{headerShown:false}}
-         />
+          
         
      
       </Stack.Navigator>
