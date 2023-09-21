@@ -30,7 +30,7 @@ export default function PersonalTimetable({navigation}){
 
    useEffect(()=>{
     async function fetchData()  {
-        fetch('https://buddy00.onrender.com/timetable')  // the link in the function connects to my api
+        fetch('https://good-earrings-cow.cyclic.cloud/timetable')  // the link in the function connects to my api
         .then((response)=>response.json())
         .then((json) => setSuds(json))
         .then(()=>console.log(suds))

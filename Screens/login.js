@@ -30,31 +30,20 @@ export default function Login({navigation}) {
     fetchData()
 },[]  )
 
-
 function fetchData()  {
-
-    fetch('https://buddy00.onrender.com/buddy') 
+    fetch('https://buddy00.onrender.com/buddy')  
     .then((response)=>response.json())
     .then((json) => setSuds(json))
-    .catch((error)=>console.log("error"));         
-   
-}
+    .then(()=>console.log('Data fetched'))
+    .catch((error)=>console.log("error"))          
+};
 
-var count = 1;
-function fix()
-{
-    if (count < 5){
-        count++
-       fetchData(); 
-        window.setTimeout(fix, 2000);
-    }
-}
-fix();
+
 
 
 
 async function Login() {
-
+    fetchData();
     
     for (var a =0; a < suds.length ; a++ ) {
 
@@ -70,8 +59,9 @@ async function Login() {
                   dispatch (setSin(true));
                   console.log(namee);  
                    
-                    setTimeout(()=>navigation.navigate('App1'),4000);
-                    setTimeout(()=>setRegg('succ'),5000)
+                    
+                    setTimeout(()=>setRegg('succ'),4000);7008
+                    setTimeout(()=>navigation.navigate('App1'),5000);
                     setTimeout(()=>setRegg('hehe'),6000);
                     
                    
@@ -131,7 +121,7 @@ if (c==suds.length){
         </>):(regg =='prob')?(<>
 <Text>Wrong password or SID!</Text>
         </>):(regg=='succ')?(<>
-<Text>Sign In Succesful</Text>
+<Text>Log In Succesful</Text>
         </>):(regg=='no')?(<>
             <Text>You do not have an accout. Go to the registration page</Text>
         </>):(<>

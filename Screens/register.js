@@ -52,16 +52,8 @@ function fetchData()  {
 //async function Fix(){ setInterval(()=>{fetchData()},10000)};
 
 //Fix();
-var count = 1;
-function fix()
-{
-    if (count < 3){
-        count++
+
        fetchData(); 
-        window.setTimeout(fix, 2000);
-    }
-}
-fix();
 
  async function Reg() {
   

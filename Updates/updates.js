@@ -10,6 +10,7 @@ import { useFonts } from "expo-font";
 import { useNavigation } from "@react-navigation/native";
 import { TextInput } from "react-native";
 import { Button } from "react-native";
+import { TouchableOpacity } from "react-native";
 
 
 
@@ -66,6 +67,37 @@ export default function Updates({route,navigation})  {
   )
   
 };
+
+//Get Update ID
+
+
+
+function Replicate() {
+
+
+
+
+}
+
+
+function SendUpdate() {
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
 function Postdataa() {
   fetch(`https://buddy00.onrender.com/updatte`,{
     method:"POST",
@@ -92,34 +124,6 @@ function Postdataa() {
   )
   
 };
-function Deletedataa() {
-  fetch(`https://buddy00.onrender.com/updattes/${id}`,{
-    method:"DELETE",
-  })
-  .then(res => {console.log(res.status);
-      console.log(res.headers);})
-  .then(
-    (result)=>{
-      console.log(result);
-    },
-    (error)=> {
-      console.log(error);
-    }
-  )
-  
-};
-
-
-
-
-
-
-
-
-
-
-
-  
 
 
  return (
@@ -135,18 +139,14 @@ function Deletedataa() {
       <>      
       <Text> New(99+)           Read(5)</Text>
       
-      <ScrollView style={style.scrollView}>
-      <View>
-          {Object.entries(data).map(([a,Postt]) => {
-            return (
-              <View>
-                <Text key={a} style={styles.text1}>{data[a].Postt}</Text>
-              </View>
-            );
-          })}
-        </View>
- 
-      </ScrollView>
+      <SafeAreaView style={styles.container}>
+      <FlatList
+        data={DATA}
+        renderItem={renderItem}
+        keyExtractor={item => item.id}
+        extraData={selectedId}
+      />
+    </SafeAreaView>
       {(nava)?(
       <View style={{
          justifyContent:'center',
@@ -193,7 +193,7 @@ const style = StyleSheet.create({
   scrollView: {
     height:400,
     width:400,
- marginBottom:100
+ marginBottom:50
   },
   text: {
     fontSize: 42,
