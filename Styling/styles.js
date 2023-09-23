@@ -279,7 +279,7 @@ marginLeft:200
     addtxt:{
       fontSize: 15,
       color: '#0909af',
-      fontWeight: '550',
+      fontWeight: '700',
     },
     today:{
       color: '#fff',
