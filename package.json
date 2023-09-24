@@ -14,6 +14,7 @@
     "@fortawesome/react-fontawesome": "^0.2.0",
     "@fortawesome/react-native-fontawesome": "^0.3.0",
     "@react-native-community/checkbox": "^0.5.16",
+    "@react-native-community/datetimepicker": "7.2.0",
     "@react-native-community/masked-view": "^0.1.11",
     "@react-native-community/viewpager": "^5.0.11",
     "@react-navigation/bottom-tabs": "^6.5.8",
@@ -24,9 +25,12 @@
     "expo-app-loading": "^2.1.1",
     "expo-dev-client": "~2.4.8",
     "expo-font": "~11.4.0",
+    "expo-location": "~16.1.0",
     "expo-splash-screen": "~0.20.5",
     "expo-status-bar": "~1.6.0",
+    "expo-updates": "~0.18.12",
     "firebase": "^10.3.1",
+    "moment": "^2.29.4",
     "react": "18.2.0",
     "react-native": "0.72.3",
     "react-native-blob-util": "^0.19.1",
@@ -40,10 +44,7 @@
     "react-native-svg": "^13.11.0",
     "react-redux": "^8.1.2",
     "redux": "^4.2.1",
-    "redux-thunk": "^2.4.2",
-    "expo-location": "~16.1.0",
-    "expo-updates": "~0.18.12",
-    "@react-native-community/datetimepicker": "7.2.0"
+    "redux-thunk": "^2.4.2"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"

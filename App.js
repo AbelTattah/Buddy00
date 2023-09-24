@@ -38,7 +38,7 @@ function LobbyTitle() {
   return(
     <View>
       <Text style={{
-        marginLeft:226,
+      marginLeft:30,
       fontWeight:700,
       fontSize:17,
       color:'white'
@@ -87,13 +87,15 @@ const {sin}= useSelector(state =>state.userReducer)
            <Tab.Screen 
         name='Updates'
         component={TODO} 
-        options = {{title:'TODO',
+        options = {{title:'TODO',tabBarStyle:{
+            backgroundColor:'#ddd'
+          },
         tabBarIcon: ({ color, size }) => (
             <FontAwesomeIcon icon={faBell} size={32} color='black' />
           ),headerTintColor:'white',headerShadowVisible:false, headerStyle: {
             elevation:0,shadowOpacity:0,borderBottomWidth:0,
             backgroundColor:'#00f'
-            ,
+            
         }}} />
     <Tab.Screen 
           name="Lobby" 
@@ -101,7 +103,9 @@ const {sin}= useSelector(state =>state.userReducer)
           component={Lobby} gestureEnabled={true}
           options = { {headerTitle:()=><LobbyTitle />,tabBarIcon: ({ color, size }) => (
             <FontAwesomeIcon icon={faMugSaucer} size={32} color='black' />
-          ),
+          ),tabBarStyle:{
+            backgroundColor:'#ddd'
+          },
            headerShadowVisible:false,headerTintColor:'white', headerStyle: {
             elevation:0,shadowOpacity:0,borderBottomWidth:0,
             backgroundColor:'#00f'
@@ -116,7 +120,9 @@ const {sin}= useSelector(state =>state.userReducer)
           <Tab.Screen
         component={Timetables}
         name="Timetables"
-        options={{headerTitle:()=><MeTitle />,tabBarIcon: ({ color, size }) => (
+        options={{headerTitle:()=><MeTitle />,tabBarStyle:{
+            backgroundColor:'#ddd'
+          },tabBarIcon: ({ color, size }) => (
             <FontAwesomeIcon icon={faCalendarDay} size={32} color='black' />
           ),
           headerTintColor:'white',headerShadowVisible:false, headerStyle: {
@@ -127,7 +133,9 @@ const {sin}= useSelector(state =>state.userReducer)
          <Tab.Screen 
         name='Navigator'
         component={Nav} 
-        options = {{title:'Navigator',
+        options = {{title:'Navigator',tabBarStyle:{
+            backgroundColor:'#ddd'
+          },
         tabBarIcon: ({ color, size }) => (
             <FontAwesomeIcon icon={faLocation} size={32} color='black' />
           ),headerTintColor:'white',headerShadowVisible:false, headerStyle: {
@@ -178,7 +186,7 @@ export default function App (){
              <Stack.Screen
         name='Register'
         component={Register}
-        options={{}}
+        options={{title:'Sign Up'}}
          />
           <Stack.Screen 
           name='App1'

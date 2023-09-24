@@ -71,7 +71,7 @@ export default function Updatesmin({route,navigation})  {
  return (
 <SafeAreaView>
    <View style={{
-    height:550,
+    height:300,
     justifyContent:'center',
     alignItems:'center'
    }}>
@@ -80,7 +80,9 @@ export default function Updatesmin({route,navigation})  {
 <ActivityIndicator size='large' color='blue'/>
       </>):(
       <>      
-      <Text> New(99+)           Read(5)</Text>
+      <Text style={{
+        marginRight:170
+      }}> New(9)          </Text>
       
       <ScrollView style={style.scrollView}>
       <View>
@@ -104,11 +106,14 @@ export default function Updatesmin({route,navigation})  {
 
 const style = StyleSheet.create({
   container: {
+    width:'120',
+    height:200,
     flex: 1,
     paddingTop: StatusBar.currentHeight,
   },
   scrollView: {
- marginBottom:200
+    height:170,
+ marginBottom:70
   },
   text: {
     fontSize: 42,

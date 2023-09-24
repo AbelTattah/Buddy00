@@ -6,7 +6,8 @@ import { store } from '../redux/store';
 import { useDispatch } from 'react-redux';
 import { ActivityIndicator } from 'react-native';
 import { setName,setSin,setSid,setCourse } from '../redux/actions';
-
+import { useFonts } from 'expo-font';
+import { TouchableOpacity } from 'react-native';
 export default function Login({navigation}) {
 
  var [siddd,setSiddd] = useState(0);
@@ -94,7 +95,14 @@ if (c==suds.length){
 
 
 
+let [fontsLoaded] = useFonts({
+    "FredokaBold":require("../fonts/FredokaBold.ttf"),
+});
 
+
+if (!fontsLoaded){
+    return <ActivityIndicator />;
+}
 
 
 
@@ -107,17 +115,22 @@ if (c==suds.length){
     return (
     <Provider store={store}>
      <View style={styles.loginMain}>
+      <View style={styles.loginLogo}>
+        <Text style={styles.loginLogoText}>Buddy</Text>
+      </View>
         <KeyboardAvoidingView style={styles.loginIn} behavior='padding'>
-        <TextInput style={styles.loginTextIn}  placeholder='Enter SID' autoCapitalize='none' onChangeText={(text)=>setSiddd(text)} />
-        <TextInput style={styles.loginTextIn} placeholder='password' autoCapitalize='none' onChangeText={(text)=>setPass(text)} />
+        <TextInput style={styles.loginTextIn}  placeholder='   Student ID' autoCapitalize='none' onChangeText={(text)=>setSiddd(text)} />
+        <TextInput style={styles.loginTextIn} placeholder='   password' autoCapitalize='none' onChangeText={(text)=>setPass(text)} />
         </KeyboardAvoidingView>
-        <Button title='Login' onPress={()=>Login()}></Button>
+        <TouchableOpacity style={styles.loginButton}  onPress={()=>Login()}><Text style={styles.loginButtonText}>Log in</Text></TouchableOpacity>
+        <Text style={styles.loginTextt1}>Forgot password?</Text>
+        <Text style={styles.loginTextt2}>Privacy</Text>
         <View style={styles.regButtonView}>
         <Text>New to Buddy?</Text>
-        <Button  title='Register' onPress={()=>navigation.navigate('Register')}></Button>
+        <TouchableOpacity style={styles.loginReg} onPress={()=>navigation.navigate('Register')}><Text style={styles.loginRegText}>  Sign Up</Text></TouchableOpacity>
         </View>
         <>{(regg=='inp')?(<>
-<Text>Logging in ... <ActivityIndicator color='white'/></Text>
+<Text>Logging in ... <ActivityIndicator color='#2407f2'/></Text>
         </>):(regg =='prob')?(<>
 <Text>Wrong password or SID!</Text>
         </>):(regg=='succ')?(<>

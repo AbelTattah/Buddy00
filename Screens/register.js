@@ -3,6 +3,7 @@ import styles from '../Styling/styles';
 import { useState,useEffect } from 'react';
 import CheckBox from 'react-native-check-box';
 import { beginAsyncEvent } from 'react-native/Libraries/Performance/Systrace';
+import { TouchableOpacity } from 'react-native';
 
 
 
@@ -97,6 +98,29 @@ console.log(c);
   
       })
     })
+    .then(
+     
+        fetch(`https://buddy00.onrender.com/updateR`,{
+          method:"POST",
+          headers:{
+            "Content-Type": 'application/json'
+          },
+          body: JSON.stringify({
+            Update:["init"],
+            SID:sid,
+          })
+        })
+        .then(res => {console.log(res.status);
+            console.log(res.headers);})
+        .then(
+          (result)=>{
+            console.log(result);
+          },
+          (error)=> {
+            console.log(error);
+          }
+        )  
+      )
     .then(res => {console.log(res.status);
         console.log(res.headers);})
     .then(
@@ -181,12 +205,12 @@ function Check(sub){
 }
 
     return (
-     <View style={styles.loginMain}>
-        <Text>Register</Text>
-        <KeyboardAvoidingView style={styles.loginIn} behavior='padding'>
-        <TextInput style={styles.loginTextIn}  placeholder=' SID' autoCapitalize='none' onChangeText={(text)=>setSid(text)} />
-        <TextInput style={styles.loginTextIn} placeholder=' name' autoCapitalize='none' onChangeText={(text)=>setNameid(text)} />
-        <TextInput style={styles.loginTextIn} placeholder='password' autoCapitalize='none' onChangeText={(text)=>setPass(text)} />
+     <View style={styles.ReggMain}>
+        <Text style={styles.ReggLogoText}>Sign Up for Buddy</Text>
+        <KeyboardAvoidingView style={styles.ReggIn} behavior='padding'>
+        <TextInput style={styles.ReggTextIn}  placeholder='    SID' autoCapitalize='none' onChangeText={(text)=>setSid(text)} />
+        <TextInput style={styles.ReggTextIn} placeholder='    name' autoCapitalize='none' onChangeText={(text)=>setNameid(text)} />
+        <TextInput style={styles.ReggTextIn} placeholder='    password' autoCapitalize='none' onChangeText={(text)=>setPass(text)} />
         </KeyboardAvoidingView>
         <View style={styles.regCheckmain}>
         <Text>Select Courses:</Text>
@@ -208,7 +232,7 @@ function Check(sub){
     isChecked={isC2}
 />
            </View>
-           <View style={styles.regCheck}>
+           <View style={styles.regCheck1}>
  <Text>DCIT101</Text><CheckBox
   
     onClick={()=>{
@@ -217,7 +241,7 @@ function Check(sub){
     isChecked={isC3}
 />
            </View>
-           <View style={styles.regCheck}>
+           <View style={styles.regCheck2}>
  <Text>UGRC150  </Text><CheckBox
   
     onClick={()=>{
@@ -227,11 +251,12 @@ function Check(sub){
 />
            </View>
         </View>
-         
-        <Button title='Register' onPress={()=>Reg()}></Button>
-        <Button title='Consolelogcourse' onPress={()=>console.log(course)}></Button>
+     <View style={styles.ReggButtonView}>    
+        <TouchableOpacity style={styles.loginButton}  onPress={()=>Reg()}><Text style={styles.loginButtonText}>Sign Up</Text></TouchableOpacity>
+       
+     </View>  
         <>{(regg=='inp')?(<>
-<Text>Signing you up... <ActivityIndicator color='white'/></Text>
+<Text>Signing you up... <ActivityIndicator color='#2407f2'/></Text>
         </>):(regg =='prob')?(<>
 <Text>You already Have an account</Text>
         </>):(regg=='succ')?(<>

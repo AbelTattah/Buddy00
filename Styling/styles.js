@@ -5,39 +5,38 @@ import { Dimensions } from "react-native";
 const { height } = Dimensions.get('window');
 const styles = StyleSheet.create({
     Homepage:{
-  
+     backgroundColor:'white',
+     flex:1,
     },
     dashboardTopSection:{
-      
+    height:60,
   backgroundColor:'blue'
     },
     dashboardName: {
 fontFamily:'FredokaBold',
-fontSize:19,
-marginLeft:200
+fontSize:24,
+marginLeft:46
     },
-    dashboardAvatar:{
-      justifyContent:'center',
-      alignItems:'center',
-      position:'absolute',
-      top:32,
-      right:39,
-      borderRadius:99,
-      borderTopColor:'white',
-      height:133,
-      width:133,
-      backgroundColor:'#888'
-    },
-
-    LobbyUpdates:{
-     height:400,
-     marginTop:200,
+  
+  LobbyUpdates:{
+     height:290,
+     marginTop:70,
+     borderColor:'#aaa',
      borderWidth:1,
-     borderRadius:50,
-     width:400,
-     padding:10
+     width:320,
+     padding:12,
+     alignItems:'center'
     
      
+    },
+    LobbyMinButton:{
+      padding:6,
+      justifyContent:'center',
+      alignItems:'center',
+      backgroundColor:'#aaa',
+      marginTop:10,
+      width:140,
+      borderRadius:10,
     },
     contentContainer1:{
       paddingTop: StatusBar.currentHeight,
@@ -53,10 +52,33 @@ marginLeft:200
       position:'absolute',
       top:120
     },
+    lobbyQuick:{
+      justifyContent:'center',
+      alignItems:'center',
+      marginTop:30,
+      
+    
+    },
+    lobbyQuickButton:{
+      backgroundColor:'#2407f2',
+      width:320,
+      height:50,
+      borderRadius:20,
+      marginTop:10,
+      marginBottom:5
+    },
+    LobbyQuickButtonText:{
+      color:'white',
+      justifyContent:'center',
+      marginLeft:20,
+      fontSize:18,
+      marginTop:12,
+      fontFamily:'FredokaBold'
+    },
     lobbyGreeting : {
-      marginTop:70,
-      marginLeft:96,
-      fontSize:20,
+      marginTop:10,
+      marginLeft:44,
+      fontSize:28,
       color:'white',
       fontFamily:'FredokaBold'
     },
@@ -71,7 +93,7 @@ marginLeft:200
     lobbyMiniUpdates1: {
       marginTop:30,
       height:150,
-      width:340,
+      width:300,
       flex:0.4,
       marginBottom:-110
     },
@@ -98,13 +120,13 @@ marginLeft:200
       
     },
     text1: {
-      
+      width:270,
       fontFamily:'FredokaLight',
-      padding:10,
+      padding:15,
       fontSize: 17,
       margin:10,
-      backgroundColor:'#8889',
-      borderRadius:30
+      backgroundColor:'#ddd',
+      borderRadius:10
     },
     meContentContainer:{
       flex:1,
@@ -379,26 +401,63 @@ locationImage:{
 }
 ,
 //Login Page
+loginLogo:{
+  marginTop:50,
+  marginBottom:30,
+},
+loginLogoText :{
+fontSize:69,
+fontFamily:'FredokaBold',
+color:'#2407f2'
+},
 loginMain :{
+  backgroundColor:'white',
   flex:1,
   justifyContent:'center',
   alignItems:'center',
-  backgroundColor:'#00f8',
 },
 loginIn:{
-gap:20,
+gap:40,
 margin:23
 },
+loginButton:{
+  width:300,
+  height:40,
+  backgroundColor:'#2407f2',
+  borderRadius:2,
+
+},
 loginTextIn:{
-  backgroundColor:'#ddd',
-  width:400,
+borderRadius:2,
+borderWidth:1,
+  width:300,
   height:40
 },
+loginButtonText:{
+  textAlign:"center",
+  marginTop:8,
+  color:'white'
+},
 regButtonView:{
-  marginTop:100
+  flexDirection:'row',
+  marginTop:20
 }
 ,
+loginTextt1:{
+  marginTop:30,
+  color:'#2407f2',
+  marginBottom:20
+},
+loginTextt2:{
+  color:'#2407f2'
+},
+loginReg:{
+backgroundColor:'white'
+},
+loginRegText:{
+color:'#2407f2',
 
+},
 
 //Register
 regCheckmain:{
@@ -406,15 +465,81 @@ flex:0.4,
 gap:10,
 marginBottom:0
 },
+RegginLogo:{
+  marginTop:50,
+  marginBottom:30,
+},
+ReggLogoText :{
+fontSize:34,
+fontFamily:'FredokaBold',
+marginRight:25
+},
+ReggMain :{
+  backgroundColor:'white',
+  flex:1,
+  justifyContent:'center',
+  alignItems:'center',
+},
+ReggIn:{
+gap:40,
+margin:23
+},
+ReggButton:{
+  width:300,
+  height:40,
+  backgroundColor:'#2407f2',
+  borderRadius:2,
+
+},
+ReggTextIn:{
+borderRadius:2,
+borderWidth:1,
+  width:300,
+  height:40
+},
+loginButtonText:{
+  textAlign:"center",
+  marginTop:8,
+  color:'white'
+},
+ReggButtonView:{
+  gap:20,
+  marginTop:60
+}
+,
+loginTextt1:{
+  marginTop:30,
+  color:'#2407f2',
+  marginBottom:20
+},
+loginTextt2:{
+  color:'#2407f2'
+},
+
+loginRegText:{
+color:'#2407f2',
+
+},
+
 
 regCheck:{
 flexDirection:'row',
+marginRight:199,
 gap:5
 },
+regCheck1:{
+  flexDirection:'row',
+  gap:18
+  },
+regCheck2:{
+    flexDirection:'row',
+    gap:6
+  },
 directionModal:{
 
 
 }
+
 
   });
 
