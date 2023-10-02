@@ -591,9 +591,23 @@ regCheck2:{
     flexDirection:'row',
     gap:6
   },
-directionModal:{
 
 
+//navigation
+
+directionModal: {
+  backgroundColor: '#adcbfb',
+  height: '45%',
+    position: 'absolute',
+   bottom: 0,
+  width: '100%',
+  padding: 10,
+  borderTopRightRadius: 40,
+  borderTopLeftRadius: 40,
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  justifyContent: 'center',
 }
 
 

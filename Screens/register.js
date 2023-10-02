@@ -4,17 +4,23 @@ import { useState,useEffect } from 'react';
 import CheckBox from 'react-native-check-box';
 import { beginAsyncEvent } from 'react-native/Libraries/Performance/Systrace';
 import { TouchableOpacity } from 'react-native';
-
-
-
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { initializeApp } from "firebase/app";
+import { Firestore, getFirestore } from "firebase/firestore";
+import { collection, addDoc } from "firebase/firestore"; 
+import { db } from '../firebase';
+import { database } from '../firebase';
+import { setDoc } from 'firebase/firestore';
+import { doc } from 'firebase/firestore';
 var course=[];
+
 
 export default function Register({navigation}) {
 
  var [sid,setSid] = useState(0);
  var [nameid,setNameid] = useState('');
  var [pass,setPass]= useState('');
- 
+ var [email,setEmail]= useState('');
  var [suds,setSuds]= useState({});
  var [sud1,setSud1] =useState({})
  var [regg,setRegg] =useState('rnd');
@@ -31,6 +37,7 @@ export default function Register({navigation}) {
  var [isC5,setIsC5] = useState(false);
 
  var c = 0 ;
+ /*
  useEffect(()=>{
     async function fetchData()  {
         fetch('https://buddy00.onrender.com/buddy')  
@@ -41,6 +48,9 @@ export default function Register({navigation}) {
     fetchData()
 
 },[]  )
+
+
+
 function fetchData()  {
 
     fetch('https://buddy00.onrender.com/buddy') 
@@ -84,8 +94,12 @@ fetchData();
 console.log(c);
 
     if (c==0) {
-        setRegg('inp');
-    fetch(`https://buddy00.onrender.com/buddy`,{
+
+
+
+
+      setRegg('inp');
+      fetch(`https://buddy00.onrender.com/buddyy`,{
       method:"POST",
       headers:{
         "Content-Type": 'application/json'
@@ -98,36 +112,12 @@ console.log(c);
   
       })
     })
-    .then(
-     
-        fetch(`https://buddy00.onrender.com/updateR`,{
-          method:"POST",
-          headers:{
-            "Content-Type": 'application/json'
-          },
-          body: JSON.stringify({
-            Update:["init"],
-            SID:sid,
-          })
-        })
-        .then(res => {console.log(res.status);
-            console.log(res.headers);})
-        .then(
-          (result)=>{
-            console.log(result);
-          },
-          (error)=> {
-            console.log(error);
-          }
-        )  
-      )
     .then(res => {console.log(res.status);
         console.log(res.headers);})
     .then(
       (result)=>{
         console.log('User Has been registered');
         setRegg('succ');
-        fix();
       },
       (error)=> {
         console.log(error);
@@ -141,11 +131,13 @@ else {
     console.log(c);
 }
 
+    
+  
 
 }
 
 
-
+*/
 
 
 
@@ -204,12 +196,58 @@ function Check(sub){
 }
 }
 
+
+async function createUserCollection() {
+  try {
+    const docRef = await setDoc(doc(db, "users", `${email}`), {
+   COR:course,
+   SNAME:nameid,
+   STUID:sid
+    });
+    console.log("Document written with ID: ", email);
+  } catch (e) {
+    console.error("Error adding document: ", e);
+  }
+}
+
+
+async function signUp() {
+
+  const auth = getAuth();
+  createUserWithEmailAndPassword(auth, email, pass)
+  .then(() => {
+  setRegg('inp');
+  createUserCollection();
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    setRegg('prob1');
+    // ..
+  })
+  .finally(()=>{
+    if (regg =='inp') {
+      
+       setRegg('succ');
+    }
+    else{
+      setRegg('prob')
+    }
+  })
+;
+
+}
+
+
+
+
     return (
      <View style={styles.ReggMain}>
         <Text style={styles.ReggLogoText}>Sign Up for Buddy</Text>
         <KeyboardAvoidingView style={styles.ReggIn} behavior='padding'>
         <TextInput style={styles.ReggTextIn}  placeholder='    SID' autoCapitalize='none' onChangeText={(text)=>setSid(text)} />
         <TextInput style={styles.ReggTextIn} placeholder='    name' autoCapitalize='none' onChangeText={(text)=>setNameid(text)} />
+        <TextInput style={styles.ReggTextIn} inputMode='email' placeholder='    email' autoCapitalize='none' onChangeText={(text)=>setEmail(text)} />
         <TextInput style={styles.ReggTextIn} placeholder='    password' autoCapitalize='none' onChangeText={(text)=>setPass(text)} />
         </KeyboardAvoidingView>
         <View style={styles.regCheckmain}>
@@ -252,14 +290,16 @@ function Check(sub){
            </View>
         </View>
      <View style={styles.ReggButtonView}>    
-        <TouchableOpacity style={styles.loginButton}  onPress={()=>Reg()}><Text style={styles.loginButtonText}>Sign Up</Text></TouchableOpacity>
+        <TouchableOpacity style={styles.loginButton}  onPress={()=>signUp()}><Text style={styles.loginButtonText}>Sign Up</Text></TouchableOpacity>
        
      </View>  
         <>{(regg=='inp')?(<>
 <Text>Signing you up... <ActivityIndicator color='#2407f2'/></Text>
         </>):(regg =='prob')?(<>
 <Text>You already Have an account</Text>
-        </>):(regg=='succ')?(<>
+        </>):(regg=='prob1')?(<><Text>
+          There was an error
+        </Text></>):(regg=='succ')?(<>
 <Text>Sign Up Succesful ,Go to login Page!</Text>
         </>):(<>
             <Text>Buddy v.1.0</Text>

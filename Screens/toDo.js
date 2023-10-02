@@ -60,18 +60,18 @@ export default function TODO({navigation}) {
                 </TouchableOpacity>
                 <View style = {styles.taskContainer}>
                 <ScrollView>
-                    <Task text = {'shut the fuck up kev'}/>
-                    <Task text = {'witchoo dumb ass!'}/>
-                    <Task text = {'witchoo dumb ass!'}/>
-                    <Task text = {'shut the fuck up kev'}/>
-                    <Task text = {'witchoo dumb ass!'}/>
-                    <Task text = {'witchoo dumb ass!'}/>
-                    <Task text = {'shut the fuck up kev'}/>
-                    <Task text = {'witchoo dumb ass!'}/>
-                    <Task text = {'witchoo dumb ass!'}/>
-                    <Task text = {'shut the fuck up kev'}/>
-                    <Task text = {'witchoo dumb ass!'}/>
-                    <Task text = {'witchoo dumb ass!'}/>
+                    <Task text = {'s'}/>
+                    <Task text = {'w!'}/>
+                    <Task text = {'w!'}/>
+                    <Task text = {'s'}/>
+                    <Task text = {'w!'}/>
+                    <Task text = {'w!'}/>
+                    <Task text = {'sh'}/>
+                    <Task text = {'wi!'}/>
+                    <Task text = {'wi!'}/>
+                    <Task text = {'sh'}/>
+                    <Task text = {'wi!'}/>
+                    <Task text = {'wi!'}/>
                 </ScrollView>      
 
                 </View>    

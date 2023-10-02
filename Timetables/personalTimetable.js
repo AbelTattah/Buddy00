@@ -91,10 +91,10 @@ console.log(byDate);
 
 
 function sett() {
-    setDisp1(byDate[0].time);
-    setDisp2(byDate[1].time);
-    setDisp3(byDate[2].time);
-    setDisp4(byDate[3].time);
+    setDisp1(byDate[0]["time"]);
+    setDisp2(byDate[1]["time"]);
+    setDisp3(byDate[2]["time"]);
+    setDisp4(byDate[3]["time"]);
     setDisp5("Yet to Generate");
     setDisp6("Yet to Generate");
     console.log("Hmmm");
@@ -103,12 +103,12 @@ sett();
 }
 
     async function fetchData()  {
-        fetch('https://good-earrings-cow.cyclic.cloud/timetable')  // the link in the function connects to my api
+        fetch('https://buddy00.onrender.com/timetables')  // the link in the function connects to my api
         .then((response)=>response.json())
         .then((json) => setSuds(json))
         .then(()=>console.log(suds))
-        .catch((error)=>{console.log("error");setLddd('mm')})          
-        .finally(()=>setLddd('yes'));
+        .catch((error)=>{console.log("error");})          
+        
     };
     //line 89 to 96 load the font and makes sure the font is loaded before rendering the main view.
     let [fontsLoaded] = useFonts({
