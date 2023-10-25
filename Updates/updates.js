@@ -13,7 +13,7 @@ import { Button } from "react-native";
 import { TouchableOpacity } from "react-native";
 import { store } from "../redux/store";
 import { Provider } from "react-redux";
-import { UseSelector, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import axios from "axios";
 
 
@@ -110,7 +110,7 @@ export default function Updates({route,navigation})  {
   var parr1;
   const [nn,setNn] = useState(0);
   const [nn1,setNn1] = useState(0);
-  const [posttarr,setPosttarr] =useState([]);
+  const [ldi,setLdi] =useState(0);
   const [posttar,setPosttar] =useState([]);
   const [posttarr1,setPosttarr1] =useState([]);
   const navigate = useNavigation; 
@@ -164,7 +164,7 @@ export default function Updates({route,navigation})  {
     function filterbyid(array,sid) {
 
        
-        return array.filter(obj=>obj.SID==sidd);
+        return array.filter(obj=>obj.SID==sid);
 
     }
     
@@ -196,21 +196,21 @@ export default function Updates({route,navigation})  {
     useEffect(()=>{
       fetchDataa1();
       fetchDataa2();
-      fetchTime();
+      setTimeout(()=>{setLdi(2)});
     },[]);
    
-    useEffect(()=>{      
-      setTimeout(()=>{setRarr(filterbyid(data,sidd))},1000);
-      setTimeout(()=>{setSarr(filterbyid(data1,sidd));       
-      },1500);
-      setTimeout(()=>{setLddd(true)},4000);},[data])
- 
 
-      useEffect(()=>{
-        setTimeout(()=>{console.log(sarr)},2000);
-        setTimeout(()=>{setId1(sarr[0]["_id"])},3000);
-          console.log(id1);
-      },[sarr])
+
+
+ useEffect(()=>{
+  fetchTime();
+  setTimeout(()=>{console.log(sarr)},3000);
+  setTimeout(()=>{setRarr(filterbyid(data,sidd))},2000);
+  setTimeout(()=>{setSarr(filterbyid(data1,sidd))},2000);
+  setTimeout(()=>{setLddd(false)},4000);
+ },[data,data1])
+
+     
   
   //  let [fontsLoaded] = useFonts({
    //   "FredokaBold":require("../fonts/FredokaBold.ttf"),
@@ -245,32 +245,8 @@ console.log(error.message);
  async function sendUpdate() {
  
 
-/*
-  for (var k = 0 ; k < data1.length ; k++) {
-
-    if (sidd==data1[k]["SID"]) {
-    
-    console.log("Id has been found 2");
-    parr1 =data1[k]["Update"];
-    setId2(data1[k]["_id"]);
-    break;
-    
-    }
-    else {
-      console.log("Loop2 ran but update ID was not found");
-    }
-    }
-*/
-
-
-  senderUpdate();
-  UpdateAll();
-  
-};
-
-
-async function senderUpdate() {
   fetchTime();
+  setTimeout(()=>{
   parr1.push(postt+`   ${timee}`);
   console.log("Sender's ID:  "+id1);
   
@@ -288,9 +264,13 @@ async function senderUpdate() {
     (error)=> {
       console.log(error);
     }
-  );
-}
+  );},4000);
 
+
+  senderUpdate();
+  UpdateAll();
+  
+};
 
 
 
@@ -406,7 +386,7 @@ for ( var v = 0 ; v < data.length ; v++ ) {
          <Button title="Delete Post" onPress={()=>Deletedataa()
         }></Button>
        <Button title="Get" onPress={()=>{
-     console.log(id1);
+     console.log(sidd);
        }}></Button>
        </View></>
       </View>):(<></>)}      

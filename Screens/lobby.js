@@ -1,8 +1,8 @@
 
-import { Button, SafeAreaView,Text, View, ScrollView,TouchableOpacity,Pressable, ActivityIndicator } from "react-native";
+import { Button, SafeAreaView, Text, View, ScrollView, TouchableOpacity, Pressable, ActivityIndicator } from "react-native";
 import * as React from 'react';
 import styles from "../Styling/styles";
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import Weather from "../Components/weather";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
@@ -13,66 +13,105 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useNavigation } from "@react-navigation/native";
 import Updatesmin from "../Updates/Updatesmin";
 import PersonalTimetable from "../Timetables/personalTimetable";
-
-
- function Lobby1 ({navigation}) {
-let [fontsLoaded] = useFonts({
-    "FredokaBold":require("../fonts/FredokaBold.ttf"),
-});
-
-if (!fontsLoaded){
-    return <ActivityIndicator />;
-}
+import { Provider } from "react-redux";
+import { store } from "../redux/store";
+import { useSelector } from "react-redux";
+import { db } from '../firebase';
+import { doc, getDoc } from "firebase/firestore";
+import { useDispatch } from 'react-redux';
+import { setCourse, setName, setSid } from "../redux/actions";
 
 
 
-//const {namee} = useSelector(state=>state.userReducer);
+function Lobby1({ navigation }) {
+
+    var [dataLoaded,setDataLoaded] =  useState(false);
+    var [suds,setSuds] = useState({});
+    const dispatch = useDispatch();
+
+    const { namee, email } = useSelector(state => state.userReducer);
+    let [fontsLoaded] = useFonts({
+        "FredokaBold": require("../fonts/FredokaBold.ttf"),
+    });
+
+    let emaill = email;
+
+    const path = 'users/user/buddy/'+emaill;
+
+
+    const fetchAndDispatch = ( ) => {
+        async function ReadData() {
+            console.log(path)
+            const docRef = doc(db, path);
+            const docSnap = await getDoc(docRef);
+        
+            if (docSnap.exists()) {
+              console.log("Document data:", docSnap.data());
+              setSuds(docSnap.data);
+            } else {
+              // docSnap.data() will be undefined in this case
+              console.log("No such document!");
+            }  
+          }
+        ReadData();
+    
+    };
+
+
+
+    if (!fontsLoaded && dataLoaded) {
+        return <ActivityIndicator />;
+    }
+
 
     return (
-        
-        <>
-        <View style={styles.Homepage}>
 
-    <View style={styles.dashboardTopSection}>
+        <Provider store={store}>
+            <View style={styles.Homepage}>
 
-        <Text style={styles.lobbyGreeting}>
-        Good Morning
-        </Text>
-    
-    </View>
+                <View style={styles.dashboardTopSection}>
 
-        <Text style={styles.dashboardName}>Kobina</Text>
+                    <Text style={styles.lobbyGreeting}>
+                        Good Morning
+                    </Text>
+                    <Weather style={{
+                        position:'absolute',
+                        right:50
+                    }} />
+                </View>
 
-   
+                <Text style={styles.dashboardName}>{namee}</Text>
 
-   
-    <Pressable style={{
-        justifyContent:'center',
-        alignItems:'center'
-    }} onLongPress={() =>{ navigation.navigate('Updates',{
-        "nava":99
-    });}}>
-    <View style={styles.LobbyUpdates}>
-    <TouchableOpacity style={styles.LobbyMinButton} onPress={() =>{ navigation.navigate('Updates')}}><Text>Updates</Text></TouchableOpacity>
-    <Updatesmin />
-     
-    </View>
-    </Pressable>
-    <View style = {styles.lobbyQuick}>
-       <Text style={{
-        fontFamily:'FredokaBold',
-        marginRight:240,
-       }}>Quick links</Text>
-       <TouchableOpacity style={styles.lobbyQuickButton}>
-        <Text style={styles.LobbyQuickButtonText}>Academic calender</Text>
-       </TouchableOpacity>
-       <TouchableOpacity style={styles.lobbyQuickButton} onPress={()=>navigation.navigate('PerT')}>
-        <Text style={styles.LobbyQuickButtonText}>Personal Timetable</Text>
-       </TouchableOpacity>
-  </View>
-  </View>
- 
-  </>
+                <Pressable style={{
+                    justifyContent: 'center',
+                    alignItems: 'center'
+                }} onLongPress={() => {
+                    navigation.navigate('Updates', {
+                        "nava": 99
+                    });
+                }}>
+                    <View style={styles.LobbyUpdates}>
+                        <TouchableOpacity style={styles.LobbyMinButton} onPress={() => { navigation.navigate('Updates') }}><Text>Updates</Text></TouchableOpacity>
+                     
+                        <Updatesmin />
+
+                    </View>
+                </Pressable>
+                <View style={styles.lobbyQuick}>
+                    <Text style={{
+                        fontFamily: 'FredokaBold',
+                        marginRight: 240,
+                    }}>Quick links</Text>
+                    <TouchableOpacity style={styles.lobbyQuickButton}>
+                        <Text style={styles.LobbyQuickButtonText}>Academic calender</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.lobbyQuickButton} onPress={() => navigation.navigate('PerT')}>
+                        <Text style={styles.LobbyQuickButtonText}>Personal Timetable</Text>
+                    </TouchableOpacity>
+                </View>
+            </View>
+
+        </Provider>
 
 
     );
@@ -80,29 +119,39 @@ if (!fontsLoaded){
 
 const stack = createNativeStackNavigator();
 
-export default function Lobby({navigation}){
-   // const {namee} = useSelector(state=>state.userReducer);
-    return(
-        
+export default function Lobby({ navigation }) {
+    // const {namee} = useSelector(state=>state.userReducer);
+    return (
+
         <NavigationContainer independent={true}>
-        <stack.Navigator>
-            <stack.Screen
-            name = "Lobby1"
-            component={Lobby1}
-            options={{headerShown:false}} />
-             <stack.Screen
-            name = "Updates"
-            component={Updates}
-            options={{}} show={true}/>
-            <stack.Screen
-            name = "PerT"
-            component={PersonalTimetable}
-            options={{}} />
-            
-        </stack.Navigator>
+            <stack.Navigator>
+                <stack.Screen
+                    name="Lobby1"
+                    component={Lobby1}
+                    options={{ headerShown: false }} />
+                <stack.Screen
+                    name="Updates"
+                    component={Updates}
+                    options={{}} show={true} />
+                <stack.Screen
+                    name="PerT"
+                    component={PersonalTimetable}
+                    options={{}} />
+
+            </stack.Navigator>
         </NavigationContainer>
-     
-       
+
+
     )
 }
 
+
+/*
+
+New courses have to be selected each semester for the timetable
+
+Pro features:
+    Customization
+    Advanced features
+
+*/

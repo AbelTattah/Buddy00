@@ -13,6 +13,7 @@ const styles = StyleSheet.create({
   backgroundColor:'blue'
     },
     dashboardName: {
+color:'black',
 fontFamily:'FredokaBold',
 fontSize:24,
 marginLeft:46
@@ -430,7 +431,6 @@ saveTask:{
 saveTaskText:{
   color:'#fff',
   fontSize: 20,
-  display: 'relative',
   top: -2,
 }, 
 modalSectionOne:{
@@ -484,10 +484,11 @@ loginButton:{
 
 },
 loginTextIn:{
-borderRadius:2,
-borderWidth:1,
+  borderRadius:2,
+  borderWidth:1,
   width:300,
-  height:40
+  height:40,
+  paddingHorizontal:10
 },
 loginButtonText:{
   textAlign:"center",
@@ -551,7 +552,8 @@ ReggTextIn:{
 borderRadius:2,
 borderWidth:1,
   width:300,
-  height:40
+  height:40,
+  paddingHorizontal:10,
 },
 loginButtonText:{
   textAlign:"center",
