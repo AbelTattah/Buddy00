@@ -18,96 +18,12 @@ import axios from "axios";
 
 
 
-
-
-
-/*
-
-const DATA = [
-  {
-    id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-    title: 'First Item',
-  },
-  {
-    id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
-    title: 'Second Item',
-  },
-  {
-    id: '58694a0f-3da1-471f-bd96-145571e29d72',
-    title: 'Third Item',
-  },
-];
-
-const Item = ({item, onPress, backgroundColor, textColor}) => (
-  <TouchableOpacity onPress={onPress} style={[styles.item, {backgroundColor}]}>
-    <Text style={[styles.title, {color: textColor}]}>{item.title}</Text>
-  </TouchableOpacity>
-);
-
-const App = () => {
-  const [selectedId, setSelectedId] = useState();
-
-  const renderItem = ({item}) => {
-    const backgroundColor = item.id === selectedId ? '#6e3b6e' : '#f9c2ff';
-    const color = item.id === selectedId ? 'white' : 'black';
-
-    return (
-      <Item
-        item={item}
-        onPress={() => setSelectedId(item.id)}
-        backgroundColor={backgroundColor}
-        textColor={color}
-      />
-    );
-  };
-
-  return (
-    <SafeAreaView style={styles.container}>
-      <FlatList
-        data={DATA}
-        renderItem={renderItem}
-        keyExtractor={item => item.id}
-        extraData={selectedId}
-      />
-    </SafeAreaView>
-  );
-};
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    marginTop: StatusBar.currentHeight || 0,
-  },
-  item: {
-    padding: 20,
-    marginVertical: 8,
-    marginHorizontal: 16,
-  },
-  title: {
-    fontSize: 32,
-  },
-});
-
-export default App;
- */
-
-
-
-
-
-
-
-
-
-
 export default function Updates({route,navigation})  {
 
   const [data,setData] = useState([]);
   const [data1,setData1] = useState([]);
   const [ld ,setLd] = useState(false);
   const [postt,setPostt] = useState('');
-  var parr;
-  var parr1;
   const [nn,setNn] = useState(0);
   const [nn1,setNn1] = useState(0);
   const [ldi,setLdi] =useState(0);
@@ -124,63 +40,29 @@ export default function Updates({route,navigation})  {
   const [rarr,setRarr] = useState([]);
   const [sarr,setSarr] = useState([])
   var iddd;
+  var parr;
+  var parr1;
   const {sidd}=useSelector(state=>state.userReducer);
 
-  
-  async function GetID1() {
-    
-    for (var n =0 ; n<data.length ; n++) {
-    if (sidd==data[n]["SID"]) {
-    
-    console.log("Id has been found 1");
-    setId1(data[n]["_id"]);
-    setNn(n);
-    break;
-    
-    }
-    else {
-      console.log("Loop ran but update ID was not found");
-      continue;
-    }
-    }
-    for (var k =0 ; k<data1.length ; k++) {
-      if (sidd==data1[k]["SID"]) {
-      
-      console.log("Id has been found 2");
-      setId2(data1[k]["_id"]);
-      setNn1(k);
-      break;
-      
-      }
-      else {
-        console.log("Loop2 ran but update  ID was not found");
-        continue;
-      }
-      }
-    }
-
-
+  //The function below extracts the user's unique id from db object
 
     function filterbyid(array,sid) {
-
-       
         return array.filter(obj=>obj.SID==sid);
-
     }
     
-   
-  async function fetchDataa1() {
-    try {
+   // The function below fetches data from the update reciever's db
+      async function fetchDataa1() {
+      try {
       const response = await axios.get('https://buddy00.onrender.com/updateR');
       console.log(200);
       setData(response.data);
-    } catch (error) {
+      } catch (error) {
       console.error(error);
-    }
+      }
       };
 
 
-    
+      // The function below fetches data from the update sender's db
       async function fetchDataa2() {
       try {
         const response = await axios.get('https://buddy00.onrender.com/updateS');
@@ -192,23 +74,54 @@ export default function Updates({route,navigation})  {
       }
        
     }
+    //The function below fetches time from google
+    async function fetchTime() {
+
+      var URL_REGISTER = 'https://www.google.com';
+      try {      
+                  const response = await axios.get(`${URL_REGISTER}`);
+                  setTimee(response.headers.get('Date'));         
+                  if (response.status !== 200) {
+                      console.log('Status Code: ' + response.status);
+                      return;
+                  }
+                }
+    
+            catch (error) {
+    console.log(error.message);
+            }
+            
+    }
+
+/*
+
+
+    function fireOnce() {
+      var fire = true ;
+      if (fire==true) {
+      //Do this
+      setNn(1);
+        fire = false;
+      }
+    }
+    useEffect(()=>{
+    fireOnce();
+    });*/
 
     useEffect(()=>{
       fetchDataa1();
       fetchDataa2();
-      setTimeout(()=>{setLdi(2)});
-    },[]);
-   
+      fetchTime();
+    });
 
 
-
- useEffect(()=>{
-  fetchTime();
-  setTimeout(()=>{console.log(sarr)},3000);
-  setTimeout(()=>{setRarr(filterbyid(data,sidd))},2000);
-  setTimeout(()=>{setSarr(filterbyid(data1,sidd))},2000);
-  setTimeout(()=>{setLddd(false)},4000);
- },[data,data1])
+    useEffect(()=>{
+      setTimeout(()=>{setRarr(filterbyid(data,sidd))},1000);
+      setTimeout(()=>{setSarr(filterbyid(data1,sidd))},2000);
+      setTimeout(()=>{console.log(sarr)},3000);
+      setTimeout(()=>{console.log(rarr)},3000);
+      setTimeout(()=>{setLddd(false)},4000);
+    },[data,data1]);
 
      
   
@@ -217,89 +130,13 @@ export default function Updates({route,navigation})  {
     //  "FredokaLight":require("../fonts/static/Fredoka-Light.ttf")
   //});
 
-async function fetchTime() {
-
-  var URL_REGISTER = 'https://www.google.com';
-  try {      
-              const response = await axios.get(`${URL_REGISTER}`);
-          
-              setTimee(response.headers.get('Date'));
-             
-              if (response.status !== 200) {
-                  console.log('Status Code: ' + response.status);
-                  return;
-              }
-            }
-
-        catch (error) {
-console.log(error.message);
-        }
-              // Examine thee text in the response
-}
-
- 
-
- //Get user's unique id from DB
-
-
- async function sendUpdate() {
- 
-
-  fetchTime();
-  setTimeout(()=>{
-  parr1.push(postt+`   ${timee}`);
-  console.log("Sender's ID:  "+id1);
-  
-  fetch(`https://buddy00.onrender.com/updateS/${id1}`,{
-    method:"PUT",
-    headers:{
-      "Content-Type": 'application/json'
-    },
-    body: JSON.stringify({
-      Update:parr1
-    })
-  })
-  .then(res => {console.log(res.status);})
-  .then(
-    (error)=> {
-      console.log(error);
-    }
-  );},4000);
-
-
-  senderUpdate();
-  UpdateAll();
-  
-};
 
 
 
-function GetUpdates() {
-fetchDataa1();
-fetchDataa2();
-setRarr(filterbyid(data,sidd));
-setSarr(filterbyid(data1,sidd));
+//The function below is used to send updates
+//One copy of the update is stored in the sender's database whiles all recipients recieve the update in their database
 
-}
-
-function Gett(){
-  const gettt = setInterval(()=>{GetID1()},2000);
-  setTimeout(()=>clearInterval(gettt),6);
-}
-
-
-const [selectedId, setSelectedId] = useState('');
-
-const Item = ({title}) => (
-  <View style={styles.item}>
-    <Text style={styles.title}>{title}</Text>
-  </View>
-);
-
-
-
-
-async function UpdateAll() {
+async function sendUpdate() {
 fetchDataa1();
 for ( var v = 0 ; v < data.length ; v++ ) {
        
@@ -333,6 +170,26 @@ for ( var v = 0 ; v < data.length ; v++ ) {
   )
    
 }
+
+parr1.push(postt+`   ${timee}`);
+console.log("Sender's ID:  "+id1);
+
+fetch(`https://buddy00.onrender.com/updateS/${id1}`,{
+  method:"PUT",
+  headers:{
+    "Content-Type": 'application/json'
+  },
+  body: JSON.stringify({
+    Update:parr1
+  })
+})
+.then(res => {console.log(res.status);})
+.then(
+  (error)=> {
+    console.log(error);
+  }
+);
+
 }
 
 
@@ -342,102 +199,99 @@ for ( var v = 0 ; v < data.length ; v++ ) {
 
 
  return (
-  <Provider store={store}>
-<SafeAreaView>
-   <View style={{
-    justifyContent:'center',
-    alignItems:'center'
-   }}>
-      {ld?(<>
-<Text>Loading updates</Text>
-<ActivityIndicator size='large' color='blue'/>
-      </>):(
-      <>
-      {(nava)?(
-      <View style={{
-         justifyContent:'center',
-         alignItems:'center',
-         gap:10,
-          height:110,
-          width:350,
-          backgroundColor:'#9999',
-          flexDirection:'row'
-        }}>
+   <Provider store={store}>
+     <SafeAreaView>
+       <View style={{
+         justifyContent: 'center',
+         alignItems: 'center'
+       }}>
+         {ld ? (<>
+           <Text>Loading updates</Text>
+           <ActivityIndicator size='large' color='blue' />
+         </>) : (
+           <>
+             {(nava) ? (
+               <View style={{
+                 justifyContent: 'center',
+                 alignItems: 'center',
+                 gap: 10,
+                 height: 110,
+                 width: 350,
+                 backgroundColor: '#9999',
+                 flexDirection: 'row'
+               }}>
 
-  <>
-        <TextInput placeholder="                    Enter Update" style={{
-          borderWidth:1,
-          width:220,
-          height:90,
-          backgroundColor:'white',
-          borderWidth:1,
-          borderColor:'blue'
-        }} multiline={true}
-        onChangeText={(text)=>setPostt(text)}
-        >
+                 <>
+                   <TextInput placeholder="                    Enter Update" style={{
+                     borderWidth: 1,
+                     width: 220,
+                     height: 90,
+                     backgroundColor: 'white',
+                     borderWidth: 1,
+                     borderColor: 'blue'
+                   }} multiline={true}
+                     onChangeText={(text) => setPostt(text)}
+                   >
 
-        </TextInput>
-        <View style={{
-       flexDirection:'column',
-       gap:2
-        }}>
-        <Button title="Post" onPress={()=>sendUpdate()}></Button>
-      
-         <Button title="Delete Post" onPress={()=>Deletedataa()
-        }></Button>
-       <Button title="Get" onPress={()=>{
-     console.log(sidd);
-       }}></Button>
-       </View></>
-      </View>):(<></>)}      
-      <Text> New(99+)           Read(5)</Text>
-      
-      
-      <SafeAreaView style={style.flat}>
-      
-    {(lddd)?(<View style={{
-      flex:1,
-      justifyContent:'center',
+                   </TextInput>
+                   <View style={{
+                     flexDirection: 'column',
+                     gap: 2
+                   }}>
+                     <Button title="Post" onPress={() => sendUpdate()}></Button>
 
-    }}><ActivityIndicator color='blue' size='large' /></View>):(
-      <View       style={{
-        flex:1,
-      justifyContent:'center',
-      alignItems:'center',
-      borderWidth:0.7,
-      width:350}}> 
-<Text style={{
-  marginRight:260
-}}>Latest</Text>
-<FlatList
-data={rarr[0]["Update"].reverse()}
-renderItem={({item})=>(
+                     <Button title="Delete Post" onPress={() => Deletedataa()
+                     }></Button>
+                     <Button title="Get" onPress={() => {
+                       console.log(sidd);
+                     }}></Button>
+                   </View></>
+               </View>) : (<></>)}
+             <Text> New(99+)           Read(5)</Text>
 
-<View style={{
-    backgroundColor:'#9999',
-    margin:10,
-    padding:20,
-    borderRadius:10
-  }}>
-  <Text style={{
-    
-  
-  }}>{item}</Text>
-</View>
-)}
-keyExtractor={(item)=>item}
 
- />
-   </View>)} 
-    </SafeAreaView>
-  
-  
-</>
+             <SafeAreaView style={style.flat}>
 
-  )}
-  </View>
-  </SafeAreaView>
-  </Provider>)
+               {(lddd) ? (<View style={{
+                 flex: 1,
+                 justifyContent: 'center',
+
+               }}><ActivityIndicator color='blue' size='large' /></View>) : (
+                 <View style={{
+                   flex: 1,
+                   justifyContent: 'center',
+                   alignItems: 'center',
+                   borderWidth: 0.7,
+                   width: 350
+                 }}>
+                   <Text style={{
+                     marginRight: 260
+                   }}>Latest</Text>
+
+                   <FlatList
+                     data={rarr[0]["Update"]}
+                     renderItem={({ item }) => (
+
+                       <View style={{
+                         backgroundColor: '#9999',
+                         margin: 10,
+                         padding: 20,
+                         borderRadius: 10
+                        }}>
+                         <Text>{item}</Text>
+                       </View>
+                        )}
+                       />
+                 </View>)}
+             </SafeAreaView>
+
+
+           </>
+
+         )}
+       </View>
+     </SafeAreaView>
+   </Provider>)
 };
 
 const style = StyleSheet.create({

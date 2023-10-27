@@ -54,7 +54,6 @@ function Lobby1({ navigation }) {
             }  
           }
         ReadData();
-    
     };
 
 
@@ -68,33 +67,20 @@ function Lobby1({ navigation }) {
 
         <Provider store={store}>
             <View style={styles.Homepage}>
-
                 <View style={styles.dashboardTopSection}>
-
                     <Text style={styles.lobbyGreeting}>
                         Good Morning
                     </Text>
-                    <Weather style={{
-                        position:'absolute',
-                        right:50
-                    }} />
                 </View>
-
                 <Text style={styles.dashboardName}>{namee}</Text>
-
                 <Pressable style={{
-                    justifyContent: 'center',
-                    alignItems: 'center'
-                }} onLongPress={() => {
-                    navigation.navigate('Updates', {
-                        "nava": 99
-                    });
+                                   justifyContent: 'center',
+                                   alignItems: 'center'
+                                  }} onLongPress={() => {navigation.navigate('Updates', {"nava": 99});
                 }}>
                     <View style={styles.LobbyUpdates}>
                         <TouchableOpacity style={styles.LobbyMinButton} onPress={() => { navigation.navigate('Updates') }}><Text>Updates</Text></TouchableOpacity>
-                     
                         <Updatesmin />
-
                     </View>
                 </Pressable>
                 <View style={styles.lobbyQuick}>
@@ -110,7 +96,6 @@ function Lobby1({ navigation }) {
                     </TouchableOpacity>
                 </View>
             </View>
-
         </Provider>
 
 

@@ -1,7 +1,7 @@
 import { View, Text, Button, KeyboardAvoidingView, TextInput } from 'react-native';
 import styles from '../Styling/styles';
-import { useState, useEffect } from 'react';
-import { Provider, useSelector } from 'react-redux';
+import { useEffect, useState} from 'react';
+import { Provider} from 'react-redux';
 import { store } from '../redux/store';
 import { useDispatch } from 'react-redux';
 import { ActivityIndicator } from 'react-native';
@@ -9,61 +9,61 @@ import { setName, setSin, setSid, setCourse,setEmail } from '../redux/actions';
 import { useFonts } from 'expo-font';
 import { TouchableOpacity } from 'react-native';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-import { collection, getDocs } from "firebase/firestore";
 import { db } from '../firebase';
 import { doc, getDoc } from "firebase/firestore";
-import { ViewPropTypes } from 'deprecated-react-native-prop-types';
+
 export default function Login({ navigation }) {
 
-
   var [emaill, setEmaill] = useState('');
-  var [siddd, setSiddd] = useState(0);
-  var [nameid, setNameid] = useState('');
   var [pass, setPass] = useState('');
   var [suds, setSuds] = useState({});
   var [regg, setRegg] = useState('Hm');
-  var c = 0;
-
-  const { namee, sidd, sin ,email } = useSelector(state => state.userReducer);
+  var [acc,setAcc] =useState('');
+  const auth = getAuth();
   const dispatch = useDispatch();
+  
 
+  useEffect(()=>{
+ DataRead();
+  },[emaill]);
+
+  useEffect(()=>{
+    setTimeout(()=>{DataRead()},500);
+  },[acc]);
 
 
   async function signIn() {
-
-    const auth = getAuth();
-
-    signInWithEmailAndPassword(auth, emaill, pass)
+      signInWithEmailAndPassword(auth, emaill, pass)
       .then(() => {
         DataRead();
-        dispatch(setEmail(emaill));
         setRegg('inp');
-        setTimeout(() => setRegg('succ'), 4000);
+        setTimeout(() => setRegg('succ'), 2000);
         dispatch(setSin(true));
-        setTimeout(() => { setPass(''); navigation.navigate('App1') }, 5000);
-        setTimeout(() => this.textInput.clear(), 6000);
+      })
+      .then(()=>{
+        setTimeout(() => { setPass(''); navigation.navigate('App1') }, 3000);
+        setTimeout(() => this.textInput.clear(), 4000); 
         dispatch(setCourse(suds["COR"]));
         dispatch(setName(suds["SNAME"]));
         dispatch(setSid(suds["STUID"]));
-        setTimeout(() => setRegg('hehe'), 6000);
+        setTimeout(() => setRegg('hehe'), 4000);
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
         setRegg('prob');
       });
-
   }
 
 
   async function DataRead() {
 
-    const docRef = doc(db, `users/user/buddy/${email}`);
+    const docRef = doc(db, `users/user/buddy/${emaill}`);
     const docSnap = await getDoc(docRef);
-
     if (docSnap.exists()) {
       setSuds(docSnap.data());
       console.log(suds);
+      setAcc('loop');
     } else {
       // docSnap.data() will be undefined in this case
       console.log("No such document!");
