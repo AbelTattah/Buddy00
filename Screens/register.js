@@ -22,6 +22,7 @@ export default function Register({ navigation }) {
   var [sid, setSid] = useState(0);
   var [nameid, setNameid] = useState('');
   var [pass, setPass] = useState('');
+  var [pass1, setPass1] = useState('');
   var [email, setEmail] = useState('');
   var [suds, setSuds] = useState({});
   var [sud1, setSud1] = useState({})
@@ -202,40 +203,64 @@ export default function Register({ navigation }) {
       console.error("Error adding document: ", e);
     }
   }
+async function createMongoDBdoc(){
+  fetch(`https://buddy00.onrender.com/updateR`,{
+  method:"POST",
+  headers:{
+    "Content-Type": 'application/json'
+  },
+  body: JSON.stringify({
+    Update:[],
+    SID:sid
+  })
+})
+.then(
+  (error)=> {
+    console.log(error);
+  }
+);
 
-
+}
   async function signUp() {
 
     const auth = getAuth();
+    if (pass1==pass && email!='' && nameid!=''&& course!=[]) {
     createUserWithEmailAndPassword(auth, email, pass)
       .then(() => {
         createUserCollection();
+        createMongoDBdoc();
       })
       .then(() => {
         setRegg('inp');
-        setSign(true);
         setTimeout(() => { setRegg('succ'); }, 3000);
+        setTimeout(() => { navigation.navigate('Login'); }, 4500);
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        setRegg('prob1');
+        console.log(errorMessage);
+        if (errorMessage=='Firebase: Error (auth/network-request-failed).'){
+        setSign(false);
+      }
+      else if(errorMessage=='Firebase: Error (auth/email-already-in-use).') {
+        setSign(true);
+      }
         // ..
-      })
-      .finally(() => {
+      });
 
-        switch (sign) {
-          case true:
-            break;
-          case false:
-            setRegg('prob');
-            break;
-          default:
-
-        }
-
-      })
-      ;
+      if (sign==true) {
+         setRegg('prob');
+      }
+      else if (sign==false) {
+        setRegg('prob1');
+      }
+      else {
+        setRegg('prob1');
+      } ;
+    }
+    else {
+      setRegg('prob2')
+    }
 
   }
 
@@ -255,7 +280,8 @@ export default function Register({ navigation }) {
         <TextInput style={styles.ReggTextIn} placeholder='    SID' autoCapitalize='none' onChangeText={(text) => setSid(text)} />
         <TextInput style={styles.ReggTextIn} placeholder='    name' autoCapitalize='none' onChangeText={(text) => setNameid(text)} />
         <TextInput style={styles.ReggTextIn} inputMode='email' placeholder='    email' autoCapitalize='none' onChangeText={(text) => setEmail(text)} />
-        <TextInput style={styles.ReggTextIn} placeholder='    password' autoCapitalize='none' onChangeText={(text) => setPass(text)} />
+        <TextInput secureTextEntry={true} style={styles.ReggTextIn} placeholder='    password' autoCapitalize='none' onChangeText={(text) => setPass(text)} />
+        <TextInput secureTextEntry={true} style={styles.ReggTextIn} placeholder='    confirm password' autoCapitalize='none' onChangeText={(text) => setPass1(text)} />
       </KeyboardAvoidingView>
       <KeyboardAwareScrollView style={styles.regCheckmain} keyboardShouldPersistTaps='always'>
         <Text>Select Courses:</Text>
@@ -304,8 +330,8 @@ export default function Register({ navigation }) {
       </>) : (regg == 'prob') ? (<>
         <Text>You have an account</Text>
       </>) : (regg == 'prob1') ? (<><Text>
-        There was an error
-      </Text></>) : (regg == 'succ') ? (<>
+       A Network error occured
+      </Text></>):(regg=='prob2')?(<Text>The form is not complete</Text>) : (regg == 'succ') ? (<>
         <Text>Sign Up Succesful ,Go to login Page!</Text>
       </>) : (<>
         <Text>Buddy v.1.0</Text>

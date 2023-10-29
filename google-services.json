@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "764052604085",
+    "project_id": "buddy-cd041",
+    "storage_bucket": "buddy-cd041.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:764052604085:android:9711669b5533d32e866afc",
+        "android_client_info": {
+          "package_name": "com.abel99.Buddy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "764052604085-lck7mivm43qmjj6of0vkpvap892oq214.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA5UYLZMMHNg4DAuaIg3jiyQtt6nsDVdNo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "764052604085-lck7mivm43qmjj6of0vkpvap892oq214.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

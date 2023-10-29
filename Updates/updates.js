@@ -92,36 +92,26 @@ export default function Updates({route,navigation})  {
             }
             
     }
-
-/*
-
-
-    function fireOnce() {
-      var fire = true ;
-      if (fire==true) {
-      //Do this
+    
+   
+    useEffect(()=>{
       setNn(1);
-        fire = false;
-      }
-    }
-    useEffect(()=>{
-    fireOnce();
-    });*/
+    })
 
-    useEffect(()=>{
+    useEffect(()=>{    
       fetchDataa1();
       fetchDataa2();
       fetchTime();
-    });
+    },[nn]);
 
 
     useEffect(()=>{
-      setTimeout(()=>{setRarr(filterbyid(data,sidd))},1000);
-      setTimeout(()=>{setSarr(filterbyid(data1,sidd))},2000);
-      setTimeout(()=>{console.log(sarr)},3000);
-      setTimeout(()=>{console.log(rarr)},3000);
-      setTimeout(()=>{setLddd(false)},4000);
-    },[data,data1]);
+      setTimeout(()=>{setRarr(filterbyid(data,sidd))},2000);
+      setTimeout(()=>{setSarr(filterbyid(data1,sidd))},3000);
+      setTimeout(()=>{console.log(sarr)},4000);
+      setTimeout(()=>{console.log(rarr)},4000);
+      setTimeout(()=>{setLddd(false)},4000);   
+    },[timee]);
 
      
   
@@ -172,9 +162,9 @@ for ( var v = 0 ; v < data.length ; v++ ) {
 }
 
 parr1.push(postt+`   ${timee}`);
-console.log("Sender's ID:  "+id1);
+console.log("Sender's ID:  "+sarr[0]['_id']);
 
-fetch(`https://buddy00.onrender.com/updateS/${id1}`,{
+fetch(`https://buddy00.onrender.com/updateS/${sarr[0]['_id']}`,{
   method:"PUT",
   headers:{
     "Content-Type": 'application/json'
@@ -269,7 +259,7 @@ fetch(`https://buddy00.onrender.com/updateS/${id1}`,{
                    }}>Latest</Text>
 
                    <FlatList
-                     data={rarr[0]["Update"]}
+                     data={rarr[0]["Update"].reverse()}
                      renderItem={({ item }) => (
 
                        <View style={{
@@ -322,3 +312,15 @@ const style = StyleSheet.create({
     fontSize: 32,
   },
 });
+
+
+/*
+Users should be able to
+1.View updates *
+2.Deletes updates from their account
+
+Update senders should be able to
+1.Delete sent updates globally
+
+
+*/
