@@ -37,6 +37,27 @@ function Lobby1({ navigation }) {
     let emaill = email;
 
     const path = 'users/user/buddy/'+emaill;
+  
+  //The function below fetches time from google
+  async function fetchTime() {  
+
+   //TODO: Use the response to create logic for dynamic greeting
+   
+    var URL_REGISTER = 'https://www.google.com';
+    try {
+      const response = await axios.get(`${URL_REGISTER}`);
+      setTimee(response.headers.get('Date'));
+      if (response.status !== 200) {
+        console.log('Status Code: ' + response.status);
+        return;
+      }
+    }
+
+    catch (error) {
+      console.log(error.message);
+    }
+
+  }
 
 
     const fetchAndDispatch = ( ) => {
@@ -69,7 +90,7 @@ function Lobby1({ navigation }) {
             <View style={styles.Homepage}>
                 <View style={styles.dashboardTopSection}>
                     <Text style={styles.lobbyGreeting}>
-                        Good Morning
+                        Greeting
                     </Text>
                 </View>
                 <Text style={styles.dashboardName}>{namee}</Text>

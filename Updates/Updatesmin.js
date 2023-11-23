@@ -21,19 +21,7 @@ export default function Updatesmin({route,navigation})  {
   const navigate = useNavigation; 
   const [nav,setNav] = useState(true);
   
-  useEffect(() => {
-      async function fetchDataa() {
-          fetch("https://buddy00.onrender.com/updattes")
-          .then((response)=>response.json())
-          .then((json) => setData(json))
-          .then(()=>console.log(
-              data[1].Update
-          ))
-          .catch((error)=>console.log())
-          .finally(()=>setLd(false));
-      };
-      fetchDataa();
-    }, []);
+
 
   //  let [fontsLoaded] = useFonts({
    //   "FredokaBold":require("../fonts/FredokaBold.ttf"),
@@ -44,16 +32,6 @@ export default function Updatesmin({route,navigation})  {
   //  return(<ActivityIndicator />)
  // }
 
- let fetchDataa=(id)=> {
-  fetch('https://buddy00.onrender.com/updattes/${id}')
-  .then((response)=>response.json())
-  .then((json) => setData(json))
-  .then(()=>console.log(
-      data[1].Update
-  ))
-  .catch((error)=>console.log())
-  .finally(()=>setLd(false));
-};
 
 
 
@@ -69,39 +47,10 @@ export default function Updatesmin({route,navigation})  {
 
 
  return (
-<SafeAreaView>
-   <View style={{
-    height:300,
-    justifyContent:'center',
-    alignItems:'center'
-   }}>
-      {ld?(<>
-<Text>Loading updates</Text>
-<ActivityIndicator size='large' color='blue'/>
-      </>):(
-      <>      
-      <Text style={{
-        marginRight:170
-      }}> New(9)          </Text>
-      
-      <ScrollView style={style.scrollView}>
-      <View>
-          {Object.entries(data).map(([a,Postt]) => {
-            return (
-              <View>
-                <Text key={a} style={styles.text1}>{data[a].Postt}</Text>
-              </View>
-            );
-          })}
-        </View>
- 
-      </ScrollView>
-     
-</>
-
-  )}
-  </View>
-  </SafeAreaView>)
+  <Text>
+    Data not fetched !
+  </Text>
+)
 };
 
 const style = StyleSheet.create({

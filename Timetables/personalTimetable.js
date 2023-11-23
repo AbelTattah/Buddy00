@@ -60,8 +60,7 @@ var a;
 for (  var c=0 ; c < subjects.length ; c++ ) {
  a = subjects[c];
             for (var b=0; b<4; b++) {
-        //I used some mathematics here. I used the Negative, positive numbers and closed intervals concepts
-        //I think majoring or minoring in maths with CS will be a very good idea
+ 
             if  (
                 sidd-suds[4]["Subject"][a][b]["high"]<0 && sidd-suds[4]["Subject"][a][b]["low"] ==0 ||
                 sidd-suds[4]["Subject"][a][b]["high"]==0 && sidd-suds[4]["Subject"][a][b]["low"] >0 ||
