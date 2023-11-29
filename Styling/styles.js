@@ -138,7 +138,7 @@ marginLeft:46
       flex:3,
       height:100,
       width:600,
-      backgroundColor:'blue',
+  
       marginTop:-40
     
     },
