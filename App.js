@@ -27,6 +27,7 @@ import { store } from './redux/store';
 import Register from './Screens/register';
 import { useSelector } from 'react-redux';
 import {useState} from 'react';
+import { Image } from 'react-native';
 
 
 //The constant below allows the usage of the tab navigator
@@ -41,7 +42,6 @@ function LobbyTitle() {
       marginLeft:30,
       fontWeight:700,
       fontSize:17,
-      color:'white'
       }}>Lobby</Text>
     </View>
   );
@@ -84,31 +84,25 @@ const {sin}= useSelector(state =>state.userReducer)
     
     <Tab.Navigator initialRouteName='Lobby'>
   
-           <Tab.Screen 
-        name='Updates'
-        component={TODO} 
-        options = {{title:'TODO',tabBarStyle:{
-            backgroundColor:'#ddd'
-          },
-        tabBarIcon: ({ color, size }) => (
-            <FontAwesomeIcon icon={faBell} size={32} color='black' />
-          ),headerTintColor:'white',headerShadowVisible:false, headerStyle: {
-            elevation:0,shadowOpacity:0,borderBottomWidth:0,
-            backgroundColor:'#00f'
-            
-        }}} />
     <Tab.Screen 
           name="Lobby" 
          
           component={Lobby} gestureEnabled={true}
-          options = { {headerTitle:()=><LobbyTitle />,tabBarIcon: ({ color, size }) => (
-            <FontAwesomeIcon icon={faMugSaucer} size={32} color='black' />
-          ),tabBarStyle:{
-            backgroundColor:'#ddd'
+          options = { {headerTitle:()=><LobbyTitle />,tabBarIcon: (color,size) => (
+           <Image source={require("./assets/documenticon.jpeg")}style={{
+            width:25,
+            height:25,
+            }}/>
+          ),tabBarLabelStyle:{fontSize:14,fontFamily:'FredokaBold'},tabBarStyle:{
+            height:80,
+            paddingBottom:10,
+            backgroundColor:'white',
+            borderTopWidth:1,
+            borderColor:"#00f8"
           },
-           headerShadowVisible:false,headerTintColor:'white', headerStyle: {
+           headerShadowVisible:false,headerTintColor:'#000', headerStyle: {
             elevation:0,shadowOpacity:0,borderBottomWidth:0,
-            backgroundColor:'#00f'
+            backgroundColor:'#7979FF8e'
           }}
           
           }
@@ -120,40 +114,47 @@ const {sin}= useSelector(state =>state.userReducer)
           <Tab.Screen
         component={Timetables}
         name="Timetables"
-        options={{headerTitle:()=><MeTitle />,tabBarStyle:{
-            backgroundColor:'#ddd'
-          },tabBarIcon: ({ color, size }) => (
-            <FontAwesomeIcon icon={faCalendarDay} size={32} color='black' />
-          ),
-          headerTintColor:'white',headerShadowVisible:false, headerStyle: {
-            elevation:0,shadowOpacity:0,borderBottomWidth:0,
-            backgroundColor:'blue',}
-        }}
-      />
-         <Tab.Screen 
-        name='Navigator'
-        component={Nav} 
-        options = {{title:'Navigator',tabBarStyle:{
-            backgroundColor:'#ddd'
+        options = { {headerTitle:()=>(<Text style={{fontFamily:'FredokaBold',fontSize:20}}>Timetables</Text>),tabBarIcon: (color,size) => (
+           <Image source={require("./assets/timetableicon.jpeg")} style={{
+            width:25,
+            height:25,
+            }}/>
+          ),tabBarLabelStyle:{fontSize:14,fontFamily:'FredokaBold'},tabBarStyle:{
+            height:80,
+            paddingBottom:10,
+            backgroundColor:'white',
+            borderTopWidth:1,
+            borderColor:"#00f8"
           },
-        tabBarIcon: ({ color, size }) => (
-            <FontAwesomeIcon icon={faLocation} size={32} color='black' />
-          ),headerTintColor:'white',headerShadowVisible:false, headerStyle: {
+           headerShadowVisible:false,headerTintColor:'#000', headerStyle: {
             elevation:0,shadowOpacity:0,borderBottomWidth:0,
-            backgroundColor:'#00f'
-            ,
-        }}} />
+            backgroundColor:'#7979FF8e'
+          }}
+          
+          }
+      />
+
        <Tab.Screen 
         name='Settings'
         component={Settings} 
-        options = {{title:'Settings',
-        tabBarIcon: ({ color, size }) => (
-            <FontAwesomeIcon icon={faGear} size={32} color='black' />
-          ),headerTintColor:'white',headerShadowVisible:false, headerStyle: {
+        options = { {headerTitle:()=>  <Text style={{fontFamily:'FredokaBold',fontSize:20}}>Settings</Text>,tabBarIcon: () => (
+           <Image source={require('./assets/settingsgearicon.png')} style={{
+            width:25,
+            height:25,
+            }} />
+          ),tabBarLabelStyle:{fontSize:14,fontFamily:'FredokaBold'},tabBarStyle:{
+            height:80,
+            paddingBottom:10,
+            backgroundColor:'white',
+            borderTopWidth:1,
+            borderColor:"#00f8"
+          },
+           headerShadowVisible:false,headerTintColor:'#000', headerStyle: {
             elevation:0,shadowOpacity:0,borderBottomWidth:0,
-            backgroundColor:'#00f'
-            ,
-        }}} />
+            backgroundColor:'#7979FF8e'
+          }}
+          
+          } />
 
        
     </Tab.Navigator>
@@ -176,13 +177,14 @@ export default function App (){
   return(
 <Provider store={store}>
  <NavigationContainer> 
-
-
- 
-       
-      
-         
+          
                  <Stack.Navigator>
+
+                 <Stack.Screen 
+          name='App1'
+        component={App1}
+        options={{headerShown:false}}
+         />  
                  <Stack.Screen
         name='Login'
         component={Login}
@@ -193,11 +195,7 @@ export default function App (){
         component={Register}
         options={{title:'Sign Up'}}
          />
-          <Stack.Screen 
-          name='App1'
-        component={App1}
-        options={{headerShown:false}}
-         />   
+     
         
      
       </Stack.Navigator>

@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
     },
     dashboardTopSection:{
     height:60,
-  backgroundColor:'blue'
+  backgroundColor:'#7979FF8e'
     },
     dashboardName: {
 color:'black',
@@ -20,13 +20,14 @@ marginLeft:46
     },
   
   LobbyUpdates:{
-     height:290,
-     marginTop:70,
-     borderColor:'#aaa',
+     height:250,
+     marginTop:10,
+     borderColor:'#00f8',
      borderWidth:1,
      width:320,
      padding:12,
-     alignItems:'center'
+     alignItems:'center',
+     borderRadius:20,
     
      
     },
@@ -57,30 +58,44 @@ marginLeft:46
       justifyContent:'center',
       alignItems:'center',
       marginTop:30,
-      
-    
+      display:'flex',
+      flexDirection:'row'
     },
     lobbyQuickButton:{
-      backgroundColor:'#2407f2',
-      width:320,
-      height:50,
+      justifyContent:'center',
+      alignItems:'center',
+      width:160,
+      height:90,
+      borderWidth:1,
       borderRadius:20,
       marginTop:10,
+      borderBottomRightRadius:0,
+      borderTopEndRadius:0,
+      borderColor:'#00f8',
+      marginBottom:5
+    },
+    lobbyQuickButton0:{
+      justifyContent:'center',
+      alignItems:'center',
+      width:160,
+      height:90,
+      borderWidth:1,
+      borderRadius:20,
+      borderBottomLeftRadius:0,
+      borderTopStartRadius:0,
+      borderLeftWidth:0,
+      marginTop:10,
+      borderColor:'#00f8',
       marginBottom:5
     },
     LobbyQuickButtonText:{
-      color:'white',
-      justifyContent:'center',
-      marginLeft:20,
       fontSize:18,
-      marginTop:12,
       fontFamily:'FredokaBold'
     },
     lobbyGreeting : {
       marginTop:10,
       marginLeft:44,
       fontSize:28,
-      color:'white',
       fontFamily:'FredokaBold'
     },
     lobbyWeather: {
@@ -138,7 +153,6 @@ marginLeft:46
       flex:3,
       height:100,
       width:600,
-      backgroundColor:'blue',
       marginTop:-40
     
     },
@@ -156,14 +170,13 @@ marginLeft:46
       width:300,
       margin:20,
       borderWidth:2,
-      backgroundColor:'blue',
       borderBottomWidth:1,
       borderBottomColor:'white',
       borderTopLeftRadius:30,
       borderBottomRightRadius:30,
     },
     me : {
-      
+      backgroundColor:"white",
       marginTop:-3,
     flex:6,
     justifyContent:'center',
@@ -173,14 +186,17 @@ marginLeft:46
     meTopButtons: {
       width :300,
       height:86,
-      borderWidth:3,
+      borderWidth:2,
+      borderRightWidth:0,
+      borderLeftWidth:0,
       borderColor:'black',
       borderRadius:20,
       justifyContent:'center',
-      backgroundColor:'#ddd'
+      backgroundColor:'#fff'
 
     },
     meTopButtonView: {
+      marginTop:10,
       flex:1,
       justifyContent:"center",
       alignItems:'center',

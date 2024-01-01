@@ -5,7 +5,7 @@ import { StyleSheet, Dimensions, View } from 'react-native';
 import Pdf from 'react-native-pdf';
 
 export default function Examt ({navigation}) {
-        const source = { uri: 'https://www.docdroid.net/file/download/VDzQUbS/final-exams-timetable-second-semester-20222023-pdf-2-pdf.pdf', cache: true };
+        const source = { uri: 'https://download1530.mediafire.com/e27s7j4f3q1g56BKU0Jo7KxBdB6GwzaGYRwpawyncLrPCh9JsK3Ns5GztzlOaS29yxayIPN_dnrr06IZVL9ydsNTjMMaU-xP3zRAQJXtWgUVoi-W6vg4M7vgxInTPq9JcZ-_cA6EnQWYhVkpTg4wltQTAmSAzLYAOpPRMc21FhXLpg/rud77ns1b7n1v5f/PROVISIONAL+EXAMINATIONS+TIMETABLE+-+FIRST+SEM+-+2023.2024+-+LVL+200-400.pdf', cache: true };
         //const source = require('./test.pdf');  // ios only
         //const source = {uri:'bundle-assets://test.pdf' };
         //const source = {uri:'file:///sdcard/test.pdf'};

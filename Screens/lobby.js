@@ -105,15 +105,11 @@ function Lobby1({ navigation }) {
                     </View>
                 </Pressable>
                 <View style={styles.lobbyQuick}>
-                    <Text style={{
-                        fontFamily: 'FredokaBold',
-                        marginRight: 240,
-                    }}>Quick links</Text>
                     <TouchableOpacity style={styles.lobbyQuickButton}>
-                        <Text style={styles.LobbyQuickButtonText}>Academic calender</Text>
+                        <Text style={styles.LobbyQuickButtonText}>Timetables</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.lobbyQuickButton} onPress={() => navigation.navigate('PerT')}>
-                        <Text style={styles.LobbyQuickButtonText}>Personal Timetable</Text>
+                    <TouchableOpacity style={styles.lobbyQuickButton0} onPress={() => navigation.navigate('PerT')}>
+                        <Text style={styles.LobbyQuickButtonText}>PastQuestions</Text>
                     </TouchableOpacity>
                 </View>
             </View>

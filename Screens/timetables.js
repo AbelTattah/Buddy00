@@ -60,7 +60,7 @@ export default function Timetables({navigation}) {
           ),
           headerTintColor:'white',headerShadowVisible:false, headerStyle: {
             elevation:0,shadowOpacity:0,borderBottomWidth:0,
-            backgroundColor:'#00f',}
+          }
         }}
       />
             <stack.Screen 
