@@ -24,7 +24,6 @@ var senderIDD = '';
 
 export default function Updates({ route, navigation }) {
 
-  var apiCaller = axios();
 
   var [data, setData] = useState([]);
   var [data1, setData1] = useState([]);
@@ -56,7 +55,7 @@ export default function Updates({ route, navigation }) {
       console.log("Reciever data has been fetched");
       setData(response.data);
       console.log(data)
-      setRarr(filterbyid(data,sidd));
+      setRarr(filterbyid(data,sidd))
       console.log(sidd)
       console.log(rarr);
     } catch (error) {
@@ -77,7 +76,6 @@ export default function Updates({ route, navigation }) {
     } catch (error) {
       console.error(error);
     }
-
   }
 
   //Check whether user is a sudo user
@@ -119,23 +117,15 @@ async function GetUpdates() {
   Checksudo();
   setTimeout(()=>{
       if (sudo) {
-        const interval0 = setInterval(()=>GetUserRecievedUpdates(),100);    
-        const interval1 = setInterval(()=>GetUserSentUpdates(),100);
-        setTimeout(()=>{
-          clearInterval(interval0);
-          clearInterval(interval1);
-        },6000);
-
+        GetUserRecievedUpdates() 
+        GetUserSentUpdates()
         fetchTime();
-        setTimeout(()=>{setLddd(true)},6000);
+        setTimeout(()=>{setLddd(false)},6000);
       }
       else {
-        const interval2 = setInterval(()=>GetUserRecievedUpdates(),2000);
-        setTimeout(()=>{
-          clearInterval(interval2);
-        },6000);
+        GetUserRecievedUpdates();
         fetchTime();
-        setTimeout(()=>{setLddd(true)},6000);
+        setTimeout(()=>{setLddd(false)},6000);
       }
   },3000);
 }
@@ -164,7 +154,7 @@ GetUpdates();
       Iddd = data[v]["_id"];
 
 
-      fetch(`http://localhost:3020/update/updateR/${iddd}`, {
+      fetch(`https://buddybackend-0i8h.onrender.com/update/updateR/${iddd}`, {
         method: "PUT",
         headers: {
           "Content-Type": 'application/json'
@@ -196,7 +186,7 @@ GetUpdates();
 
     console.log("Sender's ID:  " + senderIDD);
 
-    fetch(`http://localhost:3020/update/updateS/${senderIDD}`, {
+    fetch(`https://buddybackend-0i8h.onrender.com/update/updateS/${senderIDD}`, {
       method: "PUT",
       headers: {
         "Content-Type": 'application/json'
