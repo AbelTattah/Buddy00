@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, ScrollView, StyleSheet, StatusBar, Pressable, SafeAreaView, FlatList } from "react-native";
+import { View, Text, ScrollView, StyleSheet, StatusBar, Pressable, SafeAreaView, FlatList,Image } from "react-native";
 import styles from "../Styling/styles";
 import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
@@ -19,49 +19,46 @@ import axios from "axios";
 
 
 
+
 var senderIDD = '';
 
 export default function Updates({ route, navigation }) {
+
+  var apiCaller = axios();
 
   var [data, setData] = useState([]);
   var [data1, setData1] = useState([]);
   var [ld, setLd] = useState(false);
   var [postt, setPostt] = useState('');
-  var [nn, setNn] = useState(0);
-  var [nn1, setNn1] = useState(0);
-  var [ldi, setLdi] = useState(0);
-  var [posttar, setPosttar] = useState([]);
-  var [posttarr1, setPosttarr1] = useState([]);
-  var navigate = useNavigation;
-  var [nav, setNav] = useState(true);
   var [timee, setTimee] = useState('');
-  var [id1, setId1] = useState("");
-  var [id2, setId2] = useState("");
-  var [idn, setIdn] = useState("Hello world");
   var [nava, setNava] = useState(true);
   var [lddd, setLddd] = useState(true);
-  var [rarr, setRarr] = useState([]);
+  var [rarr, setRarr] = useState({
+    Update:["Hello world"]
+  });
   var [sarr, setSarr] = useState([]);
-  var [sudo, setSudo] = useState([]);
+  var sudo=[];
   var [isSudo, setIsSudo] = useState(false);
-  var Iddd;
   var parr;
   var parr1 ;
   const { sidd } = useSelector((state) => state.userReducer);
 
    //The function below extracts the user's data from db object
  function filterbyid(array, sid) {
-  return array.filter(obj => obj.SID == sid);
+  return array.filter(obj => obj["SID"] == sid);
 }
 
 
   // The function below fetches data from the update reciever's db and extracts the user's data from db object
   async function GetUserRecievedUpdates() {
     try {
-      const response = await axios.get('https://buddy00.onrender.com/updateR');
+      const response = await axios.get('https://buddybackend-0i8h.onrender.com/update/updateR');
       console.log("Reciever data has been fetched");
       setData(response.data);
+      console.log(data)
       setRarr(filterbyid(data,sidd));
+      console.log(sidd)
+      console.log(rarr);
     } catch (error) {
       console.error(error);
     }
@@ -70,11 +67,13 @@ export default function Updates({ route, navigation }) {
 
   // The function below fetches data from the update sender's db
   async function GetUserSentUpdates() {
+
     try {
-      const response = await axios.get('https://buddy00.onrender.com/updateS');
+      const response = await axios.get('https://buddybackend-0i8h.onrender.com/update/updateS');
       console.log("Sender data has been fetched");
       setData1(response.data);
-      setRarr(filterbyid(data1,sidd));
+      setSarr(filterbyid(data1,sidd));
+      console.log("Senders messages"+sarr);
     } catch (error) {
       console.error(error);
     }
@@ -84,16 +83,15 @@ export default function Updates({ route, navigation }) {
   //Check whether user is a sudo user
   async function Checksudo() {
     try {
-      const response = await axios.get('https://buddy00.onrender.com/sudo');
-      console.log(200);
-      setSudo(response.data);
-      for (var x = 0; x < sudo[0]["User"].length; x++) {
-        if (sudo[0]["User"][x] == sidd) {
+      const response = await axios.get('https://buddybackend-0i8h.onrender.com/sudo/sudo');
+      sudo = response.data[0];
+      for (var x = 0; x < sudo["User"].length; x++) {
+        if (sudo["User"][x] == sidd) {
           setIsSudo(true);
         }
       }
     } catch (error) {
-      console.error("Sudo user check error");
+      console.log(error.message);
     }
   };
 
@@ -119,22 +117,34 @@ export default function Updates({ route, navigation }) {
 
 async function GetUpdates() {
   Checksudo();
-  if (sudo==true) {
-    GetUserRecievedUpdates();
-    GetUserSentUpdates
-    fetchTime();
-    setTimeout(setLddd(false),6000);
-  }
-  else {
-    GetUserRecievedUpdates();
-    fetchTime();
-    setTimeout(setLddd(false),6000);
-  }
+  setTimeout(()=>{
+      if (sudo) {
+        const interval0 = setInterval(()=>GetUserRecievedUpdates(),100);    
+        const interval1 = setInterval(()=>GetUserSentUpdates(),100);
+        setTimeout(()=>{
+          clearInterval(interval0);
+          clearInterval(interval1);
+        },6000);
+
+        fetchTime();
+        setTimeout(()=>{setLddd(true)},6000);
+      }
+      else {
+        const interval2 = setInterval(()=>GetUserRecievedUpdates(),2000);
+        setTimeout(()=>{
+          clearInterval(interval2);
+        },6000);
+        fetchTime();
+        setTimeout(()=>{setLddd(true)},6000);
+      }
+  },3000);
 }
 
 useEffect(()=>{
 GetUpdates();
 },[]);
+
+
 
 
   //The function below is used to send updates
@@ -154,7 +164,7 @@ GetUpdates();
       Iddd = data[v]["_id"];
 
 
-      fetch(`https://buddy00.onrender.com/updateR/${iddd}`, {
+      fetch(`http://localhost:3020/update/updateR/${iddd}`, {
         method: "PUT",
         headers: {
           "Content-Type": 'application/json'
@@ -176,7 +186,6 @@ GetUpdates();
     }
 
   }
-
   async function senderDbUpdate() {
 
     senderIDD = sarr[0]['_id'];
@@ -187,7 +196,7 @@ GetUpdates();
 
     console.log("Sender's ID:  " + senderIDD);
 
-    fetch(`https://buddy00.onrender.com/updateS/${senderIDD}`, {
+    fetch(`http://localhost:3020/update/updateS/${senderIDD}`, {
       method: "PUT",
       headers: {
         "Content-Type": 'application/json'
@@ -245,7 +254,7 @@ GetUpdates();
                       }}>Latest</Text>
 
                       <FlatList
-                        data={rarr[0]["Update"].reverse()}
+                        data={rarr[0]["Update"]}
                         renderItem={({ item }) => (
 
                           <View style={{
@@ -278,43 +287,7 @@ GetUpdates();
               <ActivityIndicator size='large' color='blue' />
             </>) : (
               <>
-                {(nava) ? (
-                  <View style={{
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    gap: 10,
-                    height: 110,
-                    width: 350,
-                    backgroundColor: '#9999',
-                    flexDirection: 'row'
-                  }}>
-
-                    <>
-                      <TextInput placeholder="                    Enter Update" style={{
-                        borderWidth: 1,
-                        width: 220,
-                        height: 90,
-                        backgroundColor: 'white',
-                        borderWidth: 1,
-                        borderColor: 'blue'
-                      }} multiline={true}
-                        onChangeText={(text) => setPostt(text)}
-                      >
-
-                      </TextInput>
-                      <View style={{
-                        flexDirection: 'column',
-                        gap: 2
-                      }}>
-                        <Button title="Post" onPress={() => { sendUpdate(); senderDbUpdate(); }}></Button>
-
-                        <Button title="Delete Post" onPress={() => Deletedataa()
-                        }></Button>
-                        <Button title="Get" onPress={() => {
-                          console.log(sidd);
-                        }}></Button>
-                      </View></>
-                  </View>) : (<></>)}
+              
                 <Text> New(99+)           Read(5)</Text>
 
 
@@ -337,7 +310,7 @@ GetUpdates();
                       }}>Latest</Text>
 
                       <FlatList
-                        data={rarr[0]["Update"].reverse()}
+                        data={rarr[0]["Update"]}
                         renderItem={({ item }) => (
 
                           <View style={{
@@ -350,11 +323,46 @@ GetUpdates();
                           </View>
                         )}
                       />
+                      
                     </View>)}
 
                 </SafeAreaView>
 
+                {(nava) ? (
+                  <View style={{
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    gap: 10,
+                    height: 110,
+                    width: 350,
+                    flexDirection: 'row'
+                  }}>
 
+                    <>
+                      <TextInput placeholder="                    Enter Update" style={{
+                        borderWidth: 1,
+                        width: 220,
+                        height: 90,
+                  
+                        borderWidth: 1,
+                        borderTopWidth:0,
+                        borderLeftWidth:0,
+                        borderRightWidth:0,
+                      }} multiline={true}
+                        onChangeText={(text) => setPostt(text)}
+                      >
+
+                      </TextInput>
+                      <View style={{
+                        flexDirection: 'column',
+                        gap: 2
+                      }}>
+                        <TouchableOpacity title="Post" onPress={() => { sendUpdate(); senderDbUpdate(); }}>
+                          <Image source={require('../assets/paperairplane.png')} style={{height:80,width:80}} />
+                        </TouchableOpacity>
+
+                      </View></>
+                  </View>) : (<></>)}
               </>
 
             )}

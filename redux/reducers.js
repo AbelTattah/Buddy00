@@ -3,7 +3,7 @@ import { SID,SNAME,SIN,COURSE,EMAIL } from "./actions";
 
 const initialState ={
     namee:'',
-    sidd:0,
+    sidd:11335775,
     sin:true,
     course:{},
     email:''
