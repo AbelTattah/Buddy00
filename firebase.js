@@ -3,7 +3,7 @@ import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
 import { getFirestore } from "firebase/firestore";
 import { getDatabase } from "firebase/database";
-
+import {API_KEY} from "@env";
 // Optionally import the services that you want to use
 // import {...} from "firebase/auth";
 // import {...} from "firebase/database";
@@ -13,7 +13,7 @@ import { getDatabase } from "firebase/database";
 
 // Initialize Firebase
 const firebaseConfig = {
-  apiKey: "AIzaSyAKE7_TmH_7ndHQEDOy_P5UsduuZDiiEbU",
+  apiKey: API_KEY,
   authDomain: "buddy-cd041.firebaseapp.com",
   projectId: "buddy-cd041",
   storageBucket: "buddy-cd041.appspot.com",
