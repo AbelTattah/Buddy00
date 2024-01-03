@@ -16,14 +16,72 @@ import { Provider } from "react-redux";
 import { useSelector } from "react-redux";
 import axios from "axios";
 
+/*
+Student Update
 
+This is the plan:
+Students and sudo users are all users.
+
+There are two update documents for each sudo user (lecturer,course rep) 
+and one update document for each student in the database.
+
+One update document for the sudo user is the sender document that records all the sent messages.
+The second update document is the document that stores sent messages for the sudo user
+
+The student has a reciever document
+
+So in there are two database collections in all, reciever and sender collections.
+
+The reciever documents of both the students and sudo users are all stored in a recievers collection
+The sender documents of the sudo users are stored in the sender collection.
+
+
+The both the sender and reciever databases have schemas that are in this form:
+
+{
+  Update:{
+    type:Array(Array of strings)
+  }
+  timestamp
+}
+
+All the documents are created when the user is signing up
+
+Updates are sent by 
+
+1. Get the sender's document from the sender collection
+2. Get the update array
+3. Append the new update string to the end of the array,
+4. Update the sender document with result of the mutation in the previous step with a put request
+5. Repeat the steps above for each student's reciever document
+
+The above steps will make sure all users recieve the updates sent and the sent update will be recorded in the sender's
+sender document.
+
+Deletion of an update
+Both the sudo user and the student must be able to delete messages.
+The sudo user must be able to delete his sent messages.
+The sudo user must be able to delete his recieved messages.
+The student must be able to delete his recieved messages.
+
+
+
+Rendering the user's recieved messages.
+1. Check whether the user is a sudo user
+2. If the user is a sudo user,display the view that allow sending of updates 
+3. Get the user's reciever document from the database
+4. Use a flatlist to render all the messages in reverse order
+5. Make sure the list items are selectable
+
+Step 5 will aid in message deletion
+
+*/
 
 
 
 var senderIDD = '';
 
 export default function Updates({ route, navigation }) {
-
 
   var [data, setData] = useState([]);
   var [data1, setData1] = useState([]);
@@ -43,9 +101,9 @@ export default function Updates({ route, navigation }) {
   const { sidd } = useSelector((state) => state.userReducer);
 
    //The function below extracts the user's data from db object
- function filterbyid(array, sid) {
-  return array.filter(obj => obj["SID"] == sid);
-}
+  function filterbyid(array, sid) {
+   return array.filter(obj => obj["SID"] == sid);
+  }
 
 
   // The function below fetches data from the update reciever's db and extracts the user's data from db object
@@ -54,10 +112,7 @@ export default function Updates({ route, navigation }) {
       const response = await axios.get('https://buddybackend-0i8h.onrender.com/update/updateR');
       console.log("Reciever data has been fetched");
       setData(response.data);
-      console.log(data)
       setRarr(filterbyid(data,sidd))
-      console.log(sidd)
-      console.log(rarr);
     } catch (error) {
       console.error(error);
     }
@@ -66,13 +121,11 @@ export default function Updates({ route, navigation }) {
 
   // The function below fetches data from the update sender's db
   async function GetUserSentUpdates() {
-
     try {
       const response = await axios.get('https://buddybackend-0i8h.onrender.com/update/updateS');
       console.log("Sender data has been fetched");
       setData1(response.data);
       setSarr(filterbyid(data1,sidd));
-      console.log("Senders messages"+sarr);
     } catch (error) {
       console.error(error);
     }
@@ -92,6 +145,7 @@ export default function Updates({ route, navigation }) {
       console.log(error.message);
     }
   };
+
 
     //The function below fetches time from google
     async function fetchTime() {
@@ -120,12 +174,12 @@ async function GetUpdates() {
         GetUserRecievedUpdates() 
         GetUserSentUpdates()
         fetchTime();
-        setTimeout(()=>{setLddd(false)},6000);
+        setTimeout(()=>{setLddd(true)},6000);
       }
       else {
         GetUserRecievedUpdates();
         fetchTime();
-        setTimeout(()=>{setLddd(false)},6000);
+        setTimeout(()=>{setLddd(true)},6000);
       }
   },3000);
 }
@@ -143,17 +197,10 @@ GetUpdates();
   async function sendUpdate() {
     GetUserRecievedUpdates();
     for (var v = 0; v < data.length; v++) {
-
-
       fetchTime();
-
       parr = data[v]["Update"];
-
       parr.push(postt + `   ${timee}`);
-
       Iddd = data[v]["_id"];
-
-
       fetch(`https://buddybackend-0i8h.onrender.com/update/updateR/${iddd}`, {
         method: "PUT",
         headers: {
@@ -172,20 +219,16 @@ GetUpdates();
             console.log(error);
           }
         )
-
     }
-
   }
-  async function senderDbUpdate() {
 
+
+  async function senderDbUpdate() {
     senderIDD = sarr[0]['_id'];
     fetchTime();
     parr1 = sarr[0]["Update"];
     parr1.push(postt + `   ${timee}`);
-
-
     console.log("Sender's ID:  " + senderIDD);
-
     fetch(`https://buddybackend-0i8h.onrender.com/update/updateS/${senderIDD}`, {
       method: "PUT",
       headers: {
