@@ -8,6 +8,7 @@ import { faArrowDown } from "@fortawesome/free-solid-svg-icons";
 import { UseSelector, useSelector } from "react-redux";
 import { store } from "../redux/store";
 import { Provider } from "react-redux";
+import axios from "axios";
 
 export default function PersonalTimetable({navigation}){
 
@@ -30,12 +31,8 @@ export default function PersonalTimetable({navigation}){
 
    useEffect(()=>{
     async function fetchData()  {
-        fetch('https://good-earrings-cow.cyclic.cloud/timetable')  // the link in the function connects to my api
-        .then((response)=>response.json())
-        .then((json) => setSuds(json))
-        .then(()=>console.log(suds))
-        .catch((error)=>console.log("error"))          
-       
+       const response = await axios.get('https://buddy00.onrender.com/timetables')  // the link in the function connects to my api
+        setSuds(response.data);      
     };
     fetchData()
 

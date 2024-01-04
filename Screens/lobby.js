@@ -20,6 +20,7 @@ import { db } from '../firebase';
 import { doc, getDoc } from "firebase/firestore";
 import { useDispatch } from 'react-redux';
 import { setCourse, setName, setSid } from "../redux/actions";
+import CourseTimetables from "../Timetables/coursetimetables";
 
 
 
@@ -106,7 +107,7 @@ function Lobby1({ navigation }) {
                 </Pressable>
                 <View style={styles.lobbyQuick}>
                     <TouchableOpacity style={styles.lobbyQuickButton}>
-                        <Text style={styles.LobbyQuickButtonText}>Timetables</Text>
+                        <Text style={styles.LobbyQuickButtonText} onPress={() => { navigation.navigate('ttables') }}>Timetables</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.lobbyQuickButton0} onPress={() => navigation.navigate('PerT')}>
                         <Text style={styles.LobbyQuickButtonText}>PastQuestions</Text>
@@ -138,6 +139,10 @@ export default function Lobby({ navigation }) {
                 <stack.Screen
                     name="PerT"
                     component={PersonalTimetable}
+                    options={{}} />
+                <stack.Screen
+                    name="ttables"
+                    component={CourseTimetables}
                     options={{}} />
 
             </stack.Navigator>

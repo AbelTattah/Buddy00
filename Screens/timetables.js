@@ -5,6 +5,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import PersonalTimetable from "../Timetables/personalTimetable";
 import Examt from "../Timetables/examtimetable";
 import CourseTimetables from "../Timetables/coursetimetables";
+import Publications from "../Publications/publications";
 
 const stack = createNativeStackNavigator();
 
@@ -26,7 +27,7 @@ const stack = createNativeStackNavigator();
                  <TouchableOpacity style={styles.meTopButtons}>
                     <Text style={styles.meTopButtonText}>Past Questions</Text>
                  </TouchableOpacity>
-                 <TouchableOpacity style={styles.meTopButtons}>
+                 <TouchableOpacity style={styles.meTopButtons} onPress={()=>navigation.navigate("Publications")}>
                     <Text style={styles.meTopButtonText}>Other Publications</Text>
                  </TouchableOpacity>
                  
@@ -82,6 +83,13 @@ export default function Timetables({navigation}) {
         name='Course'
         component={CourseTimetables}
         options = {{title:'Course Timetables',headerTintColor:'blue',headerShadowVisible:false, headerStyle: {
+            elevation:0,shadowOpacity:0,borderBottomWidth:0,
+            backgroundColor:'#eee',
+          }}} />
+            <stack.Screen 
+        name='Publications'
+        component={Publications}
+        options = {{headerTintColor:'blue',headerShadowVisible:false, headerStyle: {
             elevation:0,shadowOpacity:0,borderBottomWidth:0,
             backgroundColor:'#eee',
           }}} />

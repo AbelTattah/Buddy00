@@ -99,6 +99,9 @@ export default function Updates({ route, navigation }) {
   var parr;
   var parr1 ;
   const { sidd } = useSelector((state) => state.userReducer);
+  var Iddd = '';
+  var iddd = '';
+  var senderIDD = '';
 
    //The function below extracts the user's data from db object
   function filterbyid(array, sid) {
@@ -149,7 +152,6 @@ export default function Updates({ route, navigation }) {
 
     //The function below fetches time from google
     async function fetchTime() {
-
       var URL_REGISTER = 'https://www.google.com';
       try {
         const response = await axios.get(`${URL_REGISTER}`);
@@ -159,7 +161,6 @@ export default function Updates({ route, navigation }) {
           return;
         }
       }
-  
       catch (error) {
         console.log(error.message);
       }
@@ -167,26 +168,34 @@ export default function Updates({ route, navigation }) {
     }
 
 
-async function GetUpdates() {
-  Checksudo();
-  setTimeout(()=>{
-      if (sudo) {
-        GetUserRecievedUpdates() 
-        GetUserSentUpdates()
-        fetchTime();
-        setTimeout(()=>{setLddd(true)},6000);
-      }
-      else {
-        GetUserRecievedUpdates();
-        fetchTime();
-        setTimeout(()=>{setLddd(true)},6000);
-      }
-  },3000);
-}
 
-useEffect(()=>{
-GetUpdates();
-},[]);
+ 
+  useEffect(() => {
+    Checksudo();
+    fetchTime();
+  }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (sudo) {
+        GetUserRecievedUpdates();
+        GetUserSentUpdates();
+        fetchTime();
+      } else {
+        GetUserRecievedUpdates();
+        fetchTime(); 
+      }
+    }, 2000);
+
+    return () => {
+      clearInterval(interval);
+      setTimeout(() => {
+        setLddd(false);
+      }, 6000);
+    };
+  }, [sudo]);
+
+
 
 
 
@@ -196,48 +205,37 @@ GetUpdates();
 
   async function sendUpdate() {
     GetUserRecievedUpdates();
+    console.log(data.length);
     for (var v = 0; v < data.length; v++) {
+      iddd = data[v]["_id"];
       fetchTime();
+      console.log(data[v]["_id"]);
       parr = data[v]["Update"];
       parr.push(postt + `   ${timee}`);
-      Iddd = data[v]["_id"];
-      fetch(`https://buddybackend-0i8h.onrender.com/update/updateR/${iddd}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": 'application/json'
-        },
-        body: JSON.stringify({
+      axios.put(`https://buddybackend-0i8h.onrender.com/update/updateR/${iddd}`, {
           Update: parr
         })
-      })
-        .then(res => {
-        })
+        .then(res => { console.log(res.status); })
         .then(
-          (result) => {
-          },
           (error) => {
             console.log(error);
           }
         )
     }
+    senderDbUpdate();
   }
 
 
   async function senderDbUpdate() {
-    senderIDD = sarr[0]['_id'];
+    senderIDD = sarr['_id'];
+    console.log(sarr);
     fetchTime();
-    parr1 = sarr[0]["Update"];
+    parr1 = sarr["Update"];
+    console.log(senderIDD);
     parr1.push(postt + `   ${timee}`);
-    console.log("Sender's ID:  " + senderIDD);
-    fetch(`https://buddybackend-0i8h.onrender.com/update/updateS/${senderIDD}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": 'application/json'
-      },
-      body: JSON.stringify({
+    axios.put(`https://buddybackend-0i8h.onrender.com/update/updateS/${senderIDD}`, {
         Update: parr1
       })
-    })
       .then(res => { console.log(res.status); })
       .then(
         (error) => {
@@ -246,7 +244,21 @@ GetUpdates();
       );
   }
 
+  const [selected, setSelected] = useState(false);
+  const [selectedIndex, setSelectedIndex] = useState(null); // Store the array index in a variable
 
+  
+
+  const handleLongPress = (selectedIndex) => {
+    setSelected(!selected);
+    setSelectedIndex(selectedIndex); // Update the selectedIndex variable
+  };
+
+  const handlePress = (selectedIndex) => {
+    setSelected(!selected);
+   // Update the selectedIndex variable
+   setSelectedIndex(null);
+  }
 
 
 
@@ -266,8 +278,6 @@ GetUpdates();
             </>) : (
               <>
                 <Text> New(99+)           Read(5)</Text>
-
-
                 <SafeAreaView style={style.flat}>
 
                   {(lddd) ? (<View style={{
@@ -287,18 +297,24 @@ GetUpdates();
                       }}>Latest</Text>
 
                       <FlatList
-                        data={rarr[0]["Update"]}
-                        renderItem={({ item }) => (
-
-                          <View style={{
-                            backgroundColor: '#9999',
-                            margin: 10,
-                            padding: 20,
-                            borderRadius: 10
-                          }}>
-                            <Text>{item}</Text>
-                          </View>
-                        )}
+                        data={rarr[0]["Update"].reverse()}
+                        renderItem={({ item, index }) => {
+                         
+                          return (
+                            <TouchableOpacity
+                              onPress={()=>{}} // Pass the index to handlePress function
+                              onLongPress={() => handleLongPress(index)} // Pass the index to handleLongPress function
+                              style={{
+                                backgroundColor: selected ? '#9999FF' : '#9999',
+                                margin: 10,
+                                padding: 20,
+                                borderRadius: 10
+                              }}
+                            >
+                              <Text>{item}</Text>
+                            </TouchableOpacity>
+                          );
+                        }}
                       />
                     </View>)}
 
@@ -342,20 +358,27 @@ GetUpdates();
                         marginRight: 260
                       }}>Latest</Text>
 
-                      <FlatList
-                        data={rarr[0]["Update"]}
-                        renderItem={({ item }) => (
-
-                          <View style={{
-                            backgroundColor: '#9999',
-                            margin: 10,
-                            padding: 20,
-                            borderRadius: 10
-                          }}>
+                    <FlatList
+                      data={rarr[0]["Update"]}
+                      renderItem={({ item, index }) => {
+                      
+                      
+                        return (
+                          <TouchableOpacity
+                            onPress={()=>{handlePress()}} // Pass the index to handlePress function
+                          onLongPress={() => handleLongPress(index)} // Pass the index to handleLongPress function
+                            style={{
+                              backgroundColor: selectedIndex === index ? '#9999FF' : '#9999',
+                              margin: 10,
+                              padding: 20,
+                              borderRadius: 10
+                            }}
+                          >
                             <Text>{item}</Text>
-                          </View>
-                        )}
-                      />
+                          </TouchableOpacity>
+                        );
+                      }}
+                    />
                       
                     </View>)}
 

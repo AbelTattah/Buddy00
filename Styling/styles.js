@@ -20,6 +20,7 @@ marginLeft:46
     },
   
   LobbyUpdates:{
+    
      height:250,
      marginTop:10,
      borderColor:'#00f8',
@@ -28,6 +29,7 @@ marginLeft:46
      padding:12,
      alignItems:'center',
      borderRadius:20,
+     overflow:'hidden'
     
      
     },
