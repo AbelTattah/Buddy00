@@ -10,7 +10,7 @@ export default function Examt ({navigation}) {
 
         return (
          
-              <TimetableComp url='https://download1530.mediafire.com/ejcsahb0wxygrYPuUXcUT6En6tiXOXMwb2T3KQ3UvvEdH2rAZIOAFMCrCCZql1kwmMDBBvPfwI933S1a2HD9vuKhX-RoFD1LQaIV00UrISJxrRVntSiYaRUeF6LpSSoFTe7TbEp_RDmBPSDbkV4pTogsBZb0ocRF_n1lXxDLn1kMtg/rud77ns1b7n1v5f/PROVISIONAL+EXAMINATIONS+TIMETABLE+-+FIRST+SEM+-+2023.2024+-+LVL+200-400.pdf' />
+              <TimetableComp url='https://buddybackend-0i8h.onrender.com/pdf/examtimetable' />
         )
     }
 

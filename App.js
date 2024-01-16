@@ -184,7 +184,7 @@ export default function App (){
           name='App1'
         component={App1}
         options={{headerShown:false}}
-         />  
+         />
                  <Stack.Screen
         name='Login'
         component={Login}
@@ -195,7 +195,7 @@ export default function App (){
         component={Register}
         options={{title:'Sign Up'}}
          />
-     
+    
         
      
       </Stack.Navigator>

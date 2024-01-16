@@ -17,7 +17,7 @@ function Logout(){
 
   return (
     <View style={styles.me}>
-   <Text>Settings</Text>
+ 
 
    <TouchableOpacity style={styles.meTopButtons} onPress={()=>Logout()} title='logout'>
     <Text style={styles.meTopButtonText}>Logout</Text>

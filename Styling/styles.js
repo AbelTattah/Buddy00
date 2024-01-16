@@ -482,7 +482,7 @@ loginLogo:{
 loginLogoText :{
 fontSize:69,
 fontFamily:'FredokaBold',
-color:'#2407f2'
+color:'black'
 },
 loginMain :{
   backgroundColor:'white',
@@ -497,7 +497,7 @@ margin:23
 loginButton:{
   width:300,
   height:40,
-  backgroundColor:'#2407f2',
+  backgroundColor:'#7979FF8e',
   borderRadius:2,
 
 },
@@ -511,7 +511,7 @@ loginTextIn:{
 loginButtonText:{
   textAlign:"center",
   marginTop:8,
-  color:'white'
+  color:'black'
 },
 regButtonView:{
   flexDirection:'row',
@@ -576,7 +576,7 @@ borderWidth:1,
 loginButtonText:{
   textAlign:"center",
   marginTop:8,
-  color:'white'
+  color:'black'
 },
 ReggButtonView:{
   gap:20,

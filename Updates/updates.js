@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo, useRef } from "react";
 import { View, Text, ScrollView, StyleSheet, StatusBar, Pressable, SafeAreaView, FlatList,Image } from "react-native";
 import styles from "../Styling/styles";
 import { useState, useEffect } from "react";
@@ -79,6 +79,7 @@ Step 5 will aid in message deletion
 
 
 
+
 var senderIDD = '';
 
 export default function Updates({ route, navigation }) {
@@ -86,7 +87,7 @@ export default function Updates({ route, navigation }) {
   var [data, setData] = useState([]);
   var [data1, setData1] = useState([]);
   var [ld, setLd] = useState(false);
-  var [postt, setPostt] = useState('');
+  var  postt = useRef("");
   var [timee, setTimee] = useState('');
   var [nava, setNava] = useState(true);
   var [lddd, setLddd] = useState(true);
@@ -102,6 +103,35 @@ export default function Updates({ route, navigation }) {
   var Iddd = '';
   var iddd = '';
   var senderIDD = '';
+
+  //rarr[0]["Update"].reverse()
+  const Flat = function List({ items }) {
+    return(
+      <FlatList
+      data={items.reverse()}
+      
+      renderItem={({ item, index }) => {
+      
+      
+        return (
+          <TouchableOpacity
+            onPress={()=>{handlePress()}} // Pass the index to handlePress function
+          onLongPress={() => handleLongPress(index)} // Pass the index to handleLongPress function
+            style={{
+              backgroundColor: selectedIndex === index ? '#9999FF' : '#9999',
+              margin: 10,
+              padding: 20,
+              borderRadius: 10
+            }}
+          >
+            <Text>{item}</Text>
+          </TouchableOpacity>
+        );
+      }}
+    />
+    )
+  };
+ 
 
    //The function below extracts the user's data from db object
   function filterbyid(array, sid) {
@@ -168,32 +198,44 @@ export default function Updates({ route, navigation }) {
     }
 
 
-
- 
-  useEffect(() => {
-    Checksudo();
-    fetchTime();
-  }, []);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
+    useEffect(()=>{
+      Checksudo();
+      fetchTime();
+    
       if (sudo) {
         GetUserRecievedUpdates();
         GetUserSentUpdates();
-        fetchTime();
-      } else {
-        GetUserRecievedUpdates();
-        fetchTime(); 
       }
-    }, 2000);
+      else {
+        GetUserRecievedUpdates();
+      }
+    },[]);
 
-    return () => {
-      clearInterval(interval);
-      setTimeout(() => {
-        setLddd(false);
-      }, 6000);
-    };
-  }, [sudo]);
+  useEffect(()=>{  
+    if (sudo) {
+      GetUserRecievedUpdates();
+      GetUserSentUpdates();
+    }
+    else {
+      GetUserRecievedUpdates();
+    }
+  },[timee]);
+
+  useEffect(()=>{
+
+    if (sudo) {
+      GetUserRecievedUpdates();
+      GetUserSentUpdates();
+    }
+    else {
+      GetUserRecievedUpdates();
+    }
+    setTimeout(()=>{
+      setLddd(false);
+    },6000);
+  },[isSudo]);
+ 
+
 
 
 
@@ -211,7 +253,7 @@ export default function Updates({ route, navigation }) {
       fetchTime();
       console.log(data[v]["_id"]);
       parr = data[v]["Update"];
-      parr.push(postt + `   ${timee}`);
+      parr.push(postt.current + `   ${timee}`);
       axios.put(`https://buddybackend-0i8h.onrender.com/update/updateR/${iddd}`, {
           Update: parr
         })
@@ -232,7 +274,7 @@ export default function Updates({ route, navigation }) {
     fetchTime();
     parr1 = sarr["Update"];
     console.log(senderIDD);
-    parr1.push(postt + `   ${timee}`);
+    parr1.push(postt.current + `   ${timee}`);
     axios.put(`https://buddybackend-0i8h.onrender.com/update/updateS/${senderIDD}`, {
         Update: parr1
       })
@@ -262,6 +304,7 @@ export default function Updates({ route, navigation }) {
 
 
 
+  
   return (
     <Provider store={store}>
       <SafeAreaView>
@@ -337,7 +380,7 @@ export default function Updates({ route, navigation }) {
             </>) : (
               <>
               
-                <Text> New(99+)           Read(5)</Text>
+                <Text></Text>
 
 
                 <SafeAreaView style={style.flat}>
@@ -358,27 +401,7 @@ export default function Updates({ route, navigation }) {
                         marginRight: 260
                       }}>Latest</Text>
 
-                    <FlatList
-                      data={rarr[0]["Update"]}
-                      renderItem={({ item, index }) => {
-                      
-                      
-                        return (
-                          <TouchableOpacity
-                            onPress={()=>{handlePress()}} // Pass the index to handlePress function
-                          onLongPress={() => handleLongPress(index)} // Pass the index to handleLongPress function
-                            style={{
-                              backgroundColor: selectedIndex === index ? '#9999FF' : '#9999',
-                              margin: 10,
-                              padding: 20,
-                              borderRadius: 10
-                            }}
-                          >
-                            <Text>{item}</Text>
-                          </TouchableOpacity>
-                        );
-                      }}
-                    />
+                 <Flat items = {rarr[0]["Update"]} />
                       
                     </View>)}
 
@@ -405,7 +428,7 @@ export default function Updates({ route, navigation }) {
                         borderLeftWidth:0,
                         borderRightWidth:0,
                       }} multiline={true}
-                        onChangeText={(text) => setPostt(text)}
+                        onChangeText={(text) => postt.current=text}
                       >
 
                       </TextInput>

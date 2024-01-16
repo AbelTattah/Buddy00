@@ -89,29 +89,7 @@ export default function Updatesmin({ route, navigation }) {
 
 
  
-  useEffect(() => {
-    fetchTime();
-  }, []);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      if (sudo) {
-        GetUserRecievedUpdates();
-        GetUserSentUpdates();
-        fetchTime();
-      } else {
-        GetUserRecievedUpdates();
-        fetchTime(); 
-      }
-    }, 2000);
-
-    return () => {
-      clearInterval(interval);
-      setTimeout(() => {
-        setLddd(false);
-      }, 6000);
-    };
-  }, [sudo]);
+ 
 
 
 

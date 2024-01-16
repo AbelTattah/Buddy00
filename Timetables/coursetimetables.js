@@ -40,21 +40,21 @@ const Main = ({navigation}) => {
 
 const ComputerScience = ({navigation}) => {
     return(
-           <TimetableComp url='https://download1322.mediafire.com/04cox35gbf2ggbnaS_-wSyQgOWoOC-CsE_hD83LDS435D0gvv-f0wNRmDzmzmITNej47uwIhpmN-UUwnzFltpGbaNlztLVpHW-5_zzNuMWPLGxtN3sDjCQQ-NuEctZpII9aVlvR1I9Y7Py7LL79QiOwzz6BQHBG6A0BKsp1lVgoW2GM/t7s1q5xplwlnxyv/timetable.pdf' />
+           <TimetableComp url='https://buddybackend-0i8h.onrender.com/pdf/timetable' />
     );
 } 
 
 
 const Mathematics = ({navigation}) => {
     return(
-          <TimetableComp url='https://download1592.mediafire.com/ilg0zjuo909grdipL-Ns8ji7hTIz854IQwrienkIgSUHF3LCuIQcGXlm6p0SzC1bCN3-3KX8kP_C6iWwaiXUPof-WdHrYKV9cdrIT2HfkWTWnI0UpX49DQpOYXpeL4VOKKmvDaWM02AT6rNDS_tbLQC_ovOShvKfAmtVh2gYN3KfDnM/7lh46inqi0kh169/Maths_Dept_Timetable-SEM-1-2023-2024+-.pdf' />
+          <TimetableComp url='https://buddybackend-0i8h.onrender.com/pdf/mathtimetable' />
     );
 }
 
 
 const Statistics = ({navigation}) => {
     return(
-         <TimetableComp url='https://download1073.mediafire.com/yrfgp9kiw0lg07f7EEp7ktKxHwBL4Or4UnCzV1A56AZqYRhyAA5UKYK8U38-Jd9F3PRReSNuYfIq52ihz8Xdf7RWrAzgTyo3zozbnJJqej6z7dd5KV_xGHqOgqHzmPLOhIEAyVkoBDx2ZADQS1wdp921yRIBGZrbf2x63nauFe2symo/if67exe0w9mmq9a/First+Semester+2023_2024+_PROVISIONAL_12_10_2023.pdf' />
+         <TimetableComp url='https://buddybackend-0i8h.onrender.com/pdf/statisticstimetable' />
     );
 }
 
