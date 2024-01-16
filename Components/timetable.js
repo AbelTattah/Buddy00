@@ -3,7 +3,7 @@ import React from 'react';
 import Pdf from 'react-native-pdf';
 import { StyleSheet } from 'react-native';
 
-export default function TimetableComp({url}) {
+export default function PdfComp({url}) {
   const source = { uri: url, cache: true };
 
   return (

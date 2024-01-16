@@ -39,10 +39,10 @@ export default function PersonalTimetable({navigation}){
 },[]  )
 
 
-//Line 47 to 98 is the magical function that generates the values for the timetables
+//Line 47 to 98 is the function that generates the values for the timetables
 
 
-function Abacadabra() {
+function lectureTimeSearchAndSort() {
 
     for (var d =0; d < suds.length ; d++ ) {
 
@@ -77,16 +77,16 @@ for (  var c=0 ; c < subjects.length ; c++ ) {
 //Line 58 to 77 sorts and arranges the objects obtained from the Loop above into the respective Views by updating
 //disp1 to 4.  
 console.log(timearr);
+
 var byDate = timearr.slice(0);
+
 byDate.sort(function(a,b) {
-
     return a.did - b.did;
-
 });
 console.log(byDate);
 
 
-function sett() {
+function UpdateState() {
     setDisp1(byDate[0]["time"]);
     setDisp2(byDate[1]["time"]);
     setDisp3(byDate[2]["time"]);
@@ -95,7 +95,7 @@ function sett() {
     setDisp6("Yet to Generate");
     console.log("Hmmm");
 }
-sett();
+UpdateState();
 }
 
     async function fetchData()  {
@@ -127,7 +127,7 @@ sett();
               
         <View style={styles.personalTimetableTopButtonView}>
 
-                <TouchableOpacity styles={styles.personalTimetableTopButton} onPress={()=>{fetchData();Abacadabra();}}>
+                <TouchableOpacity styles={styles.personalTimetableTopButton} onPress={()=>{fetchData();lectureTimeSearchAndSort();}}>
                     <FontAwesomeIcon icon={faArrowDown} size={40}/>
                 </TouchableOpacity>
 

@@ -1,4 +1,4 @@
-import { SID,SNAME,SIN,COURSE,EMAIL } from "./actions";
+import { SID,SNAME,SIN,COURSE,EMAIL,CURRENT_COURSE } from "./actions";
 
 
 const initialState ={
@@ -6,7 +6,8 @@ const initialState ={
     sidd:11335775,
     sin:true,
     course:{},
-    email:''
+    email:'',
+    currentc:'',
 }
 
 
@@ -22,6 +23,8 @@ function userReducer(state = initialState,action) {
             return {...state,course:action.payload};
         case EMAIL:
             return {...state,email:action.payload};
+        case CURRENT_COURSE:
+            return {...state,currentc:action.payload};
         default:
             return state;
 

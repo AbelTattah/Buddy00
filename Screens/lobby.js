@@ -21,6 +21,7 @@ import { doc, getDoc } from "firebase/firestore";
 import { useDispatch } from 'react-redux';
 import { setCourse, setName, setSid } from "../redux/actions";
 import CourseTimetables from "../Timetables/coursetimetables";
+import PQNav from "../PastQuestions/pastQuestions";
 
 
 
@@ -109,7 +110,7 @@ function Lobby1({ navigation }) {
                     <TouchableOpacity style={styles.lobbyQuickButton}>
                         <Text style={styles.LobbyQuickButtonText} onPress={() => { navigation.navigate('ttables') }}>Timetables</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.lobbyQuickButton0} onPress={() => navigation.navigate('PerT')}>
+                    <TouchableOpacity style={styles.lobbyQuickButton0} onPress={() => navigation.navigate('PQ')}>
                         <Text style={styles.LobbyQuickButtonText}>PastQuestions</Text>
                     </TouchableOpacity>
                 </View>
@@ -144,7 +145,10 @@ export default function Lobby({ navigation }) {
                     name="ttables"
                     component={CourseTimetables}
                     options={{}} />
-
+                <stack.Screen 
+                    name="PQ"
+                    component={PQNav}
+                    options={{}} />
             </stack.Navigator>
         </NavigationContainer>
 
