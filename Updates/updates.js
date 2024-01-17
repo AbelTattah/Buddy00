@@ -151,6 +151,7 @@ export default function Updates({ route, navigation }) {
     }
   };
 
+  
 
   // The function below fetches data from the update sender's db
   async function GetUserSentUpdates() {

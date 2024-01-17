@@ -2,15 +2,16 @@ import { View, Text, TextInput,ActivityIndicator } from 'react-native'
 import React, { useState } from 'react'
 import axios from 'axios';
 import TimetableComp from '../Components/timetable';
-import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
+import { ScrollView, TouchableOpacity } from 'react-native';
 import styles from '../Styling/styles';
 import { Provider,useDispatch} from 'react-redux';
 import { store } from '../redux/store';
-import { Dispatch } from 'react';
 import { setCurrentCourse } from '../redux/actions';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
-import pqRender from './pqRender';
+import PqRender from './pqRender';
+import { useFonts } from 'expo-font';
+import { style } from 'deprecated-react-native-prop-types/DeprecatedViewPropTypes';
 /*
 
 This is the page that displays the past questions for the user to select from
@@ -32,20 +33,22 @@ steps above are completed.
 const Stack = createNativeStackNavigator();
 
 //Load fonts
-const pastQuestions = () => {
+const PastQuestions = ({navigation}) => {
   var [fontsLoaded] = useFonts({
     "FredokaBold":require("../fonts/FredokaBold.ttf"),
   });
 
   var [code,setCode] = useState("");
   var [loading,setLoading] = useState(false);
-  var [endpoints,setEndpoints] = useState([{}]);
+  var [endpoints,setEndpoints] = useState([]);
 
 //Get endpoints for past Question pdfs from api
-  function getEndpoints(couseCode) {
+  async function getEndpoints(couseCode) {
     try {
-        const response =  axios.get(`https://buddy-backend-ti17.onrender.com/pasco/get/${couseCode}`);
+        console.log(code);
+        const response = await  axios.get(`https://buddy-backend-ti17.onrender.com/pasco/get/${code}`);
         setEndpoints(response.data.endPoints);
+        console.log(response.data);
     } catch (error) {
         console.log(error.message);
     }
@@ -57,7 +60,7 @@ const pastQuestions = () => {
   const searchHandler = () => {
     setLoading(true);
     getEndpoints();
-    setTimeout(()=>{setLoading(false)},3000);
+    setTimeout(()=>{setLoading(false)},4000);
   } 
   
     //Navigate to pdf view
@@ -65,15 +68,24 @@ const pastQuestions = () => {
     setTimeout(()=>{navigation.navigate('PQ')},1000);
   }
 
+  const Dispatch = useDispatch();
+
   return (
-    <Provider store={store}>
-      <View style={styles.me}>
-        <View style={styles.meTopSection}>
-         <View style={styles.meTopButtonView}>
-            <TextInput placeholder='Enter course Code eg. MATH123' onChangeText={(text)=>setCode(code)}></TextInput>
+
+      <View >
+        <TextInput 
+               style={styles.meTopTextInput}
+               placeholder='Enter course Code eg. MATH123' 
+               onChangeText={(text)=>setCode(text)}
+               >
+               </TextInput>
+        <View >
+         <View >
+          
                 <TouchableOpacity style={styles.meTopButtons} onPress={()=>{searchHandler()}}>
                     <Text>Search</Text>
                 </TouchableOpacity>
+                <>
                     {(loading)?(<>
                     <ActivityIndicator />
                     </>):(<>
@@ -89,10 +101,11 @@ const pastQuestions = () => {
                          }
                        </ScrollView>
                      </>)}
+                     </>
          </View>
        </View>
      </View>
-</Provider>
+
   )
 }
 
@@ -100,10 +113,10 @@ const pastQuestions = () => {
 const PQNav = ({navigation}) => {
     return (
          <Provider store={store} >
-        <NavigationContainer>
+        <NavigationContainer independent={true}>
             <Stack.Navigator>
-                <Stack.Screen name="Past Questions" component={PQNav} />
-                <Stack.Screen name="PQ" component={pqRender} />
+                <Stack.Screen name="Past Questions" component={PastQuestions} />
+                <Stack.Screen name="PQ" component={PqRender} />
             </Stack.Navigator>
         </NavigationContainer>
          </Provider>

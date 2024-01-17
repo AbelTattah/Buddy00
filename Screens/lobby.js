@@ -138,10 +138,6 @@ export default function Lobby({ navigation }) {
                     component={Updates}
                     options={{}} show={true} />
                 <stack.Screen
-                    name="PerT"
-                    component={PersonalTimetable}
-                    options={{}} />
-                <stack.Screen
                     name="ttables"
                     component={CourseTimetables}
                     options={{}} />
