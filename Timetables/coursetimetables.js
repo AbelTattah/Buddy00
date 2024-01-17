@@ -12,7 +12,7 @@ import { TouchableOpacity } from "react-native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import styles from "../Styling/styles";
 import { NavigationContainer } from "@react-navigation/native";
-import TimetableComp from "../Components/timetable";
+import PdfComp from "../Components/timetable";
 
 const Stack = createNativeStackNavigator();
 
@@ -40,21 +40,21 @@ const Main = ({navigation}) => {
 
 const ComputerScience = ({navigation}) => {
     return(
-           <TimetableComp url='https://buddybackend-0i8h.onrender.com/pdf/timetable' />
+           <PdfComp url='https://buddy-backend-ti17.onrender.com/pdf/timetable' />
     );
 } 
 
 
 const Mathematics = ({navigation}) => {
     return(
-          <TimetableComp url='https://buddybackend-0i8h.onrender.com/pdf/mathtimetable' />
+          <PdfComp url='https://buddy-backend-ti17.onrender.com/pdf/mathtimetable' />
     );
 }
 
 
 const Statistics = ({navigation}) => {
     return(
-         <TimetableComp url='https://buddybackend-0i8h.onrender.com/pdf/statisticstimetable' />
+         <PdfComp url='https://buddy-backend-ti17.onrender.com/pdf/statisticstimetable' />
     );
 }
 

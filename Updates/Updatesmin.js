@@ -43,7 +43,7 @@ export default function Updatesmin({ route, navigation }) {
   // The function below fetches data from the update reciever's db and extracts the user's data from db object
   async function GetUserRecievedUpdates() {
     try {
-      const response = await axios.get('https://buddybackend-0i8h.onrender.com/update/updateR');
+      const response = await axios.get('https://buddy-backend-ti17.onrender.com/update/updateR');
       console.log("Reciever data has been fetched");
       setData(response.data);
       setRarr(filterbyid(data,sidd))
@@ -56,7 +56,7 @@ export default function Updatesmin({ route, navigation }) {
   // The function below fetches data from the update sender's db
   async function GetUserSentUpdates() {
     try {
-      const response = await axios.get('https://buddybackend-0i8h.onrender.com/update/updateS');
+      const response = await axios.get('https://buddy-backend-ti17.onrender.com/update/updateS');
       console.log("Sender data has been fetched");
       setData1(response.data);
       setSarr(filterbyid(data1,sidd));

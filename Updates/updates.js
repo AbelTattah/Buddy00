@@ -142,7 +142,7 @@ export default function Updates({ route, navigation }) {
   // The function below fetches data from the update reciever's db and extracts the user's data from db object
   async function GetUserRecievedUpdates() {
     try {
-      const response = await axios.get('https://buddybackend-0i8h.onrender.com/update/updateR');
+      const response = await axios.get('https://buddy-backend-ti17.onrender.com/update/updateR');
       console.log("Reciever data has been fetched");
       setData(response.data);
       setRarr(filterbyid(data,sidd))
@@ -155,7 +155,7 @@ export default function Updates({ route, navigation }) {
   // The function below fetches data from the update sender's db
   async function GetUserSentUpdates() {
     try {
-      const response = await axios.get('https://buddybackend-0i8h.onrender.com/update/updateS');
+      const response = await axios.get('https://buddy-backend-ti17.onrender.com/update/updateS');
       console.log("Sender data has been fetched");
       setData1(response.data);
       setSarr(filterbyid(data1,sidd));
@@ -167,7 +167,7 @@ export default function Updates({ route, navigation }) {
   //Check whether user is a sudo user
   async function Checksudo() {
     try {
-      const response = await axios.get('https://buddybackend-0i8h.onrender.com/sudo/sudo');
+      const response = await axios.get('https://buddy-backend-ti17.onrender.com/sudo/sudo');
       sudo = response.data[0];
       for (var x = 0; x < sudo["User"].length; x++) {
         if (sudo["User"][x] == sidd) {
@@ -254,7 +254,7 @@ export default function Updates({ route, navigation }) {
       console.log(data[v]["_id"]);
       parr = data[v]["Update"];
       parr.push(postt.current + `   ${timee}`);
-      axios.put(`https://buddybackend-0i8h.onrender.com/update/updateR/${iddd}`, {
+      axios.put(`https://buddy-backend-ti17.onrender.com/update/updateR/${iddd}`, {
           Update: parr
         })
         .then(res => { console.log(res.status); })
@@ -275,7 +275,7 @@ export default function Updates({ route, navigation }) {
     parr1 = sarr["Update"];
     console.log(senderIDD);
     parr1.push(postt.current + `   ${timee}`);
-    axios.put(`https://buddybackend-0i8h.onrender.com/update/updateS/${senderIDD}`, {
+    axios.put(`https://buddy-backend-ti17.onrender.com/update/updateS/${senderIDD}`, {
         Update: parr1
       })
       .then(res => { console.log(res.status); })
@@ -304,7 +304,7 @@ export default function Updates({ route, navigation }) {
 
 
 
-  
+
   return (
     <Provider store={store}>
       <SafeAreaView>

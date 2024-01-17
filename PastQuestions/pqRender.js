@@ -9,7 +9,7 @@ const pqRender = ({navigation}) => {
   const { currentc } = UseSelector(state => state.userReducer)
   return (
    <Provider store={store}>
-        <PdfComp url={currentc} />
+        <PdfComp url={`https://buddy-backend-ti17.onrender.com/pasco/get/${currentc}`} />
    </Provider>
   )
 }

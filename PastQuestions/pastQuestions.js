@@ -44,8 +44,8 @@ const pastQuestions = () => {
 //Get endpoints for past Question pdfs from api
   function getEndpoints(couseCode) {
     try {
-        const response =  axios.get(`https://  ${couseCode}`);
-        setEndpoints(response.data);
+        const response =  axios.get(`https://buddy-backend-ti17.onrender.com/pasco/get/${couseCode}`);
+        setEndpoints(response.data.endPoints);
     } catch (error) {
         console.log(error.message);
     }
@@ -67,27 +67,31 @@ const pastQuestions = () => {
 
   return (
     <Provider store={store}>
-    <View style={styles.me}>
-    <View style={styles.meTopSection}>
-       <View style={styles.meTopButtonView}>
-         <TextInput placeholder='Enter course Code eg. MATH123' onChangeText={(text)=>setCode(code)}></TextInput>
-         <TouchableOpacity style={styles.meTopButtons} onPress={()=>{}}><Text>Search</Text></TouchableOpacity>
-         {(loading)?(<>
-         <ActivityIndicator />
-         </>):(<>
-             <ScrollView>
-                {
-                    endpoints.map((endpoint)=>(
-                        <TouchableOpacity style={styles.meMiddleButtons} onPress={()=>{Dispatch(setCurrentCourse(endpoint));navigationHandler();}}>
-                        <Text>{endpoint}</Text>
-                        </TouchableOpacity>
-                    ))
-                }
-             </ScrollView>
-         </>)}
+      <View style={styles.me}>
+        <View style={styles.meTopSection}>
+         <View style={styles.meTopButtonView}>
+            <TextInput placeholder='Enter course Code eg. MATH123' onChangeText={(text)=>setCode(code)}></TextInput>
+                <TouchableOpacity style={styles.meTopButtons} onPress={()=>{searchHandler()}}>
+                    <Text>Search</Text>
+                </TouchableOpacity>
+                    {(loading)?(<>
+                    <ActivityIndicator />
+                    </>):(<>
+                        <ScrollView>
+                         {
+                           endpoints.map((endpoint)=>(
+                            <TouchableOpacity 
+                                style={styles.meMiddleButtons} 
+                                onPress={()=>{Dispatch(setCurrentCourse(endpoint));navigationHandler();}}>
+                            <Text>{endpoint}</Text>
+                            </TouchableOpacity>
+                          ))
+                         }
+                       </ScrollView>
+                     </>)}
+         </View>
        </View>
-    </View>
-</View>
+     </View>
 </Provider>
   )
 }

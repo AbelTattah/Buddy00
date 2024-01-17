@@ -3,14 +3,14 @@
 import React from 'react';
 import { StyleSheet, Dimensions, View } from 'react-native';
 import Pdf from 'react-native-pdf';
-import TimetableComp from '../Components/timetable';
+import PdfComp from '../Components/timetable';
 
 export default function Examt ({navigation}) {
     
 
         return (
          
-              <TimetableComp url='https://buddybackend-0i8h.onrender.com/pdf/examtimetable' />
+              <PdfComp url='https://buddy-backend-ti17.onrender.com/pdf/examtimetable' />
         )
     }
 
