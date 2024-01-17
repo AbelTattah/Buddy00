@@ -1,31 +1,37 @@
-import { View, Text, Button, KeyboardAvoidingView, TextInput, ActivityIndicator, ScrollView } from 'react-native';
+import {
+  View,
+  Text,
+  Button,
+  KeyboardAvoidingView,
+  TextInput,
+  ActivityIndicator,
+  ScrollView,
+} from 'react-native';
 import styles from '../Styling/styles';
-import { useState, useEffect } from 'react';
+import {useState, useEffect} from 'react';
 import CheckBox from 'react-native-check-box';
-import { beginAsyncEvent } from 'react-native/Libraries/Performance/Systrace';
-import { TouchableOpacity } from 'react-native';
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { initializeApp } from "firebase/app";
-import { Firestore, getFirestore } from "firebase/firestore";
-import { collection, addDoc } from "firebase/firestore";
-import { db } from '../firebase';
-import { database } from '../firebase';
-import { setDoc } from 'firebase/firestore';
-import { doc } from 'firebase/firestore';
-import { useFonts } from 'expo-font';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import {beginAsyncEvent} from 'react-native/Libraries/Performance/Systrace';
+import {TouchableOpacity} from 'react-native';
+import {getAuth, createUserWithEmailAndPassword} from 'firebase/auth';
+import {initializeApp} from 'firebase/app';
+import {Firestore, getFirestore} from 'firebase/firestore';
+import {collection, addDoc} from 'firebase/firestore';
+import {db} from '../firebase';
+import {database} from '../firebase';
+import {setDoc} from 'firebase/firestore';
+import {doc} from 'firebase/firestore';
+import {useFonts} from 'expo-font';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 var course = [];
 
-
-export default function Register({ navigation }) {
-
+export default function Register({navigation}) {
   var [sid, setSid] = useState(0);
   var [nameid, setNameid] = useState('');
   var [pass, setPass] = useState('');
   var [pass1, setPass1] = useState('');
   var [email, setEmail] = useState('');
   var [suds, setSuds] = useState({});
-  var [sud1, setSud1] = useState({})
+  var [sud1, setSud1] = useState({});
   var [regg, setRegg] = useState('rnd');
   var [check1, setCheck] = useState('MATH123');
   var [check2, setCheck] = useState('MATH122');
@@ -39,103 +45,7 @@ export default function Register({ navigation }) {
   var [isC4, setIsC4] = useState(false);
   var [isC5, setIsC5] = useState(false);
   var [sign, setSign] = useState(false);
-
   var c = 0;
-  
-  /*
-  useEffect(()=>{
-     async function fetchData()  {
-         fetch('https://buddy00.onrender.com/buddy')  
-         .then((response)=>response.json())
-         .then((json) => setSuds(json))
-         .catch((error)=>console.log("error"))          
-     };
-     fetchData()
- 
- },[]  )
- 
- 
- 
- function fetchData()  {
- 
-     fetch('https://buddy00.onrender.com/buddy') 
-     .then((response)=>response.json())
-     .then((json) => setSuds(json))
-     .catch((error)=>console.log("error"));         
-    
- }
-  
- //async function Fix(){ setInterval(()=>{fetchData()},10000)};
- 
- //Fix();
- 
-        fetchData(); 
- 
-  async function Reg() {
-   
- 
- fetchData();
- 
- 
-     for (var a =0; a < suds.length ; a++ ) {
- 
-         if ( suds[a]["SID"]==sid ) {                
-             setSud1(suds[a]);
-             console.log(sud1["SID"]);
-             c = 1;
-             console.log(c);
-             break;
-         }
-         else {
-             console.log("loop did run but ID was not found")
-             console.log(c);
-             c*=0;
-             continue;
-         }
-     } 
- 
- 
- 
- console.log(c);
- 
-     if (c==0) {
-       setRegg('inp');
-       fetch(`https://buddy00.onrender.com/buddyy`,{
-       method:"POST",
-       headers:{
-         "Content-Type": 'application/json'
-       },
-       body: JSON.stringify({
-         SID:sid,
-         SName:nameid,
-         Spass:pass,
-         Courses:course
-   
-       })
-     })
-     .then(res => {console.log(res.status);
-         console.log(res.headers);})
-     .then(
-       (result)=>{
-         console.log('User Has been registered');
-         setRegg('succ');
-       },
-       (error)=> {
-         console.log(error);
-       }
-     )
-   }
- else {
-     console.log("User is already registered");
-     c*=0;
-     setRegg('prob');
-     console.log(c);
-      }
- }
- 
- */
-
-// The function below handles the checkboxes
 
   function Check(sub) {
     switch (sub) {
@@ -143,8 +53,7 @@ export default function Register({ navigation }) {
         if (isC1) {
           setIsC1(false);
           course.splice(course.indexOf('MATH123'), 1);
-        }
-        else {
+        } else {
           setIsC1(true);
           course.push(sub);
           console.log(course);
@@ -154,8 +63,7 @@ export default function Register({ navigation }) {
         if (isC2) {
           setIsC2(false);
           course.splice(course.indexOf('MATH126'), 1);
-        }
-        else {
+        } else {
           setIsC2(true);
           course.push(sub);
           console.log(course);
@@ -165,8 +73,7 @@ export default function Register({ navigation }) {
         if (isC3) {
           setIsC3(false);
           course.splice(course.indexOf('DCIT101'), 1);
-        }
-        else {
+        } else {
           setIsC3(true);
           course.push(sub);
           console.log(course);
@@ -176,118 +83,142 @@ export default function Register({ navigation }) {
         if (isC4) {
           setIsC4(false);
           course.splice(course.indexOf('UGRC150'), 1);
-        }
-        else {
+        } else {
           setIsC4(true);
           course.push(sub);
           console.log(course);
         }
         break;
       default:
-        console.log("This will not happen");
-
-
+        console.log('This will not happen');
     }
   }
-
 
   async function createUserCollection() {
     try {
-      const docRef = await setDoc(doc(db, "users", `user/buddy/${email}`), {
+      const docRef = await setDoc(doc(db, 'users', `user/buddy/${email}`), {
         COR: course,
         SNAME: nameid,
-        STUID: sid
+        STUID: sid,
       });
-      console.log("Document written with ID: ", email);
+      console.log('Document written with ID: ', email);
     } catch (e) {
-      console.error("Error adding document: ", e);
+      console.error('Error adding document: ', e);
     }
   }
-async function createMongoDBdoc(){
-  fetch(`https://buddy00.onrender.com/updateR`,{
-  method:"POST",
-  headers:{
-    "Content-Type": 'application/json'
-  },
-  body: JSON.stringify({
-    Update:[],
-    SID:sid
-  })
-})
-.then(
-  (error)=> {
-    console.log(error);
+  async function createMongoDBdoc() {
+    fetch(`https://buddy00.onrender.com/updateR`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        Update: [],
+        SID: sid,
+      }),
+    }).then((error) => {
+      console.log(error);
+    });
   }
-);
-
-}
   async function signUp() {
-
     const auth = getAuth();
-    if (pass1==pass && email!='' && nameid!=''&& course!=[]) {
-    createUserWithEmailAndPassword(auth, email, pass)
-      .then(() => {
-        createUserCollection();
-        createMongoDBdoc();
-      })
-      .then(() => {
-        setRegg('inp');
-        setTimeout(() => { setRegg('succ'); }, 3000);
-        setTimeout(() => { navigation.navigate('Login'); }, 4500);
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorMessage);
-        if (errorMessage=='Firebase: Error (auth/network-request-failed).'){
-        setSign(false);
-      }
-      else if(errorMessage=='Firebase: Error (auth/email-already-in-use).') {
-        setSign(true);
-      }
-        // ..
-      });
+    if (pass1 == pass && email != '' && nameid != '' && course != []) {
+      createUserWithEmailAndPassword(auth, email, pass)
+        .then(() => {
+          createUserCollection();
+          createMongoDBdoc();
+        })
+        .then(() => {
+          setRegg('inp');
+          setTimeout(() => {
+            setRegg('succ');
+          }, 3000);
+          setTimeout(() => {
+            navigation.navigate('Login');
+          }, 4500);
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          console.log(errorMessage);
+          if (
+            errorMessage == 'Firebase: Error (auth/network-request-failed).'
+          ) {
+            setSign(false);
+          } else if (
+            errorMessage == 'Firebase: Error (auth/email-already-in-use).'
+          ) {
+            setSign(true);
+          }
+          // ..
+        });
 
-      if (sign==true) {
-         setRegg('prob');
-      }
-      else if (sign==false) {
+      if (sign == true) {
+        setRegg('prob');
+      } else if (sign == false) {
+        setRegg('prob1');
+      } else {
         setRegg('prob1');
       }
-      else {
-        setRegg('prob1');
-      } ;
+    } else {
+      setRegg('prob2');
     }
-    else {
-      setRegg('prob2')
-    }
-
   }
 
   let [fontsLoaded] = useFonts({
-    "FredokaBold": require("../fonts/FredokaBold.ttf"),
+    FredokaBold: require('../fonts/FredokaBold.ttf'),
   });
 
   if (!fontsLoaded) {
     return <ActivityIndicator />;
   }
 
-
   return (
     <View style={styles.ReggMain}>
       <Text style={styles.ReggLogoText}>Sign Up for Buddy</Text>
-      <KeyboardAvoidingView style={styles.ReggIn} behavior='padding'>
-        <TextInput style={styles.ReggTextIn} placeholder='    SID' autoCapitalize='none' onChangeText={(text) => setSid(text)} />
-        <TextInput style={styles.ReggTextIn} placeholder='    name' autoCapitalize='none' onChangeText={(text) => setNameid(text)} />
-        <TextInput style={styles.ReggTextIn} inputMode='email' placeholder='    email' autoCapitalize='none' onChangeText={(text) => setEmail(text)} />
-        <TextInput secureTextEntry={true} style={styles.ReggTextIn} placeholder='    password' autoCapitalize='none' onChangeText={(text) => setPass(text)} />
-        <TextInput secureTextEntry={true} style={styles.ReggTextIn} placeholder='    confirm password' autoCapitalize='none' onChangeText={(text) => setPass1(text)} />
+      <KeyboardAvoidingView style={styles.ReggIn} behavior="padding">
+        <TextInput
+          style={styles.ReggTextIn}
+          placeholder="    SID"
+          autoCapitalize="none"
+          onChangeText={(text) => setSid(text)}
+        />
+        <TextInput
+          style={styles.ReggTextIn}
+          placeholder="    name"
+          autoCapitalize="none"
+          onChangeText={(text) => setNameid(text)}
+        />
+        <TextInput
+          style={styles.ReggTextIn}
+          inputMode="email"
+          placeholder="    email"
+          autoCapitalize="none"
+          onChangeText={(text) => setEmail(text)}
+        />
+        <TextInput
+          secureTextEntry={true}
+          style={styles.ReggTextIn}
+          placeholder="    password"
+          autoCapitalize="none"
+          onChangeText={(text) => setPass(text)}
+        />
+        <TextInput
+          secureTextEntry={true}
+          style={styles.ReggTextIn}
+          placeholder="    confirm password"
+          autoCapitalize="none"
+          onChangeText={(text) => setPass1(text)}
+        />
       </KeyboardAvoidingView>
-      <KeyboardAwareScrollView style={styles.regCheckmain} keyboardShouldPersistTaps='always'>
+      <KeyboardAwareScrollView
+        style={styles.regCheckmain}
+        keyboardShouldPersistTaps="always"
+      >
         <Text>Select Courses:</Text>
         <View style={styles.regCheck}>
-          <Text>MATH123 </Text><CheckBox
-
+          <Text>MATH123 </Text>
+          <CheckBox
             onClick={() => {
               Check('MATH123');
             }}
@@ -295,8 +226,8 @@ async function createMongoDBdoc(){
           />
         </View>
         <View style={styles.regCheck}>
-          <Text>MATH126 </Text><CheckBox
-
+          <Text>MATH126 </Text>
+          <CheckBox
             onClick={() => {
               Check('MATH126');
             }}
@@ -304,8 +235,8 @@ async function createMongoDBdoc(){
           />
         </View>
         <View style={styles.regCheck1}>
-          <Text>DCIT101</Text><CheckBox
-
+          <Text>DCIT101</Text>
+          <CheckBox
             onClick={() => {
               Check('DCIT101');
             }}
@@ -313,34 +244,48 @@ async function createMongoDBdoc(){
           />
         </View>
         <View style={styles.regCheck2}>
-          <Text>UGRC150  </Text><CheckBox
-
+          <Text>UGRC150 </Text>
+          <CheckBox
             onClick={() => {
               Check('UGRC150');
             }}
             isChecked={isC4}
           />
         </View>
-     
-      <View style={styles.ReggButtonView}>
-        <TouchableOpacity style={styles.loginButton} onPress={() => signUp()}><Text style={styles.loginButtonText}>Sign Up</Text></TouchableOpacity>
-      </View>
-      <>{(regg == 'inp') ? (<>
-        <Text>Signing you up... <ActivityIndicator color='#2407f2' /></Text>
-      </>) : (regg == 'prob') ? (<>
-        <Text>You have an account</Text>
-      </>) : (regg == 'prob1') ? (<><Text>
-       A Network error occured
-      </Text></>):(regg=='prob2')?(<Text>The form is not complete</Text>) : (regg == 'succ') ? (<>
-        <Text>Sign Up Succesful ,Go to login Page!</Text>
-      </>) : (<>
-        <Text>Buddy v.1.0</Text>
-      </>)}</>
+
+        <View style={styles.ReggButtonView}>
+          <TouchableOpacity style={styles.loginButton} onPress={() => signUp()}>
+            <Text style={styles.loginButtonText}>Sign Up</Text>
+          </TouchableOpacity>
+        </View>
+        <>
+          {regg == 'inp' ? (
+            <>
+              <Text>
+                Signing you up... <ActivityIndicator color="#2407f2" />
+              </Text>
+            </>
+          ) : regg == 'prob' ? (
+            <>
+              <Text>You have an account</Text>
+            </>
+          ) : regg == 'prob1' ? (
+            <>
+              <Text>A Network error occured</Text>
+            </>
+          ) : regg == 'prob2' ? (
+            <Text>The form is not complete</Text>
+          ) : regg == 'succ' ? (
+            <>
+              <Text>Sign Up Succesful ,Go to login Page!</Text>
+            </>
+          ) : (
+            <>
+              <Text>Buddy v.1.0</Text>
+            </>
+          )}
+        </>
       </KeyboardAwareScrollView>
     </View>
   );
 }
-
-
-
-

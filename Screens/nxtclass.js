@@ -1,19 +1,16 @@
-
 import {
-    StyleSheet,
-    Text,
-    SafeAreaView,
-    ScrollView,
-    StatusBar,
-    View
-  } from 'react-native';
-  import styles from '../Styling/styles';
+  StyleSheet,
+  Text,
+  SafeAreaView,
+  ScrollView,
+  StatusBar,
+  View,
+} from 'react-native';
+import styles from '../Styling/styles';
 
-
-function Nxtclass ({navigation}) {
-    return (
-   <View style={styles.meContentContainer}>
-    
+function Nxtclass({navigation}) {
+  return (
+    <View style={styles.meContentContainer}>
       <ScrollView contentContainerStyle={style.scrollView}>
         <Text style={styles.text1}>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -45,7 +42,7 @@ function Nxtclass ({navigation}) {
       </ScrollView>
     </View>
   );
-};
+}
 
 const style = StyleSheet.create({
   container: {
@@ -55,14 +52,12 @@ const style = StyleSheet.create({
   scrollView: {
     backgroundColor: 'pink',
     marginHorizontal: 20,
-    height:300,
-    flex:2
+    height: 300,
+    flex: 2,
   },
   text: {
     fontSize: 42,
   },
 });
-
-
 
 export default Nxtclass;

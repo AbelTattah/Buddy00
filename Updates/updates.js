@@ -1,20 +1,30 @@
-import React, { memo, useRef } from "react";
-import { View, Text, ScrollView, StyleSheet, StatusBar, Pressable, SafeAreaView, FlatList,Image } from "react-native";
-import styles from "../Styling/styles";
-import { useState, useEffect } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { faBell, faL } from "@fortawesome/free-solid-svg-icons";
-import { ActivityIndicator } from "react-native";
-import { useFonts } from "expo-font";
-import moment from 'moment'
-import { useNavigation } from "@react-navigation/native";
-import { TextInput } from "react-native";
-import { Button } from "react-native";
-import { TouchableOpacity } from "react-native";
-import { store } from "../redux/store";
-import { Provider } from "react-redux";
-import { useSelector } from "react-redux";
-import axios from "axios";
+import React, {memo, useRef} from 'react';
+import {
+  View,
+  Text,
+  ScrollView,
+  StyleSheet,
+  StatusBar,
+  Pressable,
+  SafeAreaView,
+  FlatList,
+  Image,
+} from 'react-native';
+import styles from '../Styling/styles';
+import {useState, useEffect} from 'react';
+import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
+import {faBell, faL} from '@fortawesome/free-solid-svg-icons';
+import {ActivityIndicator} from 'react-native';
+import {useFonts} from 'expo-font';
+import moment from 'moment';
+import {useNavigation} from '@react-navigation/native';
+import {TextInput} from 'react-native';
+import {Button} from 'react-native';
+import {TouchableOpacity} from 'react-native';
+import {store} from '../redux/store';
+import {Provider} from 'react-redux';
+import {useSelector} from 'react-redux';
+import axios from 'axios';
 
 /*
 Student Update
@@ -77,89 +87,84 @@ Step 5 will aid in message deletion
 
 */
 
-
-
-
 var senderIDD = '';
 
-export default function Updates({ route, navigation }) {
-
+export default function Updates({route, navigation}) {
   var [data, setData] = useState([]);
   var [data1, setData1] = useState([]);
   var [ld, setLd] = useState(false);
-  var  postt = useRef("");
+  var postt = useRef('');
   var [timee, setTimee] = useState('');
   var [nava, setNava] = useState(true);
   var [lddd, setLddd] = useState(true);
   var [rarr, setRarr] = useState({
-    Update:["Hello world"]
+    Update: ['Hello world'],
   });
   var [sarr, setSarr] = useState([]);
-  var sudo=[];
+  var sudo = [];
   var [isSudo, setIsSudo] = useState(false);
   var parr;
-  var parr1 ;
-  const { sidd } = useSelector((state) => state.userReducer);
+  var parr1;
+  const {sidd} = useSelector((state) => state.userReducer);
   var Iddd = '';
   var iddd = '';
   var senderIDD = '';
 
   //rarr[0]["Update"].reverse()
-  const Flat = function List({ items }) {
-    return(
+  const Flat = function List({items}) {
+    return (
       <FlatList
-      data={items.reverse()}
-      
-      renderItem={({ item, index }) => {
-      
-      
-        return (
-          <TouchableOpacity
-            onPress={()=>{handlePress()}} // Pass the index to handlePress function
-          onLongPress={() => handleLongPress(index)} // Pass the index to handleLongPress function
-            style={{
-              backgroundColor: selectedIndex === index ? '#9999FF' : '#9999',
-              margin: 10,
-              padding: 20,
-              borderRadius: 10
-            }}
-          >
-            <Text>{item}</Text>
-          </TouchableOpacity>
-        );
-      }}
-    />
-    )
+        data={items.reverse()}
+        renderItem={({item, index}) => {
+          return (
+            <TouchableOpacity
+              onPress={() => {
+                handlePress();
+              }} // Pass the index to handlePress function
+              onLongPress={() => handleLongPress(index)} // Pass the index to handleLongPress function
+              style={{
+                backgroundColor: selectedIndex === index ? '#9999FF' : '#9999',
+                margin: 10,
+                padding: 20,
+                borderRadius: 10,
+              }}
+            >
+              <Text>{item}</Text>
+            </TouchableOpacity>
+          );
+        }}
+      />
+    );
   };
- 
 
-   //The function below extracts the user's data from db object
+  //The function below extracts the user's data from db object
   function filterbyid(array, sid) {
-   return array.filter(obj => obj["SID"] == sid);
+    return array.filter((obj) => obj['SID'] == sid);
   }
-
 
   // The function below fetches data from the update reciever's db and extracts the user's data from db object
   async function GetUserRecievedUpdates() {
     try {
-      const response = await axios.get('https://buddy-backend-ti17.onrender.com/update/updateR');
-      console.log("Reciever data has been fetched");
+      const response = await axios.get(
+        'https://buddy-backend-ti17.onrender.com/update/updateR'
+      );
+      console.log('Reciever data has been fetched');
       setData(response.data);
-      setRarr(filterbyid(data,sidd))
+      setRarr(filterbyid(data, sidd));
     } catch (error) {
       console.error(error);
     }
-  };
-
-  
+  }
 
   // The function below fetches data from the update sender's db
   async function GetUserSentUpdates() {
     try {
-      const response = await axios.get('https://buddy-backend-ti17.onrender.com/update/updateS');
-      console.log("Sender data has been fetched");
+      const response = await axios.get(
+        'https://buddy-backend-ti17.onrender.com/update/updateS'
+      );
+      console.log('Sender data has been fetched');
       setData1(response.data);
-      setSarr(filterbyid(data1,sidd));
+      setSarr(filterbyid(data1, sidd));
     } catch (error) {
       console.error(error);
     }
@@ -168,80 +173,67 @@ export default function Updates({ route, navigation }) {
   //Check whether user is a sudo user
   async function Checksudo() {
     try {
-      const response = await axios.get('https://buddy-backend-ti17.onrender.com/sudo/sudo');
+      const response = await axios.get(
+        'https://buddy-backend-ti17.onrender.com/sudo/sudo'
+      );
       sudo = response.data[0];
-      for (var x = 0; x < sudo["User"].length; x++) {
-        if (sudo["User"][x] == sidd) {
+      for (var x = 0; x < sudo['User'].length; x++) {
+        if (sudo['User'][x] == sidd) {
           setIsSudo(true);
         }
       }
     } catch (error) {
       console.log(error.message);
     }
-  };
+  }
 
-
-    //The function below fetches time from google
-    async function fetchTime() {
-      var URL_REGISTER = 'https://www.google.com';
-      try {
-        const response = await axios.get(`${URL_REGISTER}`);
-        setTimee(response.headers.get('Date'));
-        if (response.status !== 200) {
-          console.log('Status Code: ' + response.status);
-          return;
-        }
+  //The function below fetches time from google
+  async function fetchTime() {
+    var URL_REGISTER = 'https://www.google.com';
+    try {
+      const response = await axios.get(`${URL_REGISTER}`);
+      setTimee(response.headers.get('Date'));
+      if (response.status !== 200) {
+        console.log('Status Code: ' + response.status);
+        return;
       }
-      catch (error) {
-        console.log(error.message);
-      }
-  
+    } catch (error) {
+      console.log(error.message);
     }
+  }
 
-
-    useEffect(()=>{
-      Checksudo();
-      fetchTime();
-    
-      if (sudo) {
-        GetUserRecievedUpdates();
-        GetUserSentUpdates();
-      }
-      else {
-        GetUserRecievedUpdates();
-      }
-    },[]);
-
-  useEffect(()=>{  
-    if (sudo) {
-      GetUserRecievedUpdates();
-      GetUserSentUpdates();
-    }
-    else {
-      GetUserRecievedUpdates();
-    }
-  },[timee]);
-
-  useEffect(()=>{
+  useEffect(() => {
+    Checksudo();
+    fetchTime();
 
     if (sudo) {
       GetUserRecievedUpdates();
       GetUserSentUpdates();
-    }
-    else {
+    } else {
       GetUserRecievedUpdates();
     }
-    setTimeout(()=>{
+  }, []);
+
+  useEffect(() => {
+    if (sudo) {
+      GetUserRecievedUpdates();
+      GetUserSentUpdates();
+    } else {
+      GetUserRecievedUpdates();
+    }
+  }, [timee]);
+
+  useEffect(() => {
+    if (sudo) {
+      GetUserRecievedUpdates();
+      GetUserSentUpdates();
+    } else {
+      GetUserRecievedUpdates();
+    }
+    setTimeout(() => {
       setLddd(false);
-    },6000);
-  },[isSudo]);
- 
-
-
-
-
-
-
+    }, 6000);
+  }, [isSudo]);
 
   //The function below is used to send updates
   //One copy of the update is stored in the sender's database whiles all recipients recieve the update in their database
@@ -250,47 +242,49 @@ export default function Updates({ route, navigation }) {
     GetUserRecievedUpdates();
     console.log(data.length);
     for (var v = 0; v < data.length; v++) {
-      iddd = data[v]["_id"];
+      iddd = data[v]['_id'];
       fetchTime();
-      console.log(data[v]["_id"]);
-      parr = data[v]["Update"];
+      console.log(data[v]['_id']);
+      parr = data[v]['Update'];
       parr.push(postt.current + `   ${timee}`);
-      axios.put(`https://buddy-backend-ti17.onrender.com/update/updateR/${iddd}`, {
-          Update: parr
+      axios
+        .put(`https://buddy-backend-ti17.onrender.com/update/updateR/${iddd}`, {
+          Update: parr,
         })
-        .then(res => { console.log(res.status); })
-        .then(
-          (error) => {
-            console.log(error);
-          }
-        )
+        .then((res) => {
+          console.log(res.status);
+        })
+        .then((error) => {
+          console.log(error);
+        });
     }
     senderDbUpdate();
   }
-
 
   async function senderDbUpdate() {
     senderIDD = sarr['_id'];
     console.log(sarr);
     fetchTime();
-    parr1 = sarr["Update"];
+    parr1 = sarr['Update'];
     console.log(senderIDD);
     parr1.push(postt.current + `   ${timee}`);
-    axios.put(`https://buddy-backend-ti17.onrender.com/update/updateS/${senderIDD}`, {
-        Update: parr1
-      })
-      .then(res => { console.log(res.status); })
-      .then(
-        (error) => {
-          console.log(error);
+    axios
+      .put(
+        `https://buddy-backend-ti17.onrender.com/update/updateS/${senderIDD}`,
+        {
+          Update: parr1,
         }
-      );
+      )
+      .then((res) => {
+        console.log(res.status);
+      })
+      .then((error) => {
+        console.log(error);
+      });
   }
 
   const [selected, setSelected] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(null); // Store the array index in a variable
-
-  
 
   const handleLongPress = (selectedIndex) => {
     setSelected(!selected);
@@ -299,159 +293,193 @@ export default function Updates({ route, navigation }) {
 
   const handlePress = (selectedIndex) => {
     setSelected(!selected);
-   // Update the selectedIndex variable
-   setSelectedIndex(null);
-  }
-
-
-
+    // Update the selectedIndex variable
+    setSelectedIndex(null);
+  };
 
   return (
     <Provider store={store}>
       <SafeAreaView>
-
-        <View>{(isSudo == false) ? (
-          <View style={{
-            justifyContent: 'center',
-            alignItems: 'center'
-          }}>
-
-            {ld ? (<>
-              <Text>Loading updates</Text>
-              <ActivityIndicator size='large' color='blue' />
-            </>) : (
-              <>
-                <Text> New(99+)           Read(5)</Text>
-                <SafeAreaView style={style.flat}>
-
-                  {(lddd) ? (<View style={{
-                    flex: 1,
-                    justifyContent: 'center',
-
-                  }}><ActivityIndicator color='blue' size='large' /></View>) : (
-                    <View style={{
-                      flex: 1,
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                      borderWidth: 0.7,
-                      width: 350
-                    }}>
-                      <Text style={{
-                        marginRight: 260
-                      }}>Latest</Text>
-
-                      <FlatList
-                        data={rarr[0]["Update"].reverse()}
-                        renderItem={({ item, index }) => {
-                         
-                          return (
-                            <TouchableOpacity
-                              onPress={()=>{}} // Pass the index to handlePress function
-                              onLongPress={() => handleLongPress(index)} // Pass the index to handleLongPress function
-                              style={{
-                                backgroundColor: selected ? '#9999FF' : '#9999',
-                                margin: 10,
-                                padding: 20,
-                                borderRadius: 10
-                              }}
-                            >
-                              <Text>{item}</Text>
-                            </TouchableOpacity>
-                          );
+        <View>
+          {isSudo == false ? (
+            <View
+              style={{
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+            >
+              {ld ? (
+                <>
+                  <Text>Loading updates</Text>
+                  <ActivityIndicator size="large" color="blue" />
+                </>
+              ) : (
+                <>
+                  <Text> New(99+) Read(5)</Text>
+                  <SafeAreaView style={style.flat}>
+                    {lddd ? (
+                      <View
+                        style={{
+                          flex: 1,
+                          justifyContent: 'center',
                         }}
-                      />
-                    </View>)}
-
-                </SafeAreaView>
-
-
-              </>
-
-            )}
-          </View>
-        ) : (
-          <View style={{
-            justifyContent: 'center',
-            alignItems: 'center'
-          }}>
-
-            {ld ? (<>
-              <Text>Loading updates</Text>
-              <ActivityIndicator size='large' color='blue' />
-            </>) : (
-              <>
-              
-                <Text></Text>
-
-
-                <SafeAreaView style={style.flat}>
-
-                  {(lddd) ? (<View style={{
-                    flex: 1,
-                    justifyContent: 'center',
-
-                  }}><ActivityIndicator color='blue' size='large' /></View>) : (
-                    <View style={{
-                      flex: 1,
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                      borderWidth: 0.7,
-                      width: 350
-                    }}>
-                      <Text style={{
-                        marginRight: 260
-                      }}>Latest</Text>
-
-                 <Flat items = {rarr[0]["Update"]} />
-                      
-                    </View>)}
-
-                </SafeAreaView>
-
-                {(nava) ? (
-                  <View style={{
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    gap: 10,
-                    height: 110,
-                    width: 350,
-                    flexDirection: 'row'
-                  }}>
-
-                    <>
-                      <TextInput placeholder="                    Enter Update" style={{
-                        borderWidth: 1,
-                        width: 220,
-                        height: 90,
-                  
-                        borderWidth: 1,
-                        borderTopWidth:0,
-                        borderLeftWidth:0,
-                        borderRightWidth:0,
-                      }} multiline={true}
-                        onChangeText={(text) => postt.current=text}
                       >
+                        <ActivityIndicator color="blue" size="large" />
+                      </View>
+                    ) : (
+                      <View
+                        style={{
+                          flex: 1,
+                          justifyContent: 'center',
+                          alignItems: 'center',
+                          borderWidth: 0.7,
+                          width: 350,
+                        }}
+                      >
+                        <Text
+                          style={{
+                            marginRight: 260,
+                          }}
+                        >
+                          Latest
+                        </Text>
 
-                      </TextInput>
-                      <View style={{
-                        flexDirection: 'column',
-                        gap: 2
-                      }}>
-                        <TouchableOpacity title="Post" onPress={() => { sendUpdate(); senderDbUpdate(); }}>
-                          <Image source={require('../assets/paperairplane.png')} style={{height:80,width:80}} />
-                        </TouchableOpacity>
+                        <FlatList
+                          data={rarr[0]['Update'].reverse()}
+                          renderItem={({item, index}) => {
+                            return (
+                              <TouchableOpacity
+                                onPress={() => {}} // Pass the index to handlePress function
+                                onLongPress={() => handleLongPress(index)} // Pass the index to handleLongPress function
+                                style={{
+                                  backgroundColor: selected
+                                    ? '#9999FF'
+                                    : '#9999',
+                                  margin: 10,
+                                  padding: 20,
+                                  borderRadius: 10,
+                                }}
+                              >
+                                <Text>{item}</Text>
+                              </TouchableOpacity>
+                            );
+                          }}
+                        />
+                      </View>
+                    )}
+                  </SafeAreaView>
+                </>
+              )}
+            </View>
+          ) : (
+            <View
+              style={{
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+            >
+              {ld ? (
+                <>
+                  <Text>Loading updates</Text>
+                  <ActivityIndicator size="large" color="blue" />
+                </>
+              ) : (
+                <>
+                  <Text></Text>
 
-                      </View></>
-                  </View>) : (<></>)}
-              </>
+                  <SafeAreaView style={style.flat}>
+                    {lddd ? (
+                      <View
+                        style={{
+                          flex: 1,
+                          justifyContent: 'center',
+                        }}
+                      >
+                        <ActivityIndicator color="blue" size="large" />
+                      </View>
+                    ) : (
+                      <View
+                        style={{
+                          flex: 1,
+                          justifyContent: 'center',
+                          alignItems: 'center',
+                          borderWidth: 0.7,
+                          width: 350,
+                        }}
+                      >
+                        <Text
+                          style={{
+                            marginRight: 260,
+                          }}
+                        >
+                          Latest
+                        </Text>
 
-            )}
-          </View>
-        )}
+                        <Flat items={rarr[0]['Update']} />
+                      </View>
+                    )}
+                  </SafeAreaView>
+
+                  {nava ? (
+                    <View
+                      style={{
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        gap: 10,
+                        height: 110,
+                        width: 350,
+                        flexDirection: 'row',
+                      }}
+                    >
+                      <>
+                        <TextInput
+                          placeholder="                    Enter Update"
+                          style={{
+                            borderWidth: 1,
+                            width: 220,
+                            height: 90,
+
+                            borderWidth: 1,
+                            borderTopWidth: 0,
+                            borderLeftWidth: 0,
+                            borderRightWidth: 0,
+                          }}
+                          multiline={true}
+                          onChangeText={(text) => (postt.current = text)}
+                        ></TextInput>
+                        <View
+                          style={{
+                            flexDirection: 'column',
+                            gap: 2,
+                          }}
+                        >
+                          <TouchableOpacity
+                            title="Post"
+                            onPress={() => {
+                              sendUpdate();
+                              senderDbUpdate();
+                            }}
+                          >
+                            <Image
+                              source={require('../assets/paperairplane.png')}
+                              style={{height: 80, width: 80}}
+                            />
+                          </TouchableOpacity>
+                        </View>
+                      </>
+                    </View>
+                  ) : (
+                    <></>
+                  )}
+                </>
+              )}
+            </View>
+          )}
         </View>
       </SafeAreaView>
-    </Provider>)
-};
+    </Provider>
+  );
+}
 
 const style = StyleSheet.create({
   container: {
@@ -462,12 +490,12 @@ const style = StyleSheet.create({
     height: 450,
     width: 300,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   scrollView: {
     height: 400,
     width: 400,
-    marginBottom: 50
+    marginBottom: 50,
   },
   text: {
     fontSize: 42,
@@ -481,7 +509,6 @@ const style = StyleSheet.create({
     fontSize: 32,
   },
 });
-
 
 /*
 Users should be able to
