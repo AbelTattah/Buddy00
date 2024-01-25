@@ -4,11 +4,11 @@ import {
   SafeAreaView,
   ScrollView,
   StatusBar,
-  View,
-} from 'react-native';
-import styles from '../Styling/styles';
+  View
+} from 'react-native'
+import styles from '../Styling/styles'
 
-function Nxtclass({navigation}) {
+function Nxtclass ({ navigation }) {
   return (
     <View style={styles.meContentContainer}>
       <ScrollView contentContainerStyle={style.scrollView}>
@@ -41,23 +41,23 @@ function Nxtclass({navigation}) {
         </Text>
       </ScrollView>
     </View>
-  );
+  )
 }
 
 const style = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: StatusBar.currentHeight,
+    paddingTop: StatusBar.currentHeight
   },
   scrollView: {
     backgroundColor: 'pink',
     marginHorizontal: 20,
     height: 300,
-    flex: 2,
+    flex: 2
   },
   text: {
-    fontSize: 42,
-  },
-});
+    fontSize: 42
+  }
+})
 
-export default Nxtclass;
+export default Nxtclass

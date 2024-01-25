@@ -1,12 +1,12 @@
-import {View, Text, TouchableOpacity} from 'react-native';
-import styles from '../Styling/styles';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {NavigationContainer} from '@react-navigation/native';
-import PersonalTimetable from '../Timetables/personalTimetable';
+import { View, Text, TouchableOpacity } from 'react-native'
+import styles from '../Styling/styles'
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import { NavigationContainer } from '@react-navigation/native'
+import PersonalTimetable from '../Timetables/personalTimetable'
 
-const stack = createNativeStackNavigator();
+const stack = createNativeStackNavigator()
 
-export default function Reminder({navigation}) {
+export default function Reminder ({ navigation }) {
   return (
     <View style={styles.me}>
       <View style={styles.meTopSection}>
@@ -47,5 +47,5 @@ export default function Reminder({navigation}) {
         <Text style={styles.meTopButtonText}>Next Class in 30mins</Text>
       </View>
     </View>
-  );
+  )
 }
