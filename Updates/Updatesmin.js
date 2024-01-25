@@ -163,18 +163,18 @@ export default function Updatesmin ({ route, navigation }) {
                           data={rarr[0].Update.reverse()}
                           renderItem={({ item, index }) => {
                             return (
-                  <TouchableOpacity
-                              style={{
-                                backgroundColor: selected ? '#9999FF' : '#9999',
-                                margin: 10,
-                                width: 270,
+                              <TouchableOpacity
+                                style={{
+                                  backgroundColor: selected ? '#9999FF' : '#9999',
+                                  margin: 10,
+                                  width: 270,
 
-                                padding: 14,
-                                borderRadius: 10
-                              }}
-                            >
-                              <Text>{item}</Text>
-                            </TouchableOpacity>
+                                  padding: 14,
+                                  borderRadius: 10
+                                }}
+                              >
+                                <Text>{item}</Text>
+                              </TouchableOpacity>
                             )
                           }}
                         />

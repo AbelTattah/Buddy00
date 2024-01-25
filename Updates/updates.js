@@ -455,14 +455,14 @@ export default function Updates ({ route, navigation }) {
                               <TouchableOpacity
                                 title='Post'
                                 onPress={() => {
-                  sendUpdate()
-                  senderDbUpdate()
-                }}
+                                  sendUpdate()
+                                  senderDbUpdate()
+                                }}
                               >
                                 <Image
-                  source={require('../assets/paperairplane.png')}
-                  style={{ height: 80, width: 80 }}
-                />
+                                  source={require('../assets/paperairplane.png')}
+                                  style={{ height: 80, width: 80 }}
+                                />
                               </TouchableOpacity>
                             </View>
                           </>
