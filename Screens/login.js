@@ -3,84 +3,83 @@ import {
   Text,
   Button,
   KeyboardAvoidingView,
-  TextInput
-  , ActivityIndicator, TouchableOpacity
-} from 'react-native'
-import styles from '../Styling/styles'
-import { useEffect, useState } from 'react'
-import { Provider, useDispatch } from 'react-redux'
-import { store } from '../redux/store'
+  TextInput,
+  ActivityIndicator,
+  TouchableOpacity,
+} from "react-native";
+import styles from "../Styling/styles";
+import { useEffect, useState } from "react";
+import { Provider, useDispatch } from "react-redux";
+import { store } from "../redux/store";
+import { setName, setSin, setSid, setCourse, setEmail } from "../redux/actions";
+import { useFonts } from "expo-font";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { db } from "../firebase";
+import { doc, getDoc } from "firebase/firestore";
 
-import { setName, setSin, setSid, setCourse, setEmail } from '../redux/actions'
-import { useFonts } from 'expo-font'
-
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
-import { db } from '../firebase'
-import { doc, getDoc } from 'firebase/firestore'
-
-export default function Login ({ navigation }) {
-  const [emaill, setEmaill] = useState('')
-  const [pass, setPass] = useState('')
-  const [suds, setSuds] = useState({})
-  const [regg, setRegg] = useState('Hm')
-  const [acc, setAcc] = useState('')
-  const auth = getAuth()
-  const dispatch = useDispatch()
+export default function Login({ navigation }) {
+  const [emaill, setEmaill] = useState("");
+  const [pass, setPass] = useState("");
+  const [suds, setSuds] = useState({});
+  const [regg, setRegg] = useState("Hm");
+  const [acc, setAcc] = useState("");
+  const auth = getAuth();
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    DataRead()
-  }, [emaill])
+    DataRead();
+  }, [emaill]);
 
   useEffect(() => {
     setTimeout(() => {
-      DataRead()
-    }, 500)
-  }, [acc])
+      DataRead();
+    }, 500);
+  }, [acc]);
 
-  async function signIn () {
+  async function signIn() {
     signInWithEmailAndPassword(auth, emaill, pass)
       .then(() => {
-        DataRead()
-        setRegg('inp')
-        setTimeout(() => setRegg('succ'), 2000)
-        dispatch(setSin(true))
+        DataRead();
+        setRegg("inp");
+        setTimeout(() => setRegg("succ"), 2000);
+        dispatch(setSin(true));
       })
       .then(() => {
         setTimeout(() => {
-          setPass('')
-          navigation.navigate('App1')
-        }, 3000)
-        setTimeout(() => this.textInput.clear(), 4000)
-        dispatch(setCourse(suds.COR))
-        dispatch(setName(suds.SNAME))
-        dispatch(setSid(suds.STUID))
-        setTimeout(() => setRegg('hehe'), 4000)
+          setPass("");
+          navigation.navigate("App1");
+        }, 3000);
+        setTimeout(() => this.textInput.clear(), 4000);
+        dispatch(setCourse(suds.COR));
+        dispatch(setName(suds.SNAME));
+        dispatch(setSid(suds.STUID));
+        setTimeout(() => setRegg("hehe"), 4000);
       })
       .catch((error) => {
-        const errorCode = error.code
-        const errorMessage = error.message
-        setRegg('prob')
-      })
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        setRegg("prob");
+      });
   }
 
-  async function DataRead () {
-    const docRef = doc(db, `users/user/buddy/${emaill}`)
-    const docSnap = await getDoc(docRef)
+  async function DataRead() {
+    const docRef = doc(db, `users/user/buddy/${emaill}`);
+    const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
-      setSuds(docSnap.data())
-      console.log(suds)
-      setAcc('loop')
+      setSuds(docSnap.data());
+      console.log(suds);
+      setAcc("loop");
     } else {
       // docSnap.data() will be undefined in this case
-      console.log('No such document!')
+      console.log("No such document!");
     }
   }
 
   const [fontsLoaded] = useFonts({
-    FredokaBold: require('../fonts/FredokaBold.ttf')
-  })
+    FredokaBold: require("../fonts/FredokaBold.ttf"),
+  });
   if (!fontsLoaded) {
-    return <ActivityIndicator />
+    return <ActivityIndicator />;
   }
 
   return (
@@ -89,22 +88,22 @@ export default function Login ({ navigation }) {
         <View style={styles.loginLogo}>
           <Text style={styles.loginLogoText}>Buddy</Text>
         </View>
-        <KeyboardAvoidingView style={styles.loginIn} behavior='padding'>
+        <KeyboardAvoidingView style={styles.loginIn} behavior="padding">
           <TextInput
             style={styles.loginTextIn}
-            inputMode='email'
-            placeholder='   email'
-            autoCapitalize='none'
+            inputMode="email"
+            placeholder="   email"
+            autoCapitalize="none"
             onChangeText={(text) => setEmaill(text)}
           />
           <TextInput
             secureTextEntry
             ref={(input) => {
-              this.textInput = input
+              this.textInput = input;
             }}
             style={styles.loginTextIn}
-            placeholder='   password'
-            autoCapitalize='none'
+            placeholder="   password"
+            autoCapitalize="none"
             onChangeText={(text) => setPass(text)}
           />
         </KeyboardAvoidingView>
@@ -117,49 +116,41 @@ export default function Login ({ navigation }) {
           <Text>New to Buddy?</Text>
           <TouchableOpacity
             style={styles.loginReg}
-            onPress={() => navigation.navigate('Register')}
+            onPress={() => navigation.navigate("Register")}
           >
             <Text style={styles.loginRegText}> Sign Up</Text>
           </TouchableOpacity>
         </View>
         <>
-          {regg == 'inp'
-            ? (
-              <>
-                <Text>
-                  Logging in ... <ActivityIndicator color='#2407f2' />
-                </Text>
-              </>
-              )
-            : regg == 'prob'
-              ? (
-                <>
-                  <Text>Wrong email or password!</Text>
-                </>
-                )
-              : regg == 'succ'
-                ? (
-                  <>
-                    <Text>Log In Succesful</Text>
-                  </>
-                  )
-                : regg == 'no'
-                  ? (
-                    <>
-                      <Text>
-                        You do not have an accout. Go to the registration page
-                      </Text>
-                    </>
-                    )
-                  : (
-                    <>
-                      <Text>Buddy v.1.0</Text>
-                    </>
-                    )}
+          {regg == "inp" ? (
+            <>
+              <Text>
+                Logging in ... <ActivityIndicator color="#2407f2" />
+              </Text>
+            </>
+          ) : regg == "prob" ? (
+            <>
+              <Text>Wrong email or password!</Text>
+            </>
+          ) : regg == "succ" ? (
+            <>
+              <Text>Log In Succesful</Text>
+            </>
+          ) : regg == "no" ? (
+            <>
+              <Text>
+                You do not have an accout. Go to the registration page
+              </Text>
+            </>
+          ) : (
+            <>
+              <Text>Buddy v.1.0</Text>
+            </>
+          )}
         </>
       </View>
     </Provider>
-  )
+  );
 }
 
 // Test
