@@ -54,7 +54,7 @@ Retrieve essential documents such as timetables, handbooks, and other important 
 
 If you'd like to contribute to Buddy, please follow these guidelines:
 
-1. Fork the repository and create a new branch for your feature or bug fix.
+1. Fork the repository and create a new branch for your feature or bugfix.
 2. Make your changes and ensure that the code is well-documented.
 3. Test your changes thoroughly.
 4. Submit a pull request, explaining the purpose and changes made.

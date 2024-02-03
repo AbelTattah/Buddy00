@@ -1,7 +1,6 @@
 import {
   View,
   Text,
-  Button,
   KeyboardAvoidingView,
   TextInput,
   ActivityIndicator,
@@ -11,7 +10,7 @@ import styles from '../Styling/styles'
 import { useEffect, useState } from 'react'
 import { Provider, useDispatch } from 'react-redux'
 import { store } from '../redux/store'
-import { setName, setSin, setSid, setCourse, setEmail } from '../redux/actions'
+import { setName, setSin, setSid, setCourse} from '../redux/actions'
 import { useFonts } from 'expo-font'
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
 import { db } from '../firebase'
@@ -50,14 +49,12 @@ export default function Login ({ navigation }) {
           navigation.navigate('App1')
         }, 3000)
         setTimeout(() => this.textInput.clear(), 4000)
-        dispatch(setCourse(suds.COR))
         dispatch(setName(suds.SNAME))
         dispatch(setSid(suds.STUID))
         setTimeout(() => setRegg('hehe'), 4000)
       })
       .catch((error) => {
-        const errorCode = error.code
-        const errorMessage = error.message
+        console.log(error.message)
         setRegg('prob')
       })
   }
@@ -122,7 +119,7 @@ export default function Login ({ navigation }) {
           </TouchableOpacity>
         </View>
         <>
-          {regg == 'inp'
+          {regg === 'inp'
             ? (
               <>
                 <Text>
@@ -130,19 +127,19 @@ export default function Login ({ navigation }) {
                 </Text>
               </>
               )
-            : regg == 'prob'
+            : regg === 'prob'
               ? (
                 <>
                   <Text>Wrong email or password!</Text>
                 </>
                 )
-              : regg == 'succ'
+              : regg === 'succ'
                 ? (
                   <>
                     <Text>Log In Succesful</Text>
                   </>
                   )
-                : regg == 'no'
+                : regg === 'no'
                   ? (
                     <>
                       <Text>
@@ -161,4 +158,3 @@ export default function Login ({ navigation }) {
   )
 }
 
-// Test

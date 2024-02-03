@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, Button, TouchableOpacity } from 'react-native'
+import { View, Text, TouchableOpacity } from 'react-native'
 import { setSin } from '../redux/actions'
 import { useDispatch } from 'react-redux'
 import styles from '../Styling/styles'

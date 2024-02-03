@@ -8,7 +8,6 @@ import {
 } from 'react-native'
 import React, { useState } from 'react'
 import axios from 'axios'
-import TimetableComp from '../Components/timetable'
 
 import styles from '../Styling/styles'
 import { Provider, useDispatch } from 'react-redux'
@@ -18,7 +17,6 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { NavigationContainer } from '@react-navigation/native'
 import PqRender from './pqRender'
 import { useFonts } from 'expo-font'
-import { style } from 'deprecated-react-native-prop-types/DeprecatedViewPropTypes'
 /*
 
 This is the page that displays the past questions for the user to select from
@@ -27,7 +25,7 @@ This is the page that displays the past questions for the user to select from
 2. The input of the user is matched to particular array containing the api enpoints
 of the course code he or she entered.
 3. This array containing the endpoints is obtained from the api when the past question is searched for
-4. The each endpioint is matched to a state which is used to render the pdf
+4. The each endpoint is matched to a state which is used to render the pdf
 
 The list of past questions relating to that particular course will be displayed in a list when the
 steps above are completed.
@@ -38,9 +36,6 @@ const Stack = createNativeStackNavigator()
 
 // Load fonts
 const PastQuestions = ({ navigation }) => {
-  const [fontsLoaded] = useFonts({
-    FredokaBold: require('../fonts/FredokaBold.ttf')
-  })
 
   const [code, setCode] = useState('')
   const [loading, setLoading] = useState(false)
@@ -157,8 +152,9 @@ const PastQuestions = ({ navigation }) => {
                       padding: 10
                     }}
                   >
-                    {endpoints.map((endpoint) => (
+                    {endpoints.map((endpoint,i) => (
                       <TouchableOpacity
+                        key={i}
                         style={styles.meTopButtons}
                         onPress={() => {
                           Dispatch(setCurrentCourse(endpoint))

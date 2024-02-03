@@ -1,4 +1,3 @@
-import { View, Text } from 'react-native'
 import React from 'react'
 import PdfComp from '../Components/timetable'
 import { Provider, useSelector } from 'react-redux'

@@ -1,8 +1,6 @@
 // import { height } from "@fortawesome/free-solid-svg-icons/faRepeat";
 import { StyleSheet, StatusBar } from 'react-native'
-import { Dimensions } from 'react-native'
 
-const { height } = Dimensions.get('window')
 const styles = StyleSheet.create({
   Homepage: {
     backgroundColor: 'white',
@@ -18,7 +16,6 @@ const styles = StyleSheet.create({
     fontSize: 24,
     marginLeft: 46
   },
-
   LobbyUpdates: {
     height: 250,
     marginTop: 10,
@@ -492,28 +489,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     color: 'blackf'
   },
-  loginButtonText: {
-    textAlign: 'center',
-    marginTop: 8,
-    color: 'black'
-  },
   regButtonView: {
     flexDirection: 'row',
     marginTop: 20
   },
-  loginTextt1: {
-    marginTop: 30,
-    color: '#2407f2',
-    marginBottom: 20
-  },
-  loginTextt2: {
-    color: '#2407f2'
-  },
   loginReg: {
     backgroundColor: 'white'
-  },
-  loginRegText: {
-    color: '#2407f2'
   },
 
   // Register
