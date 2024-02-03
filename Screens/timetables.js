@@ -2,7 +2,6 @@ import { View, Text, TouchableOpacity } from "react-native";
 import styles from "../Styling/styles";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
-import PersonalTimetable from "../Timetables/personalTimetable";
 import Examt from "../Timetables/examtimetable";
 import CourseTimetables from "../Timetables/coursetimetables";
 import Publications from "../Publications/publications";
@@ -32,12 +31,6 @@ function MePage({ navigation }) {
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.meTopButtons}
-            onPress={() => navigation.navigate("PerT")}
-          >
-            <Text style={styles.meTopButtonText}>Personalized Timetable</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.meTopButtons}
             onPress={() => navigation.navigate("Publications")}
           >
             <Text style={styles.meTopButtonText}>Other Publications</Text>
@@ -64,21 +57,6 @@ export default function Timetables({ navigation }) {
               elevation: 0,
               shadowOpacity: 0,
               borderBottomWidth: 0,
-            },
-          }}
-        />
-        <stack.Screen
-          name="PerT"
-          component={PersonalTimetable}
-          options={{
-            title: "Personal Timetable",
-            headerTintColor: "blue",
-            headerShadowVisible: false,
-            headerStyle: {
-              elevation: 0,
-              shadowOpacity: 0,
-              borderBottomWidth: 0,
-              backgroundColor: "#eee",
             },
           }}
         />

@@ -6,12 +6,10 @@ import {
 } from 'react-native'
 import * as React from 'react'
 import styles from '../Styling/styles'
-import { useState, useEffect } from 'react'
 import Updates from '../Updates/updates'
 import { NavigationContainer, useNavigation } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
-import Updatesmin from '../Updates/Updatesmin'
 import { Provider, useSelector, useDispatch } from 'react-redux'
 import { store } from '../redux/store'
 
@@ -19,7 +17,7 @@ import CourseTimetables from '../Timetables/coursetimetables'
 import PQNav from '../PastQuestions/pastQuestions'
 
 function Lobby1 ({ navigation }) {
-
+const namee = useSelector(state => state.userReducer.namee)
   return (
     <Provider store={store}>
       <View style={styles.Homepage}>
@@ -45,7 +43,6 @@ function Lobby1 ({ navigation }) {
             >
               <Text>Updates</Text>
             </TouchableOpacity>
-            <Updatesmin />
           </View>
         </Pressable>
         <View style={styles.lobbyQuick}>
