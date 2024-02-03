@@ -7,14 +7,14 @@ Steps for displaying timetables for a specific student
 
 */
 
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity } from 'react-native'
 
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import styles from "../Styling/styles";
-import { NavigationContainer } from "@react-navigation/native";
-import TimetableComp from "../Components/timetable";
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import styles from '../Styling/styles'
+import { NavigationContainer } from '@react-navigation/native'
+import TimetableComp from '../Components/timetable'
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator()
 
 const Main = ({ navigation }) => {
   return (
@@ -23,73 +23,73 @@ const Main = ({ navigation }) => {
         <View style={styles.meTopButtonView}>
           <TouchableOpacity
             style={styles.meTopButtons}
-            onPress={() => navigation.navigate("Aca")}
+            onPress={() => navigation.navigate('Aca')}
           >
             <Text style={styles.meTopButtonText}>AcademicCalendar</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.meTopButtons}>
             <Text
               style={styles.meTopButtonText}
-              onPress={() => navigation.navigate("Schfees")}
+              onPress={() => navigation.navigate('Schfees')}
             >
               Schedule of fees
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.meTopButtons}
-            onPress={() => navigation.navigate("Handbook")}
+            onPress={() => navigation.navigate('Handbook')}
           >
             <Text style={styles.meTopButtonText}>Student Handbook</Text>
           </TouchableOpacity>
         </View>
       </View>
     </View>
-  );
-};
+  )
+}
 
 const StudentHandbook = ({ navigation }) => {
-  return <TimetableComp url="https://buddybackend-0i8h.onrender.com/pdf/" />;
-};
+  return <TimetableComp url='https://buddybackend-0i8h.onrender.com/pdf/' />
+}
 
 const AcademicCalendar = ({ navigation }) => {
   return (
-    <TimetableComp url="https://buddybackend-0i8h.onrender.com/pdf/academiccalendar" />
-  );
-};
+    <TimetableComp url='https://buddybackend-0i8h.onrender.com/pdf/academiccalendar' />
+  )
+}
 
 const ScheduleofFees = ({ navigation }) => {
   return (
-    <TimetableComp url="https://buddybackend-0i8h.onrender.com/pdf/fees" />
-  );
-};
+    <TimetableComp url='https://buddybackend-0i8h.onrender.com/pdf/fees' />
+  )
+}
 
-export default function Publications() {
+export default function Publications () {
   return (
     <NavigationContainer independent>
       <Stack.Navigator>
-        <Stack.Screen name="Main" component={Main} />
+        <Stack.Screen name='Main' component={Main} />
         <Stack.Screen
-          name="Aca"
+          name='Aca'
           options={{
-            title: "Academic Calendar",
+            title: 'Academic Calendar'
           }}
           component={AcademicCalendar}
         />
         <Stack.Screen
-          name="Schfees"
+          name='Schfees'
           options={{
-            title: "Schedule of Fees",
+            title: 'Schedule of Fees'
           }}
           component={ScheduleofFees}
         />
         <Stack.Screen
-          name="Handbook"
+          name='Handbook'
           options={{
-            title: "Student Handbook",
+            title: 'Student Handbook'
           }}
           component={StudentHandbook}
         />
       </Stack.Navigator>
     </NavigationContainer>
-  );
+  )
 }

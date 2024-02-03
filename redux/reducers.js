@@ -1,31 +1,31 @@
-import { SID, SNAME, SIN, COURSE, EMAIL, CURRENT_COURSE } from "./actions";
+import { SID, SNAME, SIN, COURSE, EMAIL, CURRENT_COURSE } from './actions'
 
 const initialState = {
-  namee: "",
+  namee: '',
   sidd: 11335775,
   sin: true,
   course: {},
-  email: "",
-  currentc: "",
-};
+  email: '',
+  currentc: ''
+}
 
-function userReducer(state = initialState, action) {
+function userReducer (state = initialState, action) {
   switch (action.type) {
     case SNAME:
-      return { ...state, namee: action.payload };
+      return { ...state, namee: action.payload }
     case SID:
-      return { ...state, sidd: action.payload };
+      return { ...state, sidd: action.payload }
     case SIN:
-      return { ...state, sin: action.payload };
+      return { ...state, sin: action.payload }
     case COURSE:
-      return { ...state, course: action.payload };
+      return { ...state, course: action.payload }
     case EMAIL:
-      return { ...state, email: action.payload };
+      return { ...state, email: action.payload }
     case CURRENT_COURSE:
-      return { ...state, currentc: action.payload };
+      return { ...state, currentc: action.payload }
     default:
-      return state;
+      return state
   }
 }
 
-export default userReducer;
+export default userReducer

@@ -7,14 +7,14 @@ Steps for displaying timetables for a specific student
 
 */
 
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity } from 'react-native'
 
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import styles from "../Styling/styles";
-import { NavigationContainer } from "@react-navigation/native";
-import PdfComp from "../Components/timetable";
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import styles from '../Styling/styles'
+import { NavigationContainer } from '@react-navigation/native'
+import PdfComp from '../Components/timetable'
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator()
 
 const Main = ({ navigation }) => {
   return (
@@ -23,57 +23,57 @@ const Main = ({ navigation }) => {
         <View style={styles.meTopButtonView}>
           <TouchableOpacity
             style={styles.meTopButtons}
-            onPress={() => navigation.navigate("Computer")}
+            onPress={() => navigation.navigate('Computer')}
           >
             <Text style={styles.meTopButtonText}>Computer Science</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.meTopButtons}>
             <Text
               style={styles.meTopButtonText}
-              onPress={() => navigation.navigate("Mathematics")}
+              onPress={() => navigation.navigate('Mathematics')}
             >
               Mathematics
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.meTopButtons}
-            onPress={() => navigation.navigate("Statistics")}
+            onPress={() => navigation.navigate('Statistics')}
           >
             <Text style={styles.meTopButtonText}>Statistics</Text>
           </TouchableOpacity>
         </View>
       </View>
     </View>
-  );
-};
+  )
+}
 
 const ComputerScience = ({ navigation }) => {
   return (
-    <PdfComp url="https://buddy-backend-ti17.onrender.com/pdf/cstimetable" />
-  );
-};
+    <PdfComp url='https://buddy-backend-ti17.onrender.com/pdf/cstimetable' />
+  )
+}
 
 const Mathematics = ({ navigation }) => {
   return (
-    <PdfComp url="https://buddy-backend-ti17.onrender.com/pdf/mathtimetable" />
-  );
-};
+    <PdfComp url='https://buddy-backend-ti17.onrender.com/pdf/mathtimetable' />
+  )
+}
 
 const Statistics = ({ navigation }) => {
   return (
-    <PdfComp url="https://buddy-backend-ti17.onrender.com/pdf/statisticstimetable" />
-  );
-};
+    <PdfComp url='https://buddy-backend-ti17.onrender.com/pdf/statisticstimetable' />
+  )
+}
 
-export default function CourseTimetables() {
+export default function CourseTimetables () {
   return (
     <NavigationContainer independent>
       <Stack.Navigator>
-        <Stack.Screen name="Main" component={Main} />
-        <Stack.Screen name="Computer" component={ComputerScience} />
-        <Stack.Screen name="Statistics" component={Statistics} />
-        <Stack.Screen name="Mathematics" component={Mathematics} />
+        <Stack.Screen name='Main' component={Main} />
+        <Stack.Screen name='Computer' component={ComputerScience} />
+        <Stack.Screen name='Statistics' component={Statistics} />
+        <Stack.Screen name='Mathematics' component={Mathematics} />
       </Stack.Navigator>
     </NavigationContainer>
-  );
+  )
 }
