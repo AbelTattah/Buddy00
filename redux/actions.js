@@ -1,9 +1,11 @@
-export const SNAME = 'SNAME'
+export const SNAME = 'SNAME' 
 export const SID = 'SID'
 export const SIN = 'SIN'
 export const COURSE = 'COURSE'
 export const EMAIL = 'EMAIL'
 export const CURRENT_COURSE = 'CURRENT_COURSE'
+
+// Action creators
 
 export const setName = (namee) => (dispatch) => {
   dispatch({

@@ -6,28 +6,28 @@ import {
   ActivityIndicator,
   TouchableOpacity,
 } from "react-native";
-import styles from "../Styling/styles";
-import { useState, useEffect } from "react";
+import styles from "../Styling/styles"; // Importing the styles from the styles file
+import { useState, useEffect } from "react"; // Importing the useState and useEffect component from react
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth"; // Importing the getAuth and createUserWithEmailAndPassword from firebase/auth
+import { setDoc, doc } from "firebase/firestore"; // Importing the setDoc and doc from firebase/firestore
+import { db } from "../firebase"; // Importing the db from the firebase
+import { useFonts } from "expo-font"; // Importing the useFonts from expo-font
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view"; // Importing the KeyboardAwareScrollView from react-native-keyboard-aware-scroll-view
 
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { setDoc, doc } from "firebase/firestore";
-
-import { db } from "../firebase";
-
-import { useFonts } from "expo-font";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-
+// Register component
 export default function Register({ navigation }) {
-  const [sid, setSid] = useState(0);
-  const [nameid, setNameid] = useState("");
-  const [pass, setPass] = useState("");
-  const [pass1, setPass1] = useState("");
-  const [email, setEmail] = useState("");
-  const [regg, setRegg] = useState("rnd");
-  const [sign, setSign] = useState(false);
-
+  const [sid, setSid] = useState(0); // Student ID state
+  const [nameid, setNameid] = useState(""); // Name state
+  const [pass, setPass] = useState(""); // Password state
+  const [pass1, setPass1] = useState(""); // Confirm password state
+  const [email, setEmail] = useState(""); // Email state
+  const [regg, setRegg] = useState("rnd"); // Registration state
+  const [sign, setSign] = useState(false); // Sign up state
+  
+  // function to create user collection in firestore
   async function createUserCollection() {
     try {
+      // Add a new document in collection "users"
       const docRef = await setDoc(doc(db, "users", `user/buddy/${email}`), {
         SNAME: nameid,
         STUID: sid,
@@ -38,6 +38,8 @@ export default function Register({ navigation }) {
       console.error("Error adding document: ", e);
     }
   }
+  
+  // function to create user document in mongodb
   async function createMongoDBdoc() {
     fetch("https://buddy00.onrender.com/updateR", {
       method: "POST",
@@ -52,24 +54,31 @@ export default function Register({ navigation }) {
       console.log(error);
     });
   }
+
+  // function to sign up user
   async function signUp() {
     const auth = getAuth();
     if (pass1 == pass && email !== "" && nameid != "") {
+      // Sign up user
       createUserWithEmailAndPassword(auth, email, pass)
         .then(() => {
           createUserCollection();
           createMongoDBdoc();
         })
         .then(() => {
+          // Set registration state
           setRegg("inp");
+          // Set registration state
           setTimeout(() => {
             setRegg("succ");
           }, 3000);
+          // Navigate to login page
           setTimeout(() => {
             navigation.navigate("Login");
           }, 4500);
         })
         .catch((error) => {
+          // Handle errors
           const errorMessage = error.message;
           console.log(errorMessage);
           if (
@@ -95,7 +104,8 @@ export default function Register({ navigation }) {
       setRegg("prob2");
     }
   }
-
+  
+  // Load fonts
   const [fontsLoaded] = useFonts({
     FredokaBold: require("../fonts/FredokaBold.ttf"),
   });
@@ -108,6 +118,7 @@ export default function Register({ navigation }) {
     <View style={styles.ReggMain}>
       <Text style={styles.ReggLogoText}>Sign Up for Buddy</Text>
       <KeyboardAvoidingView style={styles.ReggIn} behavior="padding">
+        {/* Sign up inputs */}
         <TextInput
           style={styles.ReggTextIn}
           placeholder="    SID"

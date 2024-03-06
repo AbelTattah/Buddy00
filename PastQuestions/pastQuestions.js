@@ -5,18 +5,17 @@ import {
   ActivityIndicator,
   ScrollView,
   TouchableOpacity
-} from 'react-native'
-import React, { useState } from 'react'
-import axios from 'axios'
+} from 'react-native' // Importing components from react-native
+import React, { useState } from 'react' // Importing the useState hook from react
+import axios from 'axios' // Importing axios
 
-import styles from '../Styling/styles'
-import { Provider, useDispatch } from 'react-redux'
-import { store } from '../redux/store'
-import { setCurrentCourse } from '../redux/actions'
-import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import { NavigationContainer } from '@react-navigation/native'
-import PqRender from './pqRender'
-import { useFonts } from 'expo-font'
+import styles from '../Styling/styles' // Importing the styles from the styles file
+import { Provider, useDispatch } from 'react-redux' // Importing the Provider and useDispatch from react-redux
+import { store } from '../redux/store' // Importing the store from the redux store
+import { setCurrentCourse } from '../redux/actions' // Importing the setCurrentCourse action from the redux actions
+import { createNativeStackNavigator } from '@react-navigation/native-stack' // Importing the createNativeStackNavigator from @react-navigation/native-stack
+import { NavigationContainer } from '@react-navigation/native' // Importing the NavigationContainer from @react-navigation/native
+import PqRender from './pqRender' // Importing the pqRender component
 /*
 
 This is the page that displays the past questions for the user to select from

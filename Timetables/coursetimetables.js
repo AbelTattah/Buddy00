@@ -7,15 +7,16 @@ Steps for displaying timetables for a specific student
 
 */
 
-import { View, Text, TouchableOpacity } from 'react-native'
+import { View, Text, TouchableOpacity } from 'react-native' // Importing components from react-native
+import { createNativeStackNavigator } from '@react-navigation/native-stack' // Importing the createNativeStackNavigator from @react-navigation/native-stack
+import styles from '../Styling/styles' // Importing the styles from the styles file
+import { NavigationContainer } from '@react-navigation/native' // Importing the NavigationContainer from @react-navigation/native
+import PdfComp from '../Components/timetable' // Importing the timetable component
 
-import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import styles from '../Styling/styles'
-import { NavigationContainer } from '@react-navigation/native'
-import PdfComp from '../Components/timetable'
-
+// Create a stack navigator
 const Stack = createNativeStackNavigator()
 
+// Main page for the timetables
 const Main = ({ navigation }) => {
   return (
     <View style={styles.me}>
@@ -69,7 +70,9 @@ export default function CourseTimetables () {
   return (
     <NavigationContainer independent>
       <Stack.Navigator>
-        <Stack.Screen name='Main' component={Main} />
+        <Stack.Screen name='Main'
+        options={{ headerTitle: 'Course Timetables'}}
+         component={Main} />
         <Stack.Screen name='Computer' component={ComputerScience} />
         <Stack.Screen name='Statistics' component={Statistics} />
         <Stack.Screen name='Mathematics' component={Mathematics} />

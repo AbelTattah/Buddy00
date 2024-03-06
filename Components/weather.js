@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from "react";
-
-import { Text, View } from "react-native";
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { faCloudRain, faCloud, faSun } from "@fortawesome/free-solid-svg-icons";
+import React, { useState, useEffect } from "react"; // Importing the useState and useEffect hooks from react
+import { Text, View } from "react-native"; // Importing the Text and View components from react-native
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome"; // Importing the FontAwesomeIcon component from react-native-fontawesome
+import { faCloudRain, faCloud, faSun } from "@fortawesome/free-solid-svg-icons"; // Importing the faCloudRain, faCloud and faSun icons from the free-solid-icons
 
 export default function Weather() {
+  // declare a new state variable for the weather data from the API
   const [data, setData] = useState([]);
+  // declare a new state variable for the loading state
   const [ldd, setLdd] = useState(true);
 
   useEffect(() => {
@@ -15,7 +16,6 @@ export default function Weather() {
       )
         .then((response) => response.json())
         .then((json) => setData(json))
-        .then(() => console.log("Hello world"))
         .catch((error) => console.log(error.message))
         .finally(() => setLdd(false));
     }

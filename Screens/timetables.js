@@ -1,13 +1,15 @@
-import { View, Text, TouchableOpacity } from "react-native";
-import styles from "../Styling/styles";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { NavigationContainer } from "@react-navigation/native";
-import Examt from "../Timetables/examtimetable";
-import CourseTimetables from "../Timetables/coursetimetables";
-import Publications from "../Publications/publications";
+import { View, Text, TouchableOpacity } from "react-native"; // Importing components from react-native
+import styles from "../Styling/styles"; //  Importing the styles from the styles file
+import { createNativeStackNavigator } from "@react-navigation/native-stack"; // Importing the createNativeStackNavigator from @react-navigation/native-stack
+import { NavigationContainer } from "@react-navigation/native"; // Importing the NavigationContainer from @react-navigation/native
+import Examt from "../Timetables/examtimetable"; // Importing the exam timetable component
+import CourseTimetables from "../Timetables/coursetimetables"; // Importing the course timetables component
+import Publications from "../Publications/publications"; // Importing the publications component
 
+// Create a stack navigator
 const stack = createNativeStackNavigator();
 
+// Main page for the timetables
 function MePage({ navigation }) {
   return (
     <View style={styles.me}>
@@ -41,6 +43,7 @@ function MePage({ navigation }) {
   );
 }
 
+// Export the timetables component
 export default function Timetables({ navigation }) {
   return (
     <NavigationContainer independent>
@@ -79,6 +82,7 @@ export default function Timetables({ navigation }) {
           name="Course"
           component={CourseTimetables}
           options={{
+            headerShown: false,
             title: "Course Timetables",
             headerTintColor: "blue",
             headerShadowVisible: false,
@@ -94,6 +98,7 @@ export default function Timetables({ navigation }) {
           name="Publications"
           component={Publications}
           options={{
+            headerShown: false,
             headerTintColor: "blue",
             headerShadowVisible: false,
             headerStyle: {

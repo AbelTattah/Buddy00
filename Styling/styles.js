@@ -1,6 +1,8 @@
-// import { height } from "@fortawesome/free-solid-svg-icons/faRepeat";
+// Purpose: This file contains the styles for the entire application. It is imported into the components that need it.
 import { StyleSheet, StatusBar } from 'react-native'
 
+
+// Styles for the entire application
 const styles = StyleSheet.create({
   Homepage: {
     backgroundColor: 'white',
@@ -13,14 +15,18 @@ const styles = StyleSheet.create({
   dashboardName: {
     color: 'black',
     fontFamily: 'FredokaBold',
-    fontSize: 24,
-    marginLeft: 46
+    fontSize:22,
+    position: 'absolute',
+    top: -0,
+    left: 50,
+    marginTop: 20
   },
   LobbyUpdates: {
-    height: 250,
-    marginTop: 10,
-    borderColor: '#00f8',
-    borderWidth: 1,
+    marginTop: 90,
+    borderRadius: 20,
+  },
+  LobbyUpdateInner: {
+    height: 400,
     width: 320,
     padding: 12,
     alignItems: 'center',
@@ -54,20 +60,21 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 30,
+    elevation: 2,
     display: 'flex',
-    flexDirection: 'row'
+    flexDirection: 'row',
+    gap: 10
   },
   lobbyQuickButton: {
     justifyContent: 'center',
     alignItems: 'center',
     width: 160,
     height: 90,
-    borderWidth: 1,
     borderRadius: 20,
+    backgroundColor: '#7979FF8e',
     marginTop: 10,
     borderBottomRightRadius: 0,
     borderTopEndRadius: 0,
-    borderColor: '#00f8',
     marginBottom: 5
   },
   lobbyQuickButton0: {
@@ -75,13 +82,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: 160,
     height: 90,
-    borderWidth: 1,
+    backgroundColor: '#7979FF8e',
     borderRadius: 20,
     borderBottomLeftRadius: 0,
     borderTopStartRadius: 0,
     borderLeftWidth: 0,
     marginTop: 10,
-    borderColor: '#00f8',
     marginBottom: 5
   },
   LobbyQuickButtonText: {
@@ -144,7 +150,7 @@ const styles = StyleSheet.create({
     width: 600,
     height: 600
   },
-  meTopSection: {
+  uSection: {
     flex: 3,
     height: 100,
     width: 600,
@@ -179,14 +185,11 @@ const styles = StyleSheet.create({
   meTopButtons: {
     width: 300,
     height: 86,
-    borderWidth: 2,
-    borderRightWidth: 0,
-    borderLeftWidth: 0,
-    marginTop: 6,
+    backgroundColor: '#7979FF8e',
     borderColor: 'black',
     borderRadius: 20,
     justifyContent: 'center',
-    backgroundColor: '#fff'
+
   },
   meTopButtonView: {
     marginTop: 10,
@@ -461,7 +464,7 @@ const styles = StyleSheet.create({
     marginBottom: 30
   },
   loginLogoText: {
-    fontSize: 69,
+    fontSize: 99,
     fontFamily: 'FredokaBold',
     color: 'black'
   },
@@ -509,12 +512,15 @@ const styles = StyleSheet.create({
   },
   ReggLogoText: {
     fontSize: 34,
+    elevation: 5,
     fontFamily: 'FredokaBold',
+   color:'black',
     marginRight: 25
   },
   ReggMain: {
     backgroundColor: 'white',
     flex: 1,
+    paddingTop: 40,
     justifyContent: 'center',
     alignItems: 'center'
   },

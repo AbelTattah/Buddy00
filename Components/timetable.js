@@ -1,10 +1,14 @@
-import { View, Text, StyleSheet } from 'react-native'
-import React from 'react'
-import Pdf from 'react-native-pdf'
+import {StyleSheet } from 'react-native' // Importing components from react-native
+import React from 'react' // Importing components from react
+import Pdf from 'react-native-pdf' // Importing the pdf component from react-native-pdf
 
+
+// Component to render pdf
 export default function PdfComp ({ url }) {
+  // Source of the pdf
   const source = { uri: url, cache: true }
-
+  
+  // Render the pdf
   return (
     <Pdf
       trustAllCerts={false}

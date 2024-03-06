@@ -1,25 +1,26 @@
-import * as React from "react";
-import Lobby from "./Screens/lobby";
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { Button, View, Text, Image } from "react-native";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import * as React from "react"; // Importing components from react
+import Lobby from "./Screens/lobby"; // Importing the lobby component
+import { NavigationContainer } from "@react-navigation/native"; // Importing the NavigationContainer from @react-navigation/native
+import { createNativeStackNavigator } from "@react-navigation/native-stack"; // Importing the createNativeStackNavigator from @react-navigation/native-stack
+import { Button, View, Text, Image } from "react-native"; // Importing components from react-native
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"; // Importing the createBottomTabNavigator from @react-navigation/bottom-tabs
 
+// Importing the styles from the styles file
 import Settings from "./Screens/settings";
 import Timetables from "./Screens/timetables";
 // Rest of the import statements
-import { useFonts } from "expo-font";
 import Login from "./Screens/login";
 import { Provider, useSelector } from "react-redux";
+// Importing the store from the redux store
 import { store } from "./redux/store";
 import Register from "./Screens/register";
+import { StatusBar } from "expo-status-bar";
 
+// Create a stack navigator
 const Stack = createNativeStackNavigator();
 
 // The constant below allows the usage of the tab navigator
 const Tab = createBottomTabNavigator();
-
-// I am planning to nest the stack navigation below into the tab navigation in the App() function
 
 function LobbyTitle() {
   return (
@@ -27,11 +28,12 @@ function LobbyTitle() {
       <Text
         style={{
           marginLeft: 30,
-          fontWeight: 700,
-          fontSize: 17,
+          fontWeight: "bold",
+          fontSize: 23,
+          fontFamily: "FredokaBold",
         }}
       >
-        Lobby
+        Buddy
       </Text>
     </View>
   );
@@ -66,7 +68,6 @@ function App1({ navigation }) {
                   paddingBottom: 10,
                   backgroundColor: "white",
                   borderTopWidth: 1,
-                  borderColor: "#00f8",
                 },
                 headerShadowVisible: false,
                 headerTintColor: "#000",
@@ -74,7 +75,6 @@ function App1({ navigation }) {
                   elevation: 0,
                   shadowOpacity: 0,
                   borderBottomWidth: 0,
-                  backgroundColor: "#7979FF8e",
                 },
               }}
             />
@@ -102,8 +102,7 @@ function App1({ navigation }) {
                   height: 80,
                   paddingBottom: 10,
                   backgroundColor: "white",
-                  borderTopWidth: 1,
-                  borderColor: "#00f8",
+                  borderTopWidth: 2,
                 },
                 headerShadowVisible: false,
                 headerTintColor: "#000",
@@ -111,7 +110,6 @@ function App1({ navigation }) {
                   elevation: 0,
                   shadowOpacity: 0,
                   borderBottomWidth: 0,
-                  backgroundColor: "#7979FF8e",
                 },
               }}
             />
@@ -139,8 +137,7 @@ function App1({ navigation }) {
                   height: 80,
                   paddingBottom: 10,
                   backgroundColor: "white",
-                  borderTopWidth: 1,
-                  borderColor: "#00f8",
+                  borderTopWidth: 2,
                 },
                 headerShadowVisible: false,
                 headerTintColor: "#000",
@@ -148,7 +145,6 @@ function App1({ navigation }) {
                   elevation: 0,
                   shadowOpacity: 0,
                   borderBottomWidth: 0,
-                  backgroundColor: "#7979FF8e",
                 },
               }}
             />
@@ -174,7 +170,8 @@ function App1({ navigation }) {
 }
 
 export default function App() {
-  return (
+  return (<>
+    <StatusBar style="dark" />
     <Provider store={store}>
       <NavigationContainer>
         <Stack.Navigator>
@@ -196,6 +193,7 @@ export default function App() {
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>
+    </>
   );
 }
 

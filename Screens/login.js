@@ -4,103 +4,148 @@ import {
   KeyboardAvoidingView,
   TextInput,
   ActivityIndicator,
-  TouchableOpacity
-} from 'react-native'
-import styles from '../Styling/styles'
-import { useEffect, useState } from 'react'
-import { Provider, useDispatch } from 'react-redux'
-import { store } from '../redux/store'
-import { setName, setSin, setSid, setCourse} from '../redux/actions'
-import { useFonts } from 'expo-font'
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
-import { db } from '../firebase'
-import { doc, getDoc } from 'firebase/firestore'
+  ImageBackground,
+  TouchableOpacity,
+} from "react-native"; // Importing components from react-native
+import styles from "../Styling/styles"; // Importing the styles from the styles file
+import { useEffect, useState } from "react"; // Importing the useEffect and useState component from react
+import { Provider, useDispatch } from "react-redux"; // Importing the provider and useDispatch component from react-redux
+import { store } from "../redux/store"; // Importing the store from the redux store
+import { setName, setSin, setSid } from "../redux/actions"; // Importing the setName, setSin, and setSid action from the redux actions
+import { useFonts } from "expo-font"; // Importing the useFonts from expo-font
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth"; // Importing the getAuth and signInWithEmailAndPassword from firebase/auth
+import { db } from "../firebase"; // Importing the db from the firebase
+import { doc, getDoc } from "firebase/firestore"; // Importing the doc and getDoc from firebase/firestore
+import Image from "../assets/schoolimagecopy.jpg";
 
-export default function Login ({ navigation }) {
-  const [emaill, setEmaill] = useState('')
-  const [pass, setPass] = useState('')
-  const [suds, setSuds] = useState({})
-  const [regg, setRegg] = useState('Hm')
-  const [acc, setAcc] = useState('')
-  const auth = getAuth()
-  const dispatch = useDispatch()
+// Login component
+export default function Login({ navigation }) {
+  const [emaill, setEmaill] = useState(""); // Email state
+  const [pass, setPass] = useState(""); // Password state
+  const [suds, setSuds] = useState({}); // User data state
+  const [regg, setRegg] = useState("Hm"); // Registration state
+  const [acc, setAcc] = useState(""); // Account state
+  const auth = getAuth(); // Firebase auth
+  const dispatch = useDispatch(); // Redux dispatch
 
   useEffect(() => {
-    DataRead()
-  }, [emaill])
+    // Get user data from firestore
+    DataRead();
+  }, [emaill]);
 
   useEffect(() => {
     setTimeout(() => {
-      DataRead()
-    }, 500)
-  }, [acc])
+      DataRead();
+    }, 500);
+  }, [acc]);
 
-  async function signIn () {
+  // Sign in function
+  async function signIn() {
     signInWithEmailAndPassword(auth, emaill, pass)
       .then(() => {
-        DataRead()
-        setRegg('inp')
-        setTimeout(() => setRegg('succ'), 2000)
-        dispatch(setSin(true))
+        // Read user data from firestore
+        DataRead();
+        // Set registration state
+        setRegg("inp");
+        // Set user data in redux store
+        setTimeout(() => setRegg("succ"), 2000);
+        // Set user data in redux store
+        dispatch(setSin(true));
       })
       .then(() => {
         setTimeout(() => {
-          setPass('')
-          navigation.navigate('App1')
-        }, 3000)
-        setTimeout(() => this.textInput.clear(), 4000)
-        dispatch(setName(suds.SNAME))
-        dispatch(setSid(suds.STUID))
-        setTimeout(() => setRegg('hehe'), 4000)
+          // Clear password state
+          setPass("");
+          // Navigate to the main app
+          navigation.navigate("App1");
+        }, 3000);
+        // Clear text inputs
+        setTimeout(() => this.textInput.clear(), 4000);
+        // Set user data in redux store
+        dispatch(setName(suds.SNAME));
+        dispatch(setSid(suds.STUID));
+        // Clear registration state
+        setTimeout(() => setRegg(""), 4000);
       })
       .catch((error) => {
-        console.log(error.message)
-        setRegg('prob')
-      })
+        console.log(error.message);
+        setRegg("prob");
+      });
   }
 
-  async function DataRead () {
-    const docRef = doc(db, `users/user/buddy/${emaill}`)
-    const docSnap = await getDoc(docRef)
+  // function to read user data from firestore
+  async function DataRead() {
+    // Get user data from firestore
+    const docRef = doc(db, `users/user/buddy/${emaill}`);
+    const docSnap = await getDoc(docRef);
+    // Check if user data exists and set user data state
     if (docSnap.exists()) {
-      setSuds(docSnap.data())
-      console.log(suds)
-      setAcc('loop')
+      setSuds(docSnap.data());
+      console.log(suds);
+      setAcc("loop");
     } else {
       // docSnap.data() will be undefined in this case
-      console.log('No such document!')
+      console.log("No such document!");
     }
   }
 
+  // Load fonts
   const [fontsLoaded] = useFonts({
-    FredokaBold: require('../fonts/FredokaBold.ttf')
-  })
+    FredokaBold: require("../fonts/FredokaBold.ttf"),
+  });
   if (!fontsLoaded) {
-    return <ActivityIndicator />
+    return <ActivityIndicator />;
   }
 
+  // Render the page
   return (
     <Provider store={store}>
       <View style={styles.loginMain}>
         <View style={styles.loginLogo}>
-          <Text style={styles.loginLogoText}>Buddy</Text>
+          <ImageBackground
+            style={{
+              width: 600,
+              height: 450,
+              justifyContent: "center",
+              alignItems: "center",
+              marginTop: -150,
+
+            }}
+            source={Image}
+          >
+            <Text
+              style={{
+                backgroundColor: "white",
+                padding: 30,
+                borderRadius: 10,
+                fontSize: 100,
+                elevation: 5,
+                fontFamily: "FredokaBold",
+                color: "blue",
+                marginRight: 25,
+              }}
+            >
+              Buddy
+            </Text>
+          </ImageBackground>
         </View>
-        <KeyboardAvoidingView style={styles.loginIn} behavior='padding'>
+        <KeyboardAvoidingView style={styles.loginIn} behavior="padding">
+          {/* Login inputs */}
           <TextInput
             style={styles.loginTextIn}
-            inputMode='email'
-            placeholder='   email'
-            autoCapitalize='none'
+            inputMode="email"
+            placeholder="   email"
+            autoCapitalize="none"
             onChangeText={(text) => setEmaill(text)}
           />
           <TextInput
             secureTextEntry
             ref={(input) => {
-              this.textInput = input
+              this.textInput = input;
             }}
             style={styles.loginTextIn}
-            placeholder='   password'
-            autoCapitalize='none'
+            placeholder="   password"
+            autoCapitalize="none"
             onChangeText={(text) => setPass(text)}
           />
         </KeyboardAvoidingView>
@@ -113,48 +158,39 @@ export default function Login ({ navigation }) {
           <Text>New to Buddy?</Text>
           <TouchableOpacity
             style={styles.loginReg}
-            onPress={() => navigation.navigate('Register')}
+            onPress={() => navigation.navigate("Register")}
           >
             <Text style={styles.loginRegText}> Sign Up</Text>
           </TouchableOpacity>
         </View>
         <>
-          {regg === 'inp'
-            ? (
-              <>
-                <Text>
-                  Logging in ... <ActivityIndicator color='#2407f2' />
-                </Text>
-              </>
-              )
-            : regg === 'prob'
-              ? (
-                <>
-                  <Text>Wrong email or password!</Text>
-                </>
-                )
-              : regg === 'succ'
-                ? (
-                  <>
-                    <Text>Log In Succesful</Text>
-                  </>
-                  )
-                : regg === 'no'
-                  ? (
-                    <>
-                      <Text>
-                        You do not have an accout. Go to the registration page
-                      </Text>
-                    </>
-                    )
-                  : (
-                    <>
-                      <Text>Buddy v.1.0</Text>
-                    </>
-                    )}
+          {regg === "inp" ? (
+            <>
+              <Text>
+                Logging in ... <ActivityIndicator color="#2407f2" />
+              </Text>
+            </>
+          ) : regg === "prob" ? (
+            <>
+              <Text>Wrong email or password!</Text>
+            </>
+          ) : regg === "succ" ? (
+            <>
+              <Text>Log In Succesful</Text>
+            </>
+          ) : regg === "no" ? (
+            <>
+              <Text>
+                You do not have an accout. Go to the registration page
+              </Text>
+            </>
+          ) : (
+            <>
+              <Text>Buddy v.1.0</Text>
+            </>
+          )}
         </>
       </View>
     </Provider>
-  )
+  );
 }
-
