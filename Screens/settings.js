@@ -1,20 +1,17 @@
-import React from 'react' // Importing components from react
-import { View, Text, TouchableOpacity } from 'react-native' // Importing components from react-native
-import { setSin } from '../redux/actions' // Importing the setSin action from the redux actions
-import { useDispatch } from 'react-redux' // Importing the useDispatch component from react-redux
-import styles from '../Styling/styles' // Importing the styles from the styles file
+import React from "react"; // Importing components from react
+import { View, Text, TouchableOpacity } from "react-native"; // Importing components from react-native
+import styles from "../Styling/styles"; // Importing the styles from the styles file
+import { userContext } from "../store/user";
+import { useContext } from "react";
 
 // Settings page
-export default function Settings ({ navigation }) {
-  // Redux dispatch
-  const dispatch = useDispatch()
-  
+export default function Settings({ navigation }) {
+  const context = useContext(userContext);
 
   // Logout function
-  function Logout () {
-    dispatch(setSin(false))
+  function Logout() {
+    context.setAuthState(false);
   }
-  
 
   // Render the page
   return (
@@ -22,10 +19,10 @@ export default function Settings ({ navigation }) {
       <TouchableOpacity
         style={styles.meTopButtons}
         onPress={() => Logout()}
-        title='logout'
+        title="logout"
       >
         <Text style={styles.meTopButtonText}>Logout</Text>
       </TouchableOpacity>
     </View>
-  )
+  );
 }

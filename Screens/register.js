@@ -12,7 +12,6 @@ import { getAuth, createUserWithEmailAndPassword } from "firebase/auth"; // Impo
 import { setDoc, doc } from "firebase/firestore"; // Importing the setDoc and doc from firebase/firestore
 import { db } from "../firebase"; // Importing the db from the firebase
 import { useFonts } from "expo-font"; // Importing the useFonts from expo-font
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view"; // Importing the KeyboardAwareScrollView from react-native-keyboard-aware-scroll-view
 
 // Register component
 export default function Register({ navigation }) {
@@ -23,7 +22,7 @@ export default function Register({ navigation }) {
   const [email, setEmail] = useState(""); // Email state
   const [regg, setRegg] = useState("rnd"); // Registration state
   const [sign, setSign] = useState(false); // Sign up state
-  
+
   // function to create user collection in firestore
   async function createUserCollection() {
     try {
@@ -38,7 +37,7 @@ export default function Register({ navigation }) {
       console.error("Error adding document: ", e);
     }
   }
-  
+
   // function to create user document in mongodb
   async function createMongoDBdoc() {
     fetch("https://buddy00.onrender.com/updateR", {
@@ -104,7 +103,7 @@ export default function Register({ navigation }) {
       setRegg("prob2");
     }
   }
-  
+
   // Load fonts
   const [fontsLoaded] = useFonts({
     FredokaBold: require("../fonts/FredokaBold.ttf"),
@@ -153,7 +152,7 @@ export default function Register({ navigation }) {
           onChangeText={(text) => setPass1(text)}
         />
       </KeyboardAvoidingView>
-      <KeyboardAwareScrollView
+      <KeyboardAvoidingView
         style={styles.regCheckmain}
         keyboardShouldPersistTaps="always"
       >
@@ -189,7 +188,7 @@ export default function Register({ navigation }) {
             </>
           )}
         </>
-      </KeyboardAwareScrollView>
+      </KeyboardAvoidingView>
     </View>
   );
 }

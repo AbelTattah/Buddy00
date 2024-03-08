@@ -9,14 +9,14 @@ import {
 } from "react-native"; // Importing components from react-native
 import styles from "../Styling/styles"; // Importing the styles from the styles file
 import { useEffect, useState } from "react"; // Importing the useEffect and useState component from react
-import { Provider, useDispatch } from "react-redux"; // Importing the provider and useDispatch component from react-redux
-import { store } from "../redux/store"; // Importing the store from the redux store
-import { setName, setSin, setSid } from "../redux/actions"; // Importing the setName, setSin, and setSid action from the redux actions
 import { useFonts } from "expo-font"; // Importing the useFonts from expo-font
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth"; // Importing the getAuth and signInWithEmailAndPassword from firebase/auth
 import { db } from "../firebase"; // Importing the db from the firebase
 import { doc, getDoc } from "firebase/firestore"; // Importing the doc and getDoc from firebase/firestore
 import Image from "../assets/schoolimagecopy.jpg";
+import { userContext } from "../store/user";
+import { useContext } from "react";
+//import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // Login component
 export default function Login({ navigation }) {
@@ -26,7 +26,7 @@ export default function Login({ navigation }) {
   const [regg, setRegg] = useState("Hm"); // Registration state
   const [acc, setAcc] = useState(""); // Account state
   const auth = getAuth(); // Firebase auth
-  const dispatch = useDispatch(); // Redux dispatch
+  const context = useContext(userContext);
 
   useEffect(() => {
     // Get user data from firestore
@@ -49,8 +49,7 @@ export default function Login({ navigation }) {
         setRegg("inp");
         // Set user data in redux store
         setTimeout(() => setRegg("succ"), 2000);
-        // Set user data in redux store
-        dispatch(setSin(true));
+        context.setAuthState(true);
       })
       .then(() => {
         setTimeout(() => {
@@ -61,10 +60,8 @@ export default function Login({ navigation }) {
         }, 3000);
         // Clear text inputs
         setTimeout(() => this.textInput.clear(), 4000);
-        // Set user data in redux store
-        dispatch(setName(suds.SNAME));
-        dispatch(setSid(suds.STUID));
-        // Clear registration state
+        context.setName(suds.SNAME);
+        context.setSid(suds.STUID);
         setTimeout(() => setRegg(""), 4000);
       })
       .catch((error) => {
@@ -99,98 +96,93 @@ export default function Login({ navigation }) {
 
   // Render the page
   return (
-    <Provider store={store}>
-      <View style={styles.loginMain}>
-        <View style={styles.loginLogo}>
-          <ImageBackground
+    <View style={styles.loginMain}>
+      <View style={styles.loginLogo}>
+        <ImageBackground
+          style={{
+            width: 600,
+            height: 450,
+            justifyContent: "center",
+            alignItems: "center",
+            marginTop: -150,
+          }}
+          source={Image}
+        >
+          <Text
             style={{
-              width: 600,
-              height: 450,
-              justifyContent: "center",
-              alignItems: "center",
-              marginTop: -150,
-
+              backgroundColor: "white",
+              padding: 30,
+              borderRadius: 10,
+              fontSize: 100,
+              elevation: 5,
+              fontFamily: "FredokaBold",
+              color: "blue",
+              marginRight: 25,
             }}
-            source={Image}
           >
-            <Text
-              style={{
-                backgroundColor: "white",
-                padding: 30,
-                borderRadius: 10,
-                fontSize: 100,
-                elevation: 5,
-                fontFamily: "FredokaBold",
-                color: "blue",
-                marginRight: 25,
-              }}
-            >
-              Buddy
-            </Text>
-          </ImageBackground>
-        </View>
-        <KeyboardAvoidingView style={styles.loginIn} behavior="padding">
-          {/* Login inputs */}
-          <TextInput
-            style={styles.loginTextIn}
-            inputMode="email"
-            placeholder="   email"
-            autoCapitalize="none"
-            onChangeText={(text) => setEmaill(text)}
-          />
-          <TextInput
-            secureTextEntry
-            ref={(input) => {
-              this.textInput = input;
-            }}
-            style={styles.loginTextIn}
-            placeholder="   password"
-            autoCapitalize="none"
-            onChangeText={(text) => setPass(text)}
-          />
-        </KeyboardAvoidingView>
-        <TouchableOpacity style={styles.loginButton} onPress={() => signIn()}>
-          <Text style={styles.loginButtonText}>Log in</Text>
-        </TouchableOpacity>
-        <Text style={styles.loginTextt1}>Forgot password?</Text>
-        <Text style={styles.loginTextt2}>Privacy</Text>
-        <View style={styles.regButtonView}>
-          <Text>New to Buddy?</Text>
-          <TouchableOpacity
-            style={styles.loginReg}
-            onPress={() => navigation.navigate("Register")}
-          >
-            <Text style={styles.loginRegText}> Sign Up</Text>
-          </TouchableOpacity>
-        </View>
-        <>
-          {regg === "inp" ? (
-            <>
-              <Text>
-                Logging in ... <ActivityIndicator color="#2407f2" />
-              </Text>
-            </>
-          ) : regg === "prob" ? (
-            <>
-              <Text>Wrong email or password!</Text>
-            </>
-          ) : regg === "succ" ? (
-            <>
-              <Text>Log In Succesful</Text>
-            </>
-          ) : regg === "no" ? (
-            <>
-              <Text>
-                You do not have an accout. Go to the registration page
-              </Text>
-            </>
-          ) : (
-            <>
-              <Text>Buddy v.1.0</Text>
-            </>
-          )}
-        </>
+            Buddy
+          </Text>
+        </ImageBackground>
       </View>
-    </Provider>
+      <KeyboardAvoidingView style={styles.loginIn} behavior="padding">
+        {/* Login inputs */}
+        <TextInput
+          style={styles.loginTextIn}
+          inputMode="email"
+          placeholder="   email"
+          autoCapitalize="none"
+          onChangeText={(text) => setEmaill(text)}
+        />
+        <TextInput
+          secureTextEntry
+          ref={(input) => {
+            this.textInput = input;
+          }}
+          style={styles.loginTextIn}
+          placeholder="   password"
+          autoCapitalize="none"
+          onChangeText={(text) => setPass(text)}
+        />
+      </KeyboardAvoidingView>
+      <TouchableOpacity style={styles.loginButton} onPress={() => signIn()}>
+        <Text style={styles.loginButtonText}>Log in</Text>
+      </TouchableOpacity>
+      <Text style={styles.loginTextt1}>Forgot password?</Text>
+      <Text style={styles.loginTextt2}>Privacy</Text>
+      <View style={styles.regButtonView}>
+        <Text>New to Buddy?</Text>
+        <TouchableOpacity
+          style={styles.loginReg}
+          onPress={() => navigation.navigate("Register")}
+        >
+          <Text style={styles.loginRegText}> Sign Up</Text>
+        </TouchableOpacity>
+      </View>
+      <>
+        {regg === "inp" ? (
+          <>
+            <Text>
+              Logging in ... <ActivityIndicator color="#2407f2" />
+            </Text>
+          </>
+        ) : regg === "prob" ? (
+          <>
+            <Text>Wrong email or password!</Text>
+          </>
+        ) : regg === "succ" ? (
+          <>
+            <Text>Log In Succesful</Text>
+          </>
+        ) : regg === "no" ? (
+          <>
+            <Text>You do not have an accout. Go to the registration page</Text>
+          </>
+        ) : (
+          <>
+            <Text>Buddy v.1.0</Text>
+          </>
+        )}
+      </>
+    </View>
   );
 }

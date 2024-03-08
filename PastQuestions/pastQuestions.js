@@ -4,18 +4,18 @@ import {
   TextInput,
   ActivityIndicator,
   ScrollView,
-  TouchableOpacity
-} from 'react-native' // Importing components from react-native
-import React, { useState } from 'react' // Importing the useState hook from react
-import axios from 'axios' // Importing axios
+  TouchableOpacity,
+} from "react-native"; // Importing components from react-native
+import React, { useState } from "react"; // Importing the useState hook from react
+import axios from "axios"; // Importing axios
 
-import styles from '../Styling/styles' // Importing the styles from the styles file
-import { Provider, useDispatch } from 'react-redux' // Importing the Provider and useDispatch from react-redux
-import { store } from '../redux/store' // Importing the store from the redux store
-import { setCurrentCourse } from '../redux/actions' // Importing the setCurrentCourse action from the redux actions
-import { createNativeStackNavigator } from '@react-navigation/native-stack' // Importing the createNativeStackNavigator from @react-navigation/native-stack
-import { NavigationContainer } from '@react-navigation/native' // Importing the NavigationContainer from @react-navigation/native
-import PqRender from './pqRender' // Importing the pqRender component
+import styles from "../Styling/styles"; // Importing the styles from the styles file
+import { createNativeStackNavigator } from "@react-navigation/native-stack"; // Importing the createNativeStackNavigator from @react-navigation/stack
+import { NavigationContainer } from "@react-navigation/native"; // Importing the NavigationContainer from @react-navigation/native
+import PqRender from "./pqRender"; // Importing the pqRender component
+import { userContext } from "../store/user";
+import { useContext } from "react";
+
 /*
 
 This is the page that displays the past questions for the user to select from
@@ -31,69 +31,68 @@ steps above are completed.
 
 */
 
-const Stack = createNativeStackNavigator()
+const Stack = createNativeStackNavigator();
 
 // Load fonts
 const PastQuestions = ({ navigation }) => {
+  const [code, setCode] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [endpoints, setEndpoints] = useState([]);
 
-  const [code, setCode] = useState('')
-  const [loading, setLoading] = useState(false)
-  const [endpoints, setEndpoints] = useState([])
+  const context = useContext(userContext);
 
   // Get endpoints for past Question pdfs from api
-  async function getEndpoints (couseCode) {
+  async function getEndpoints(couseCode) {
     try {
-      console.log(code)
+      console.log(code);
       const response = await axios.get(
         `https://buddy-backend-ti17.onrender.com/pasco/get/${code}`
-      )
-      setEndpoints(response.data.endPoints)
-      console.log(response.data)
+      );
+      setEndpoints(response.data.endPoints);
+      console.log(response.data);
     } catch (error) {
-      console.log(error.message)
+      console.log(error.message);
     }
   }
 
   // Search for past questions
 
   const searchHandler = () => {
-    setLoading(true)
-    getEndpoints()
+    setLoading(true);
+    getEndpoints();
     setTimeout(() => {
-      setLoading(false)
-    }, 4000)
-  }
+      setLoading(false);
+    }, 4000);
+  };
 
   // Navigate to pdf view
   const navigationHandler = () => {
     setTimeout(() => {
-      navigation.navigate('PQ')
-    }, 1000)
-  }
-
-  const Dispatch = useDispatch()
+      navigation.navigate("PQ");
+    }, 1000);
+  };
 
   return (
     <View
       style={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
         paddingTop: 50,
-        backgroundColor: '#fff'
+        backgroundColor: "#fff",
       }}
     >
       <TextInput
         style={{
-          borderColor: 'black',
+          borderColor: "black",
           borderWidth: 1,
           borderRadius: 20,
           height: 60,
           width: 300,
           marginBottom: 20,
-          padding: 10
+          padding: 10,
         }}
-        placeholder='Enter course Code eg. MATH123'
+        placeholder="Enter course Code eg. MATH123"
         onChangeText={(text) => setCode(text)}
       />
       <View>
@@ -102,100 +101,107 @@ const PastQuestions = ({ navigation }) => {
             style={{
               width: 70,
               height: 30,
-              position: 'absolute',
+              position: "absolute",
               top: -65,
-              display: 'flex',
-              justifyContent: 'center',
-              left: 220,
-              backgroundColor: '#7979FF8e',
-              zIndex: 1
+              display: "flex",
+              justifyContent: "center",
+              right: -130,
+              backgroundColor: "#7979FF8e",
+              zIndex: 1,
             }}
             onPress={() => {
-              searchHandler()
+              searchHandler();
             }}
           >
             <Text
               style={{
-                textAlign: 'center'
+                textAlign: "center",
               }}
             >
               Search
             </Text>
           </TouchableOpacity>
           <>
-            {loading
-              ? (
-                <View
+            {loading ? (
+              <View
+                style={{
+                  height: 300,
+                  width: 300,
+                  backgroundColor: "#fff",
+                  borderRadius: 20,
+                  padding: 10,
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <ActivityIndicator />
+              </View>
+            ) : (
+              <>
+                <ScrollView
                   style={{
                     height: 300,
-                    width: 300,
-                    backgroundColor: '#fff',
+                    backgroundColor: "#fff",
                     borderRadius: 20,
                     padding: 10,
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center'
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: 20,
                   }}
                 >
-                  <ActivityIndicator />
-                </View>
-                )
-              : (
-                <>
-                  <ScrollView
-                    style={{
-                      height: 300,
-                      width: 300,
-                      backgroundColor: '#fff',
-                      borderRadius: 20,
-                      padding: 10
-                    }}
-                  >
-                    {endpoints.map((endpoint,i) => (
-                      <TouchableOpacity
-                        key={i}
-                        style={styles.meTopButtons}
-                        onPress={() => {
-                          Dispatch(setCurrentCourse(endpoint))
-                          navigationHandler()
+                  {endpoints.map((endpoint, i) => (
+                    <TouchableOpacity
+                      key={i}
+                      style={{
+                        width: 300,
+                        height: 86,
+                        backgroundColor: "#7979FF8e",
+                        borderColor: "black",
+                        borderRadius: 20,
+                        justifyContent: "center",
+                        margin: 10,
+                        marginRight: 10,
+                      }}
+                      onPress={() => {
+                        context.setPdf(endpoint);
+                        navigationHandler();
+                      }}
+                    >
+                      <Text
+                        style={{
+                          textAlign: "center",
                         }}
                       >
-                        <Text
-                          style={{
-                            textAlign: 'center'
-                          }}
-                        >
-                          {endpoint}
-                        </Text>
-                      </TouchableOpacity>
-                    ))}
-                  </ScrollView>
-                </>
-                )}
+                        {endpoint}
+                      </Text>
+                    </TouchableOpacity>
+                  ))}
+                </ScrollView>
+              </>
+            )}
           </>
         </View>
       </View>
     </View>
-  )
-}
+  );
+};
 
 const PQNav = ({ navigation }) => {
   return (
-    <Provider store={store}>
-      <NavigationContainer independent>
-        <Stack.Navigator>
-          <Stack.Screen name='Past Questions' component={PastQuestions} />
-          <Stack.Screen
-            name='PQ'
-            options={{
-              title: 'Past Question'
-            }}
-            component={PqRender}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
-    </Provider>
-  )
-}
+    <NavigationContainer independent>
+      <Stack.Navigator>
+        <Stack.Screen name="Past Questions" component={PastQuestions} />
+        <Stack.Screen
+          name="PQ"
+          options={{
+            title: "Past Question",
+          }}
+          component={PqRender}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+};
 
-export default PQNav
+export default PQNav;

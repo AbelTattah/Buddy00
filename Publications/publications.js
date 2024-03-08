@@ -67,7 +67,6 @@ const ScheduleofFees = ({ navigation }) => {
   );
 };
 
-
 export default function Publications() {
   return (
     <NavigationContainer independent>

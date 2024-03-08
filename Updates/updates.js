@@ -13,10 +13,8 @@ import {
   Button,
   TouchableOpacity,
 } from "react-native"; // Importing components from react-native
-
-// Importing the store from the redux store
-import { store } from "../redux/store";
-import { Provider, useSelector } from "react-redux";
+import { useContext } from "react";
+import { userContext } from "../store/user";
 
 // Importing the axios library
 import axios from "axios";
@@ -100,10 +98,11 @@ export default function Updates({ route, navigation }) {
   const [isSudo, setIsSudo] = useState(false);
   let parr;
   let parr1;
-  const { sidd } = useSelector((state) => state.userReducer);
   let iddd = "";
   let senderIDD = "";
 
+  const {sid} = useContext(userContext)
+  
   const Flat = function List({ items }) {
     return (
       <FlatList
@@ -144,7 +143,7 @@ async function GetUserRecievedUpdates() {
       "https://buddy-backend-ti17.onrender.com/update/updateR"
     );
     setData(response.data);
-    setRarr(filterbyid(response.data, sidd)); // Use response.data instead of data
+    setRarr(filterbyid(response.data, sid)); // Use response.data instead of data
     console.log(rarr);
   } catch (error) {
     console.error(error);
@@ -158,7 +157,7 @@ async function GetUserSentUpdates() {
       "https://buddy-backend-ti17.onrender.com/update/updateS"
     );
     setData1(response.data);
-    setSarr(filterbyid(response.data, sidd)); // Use response.data instead of data1
+    setSarr(filterbyid(response.data, sid)); // Use response.data instead of data1
     console.log(sarr);
   } catch (error) {
     console.error(error);
@@ -172,7 +171,7 @@ async function GetUserSentUpdates() {
       );
       sudo = response.data[0];
       for (let x = 0; x < sudo.User.length; x++) {
-        if (sudo.User[x] == sidd) {
+        if (sudo.User[x] == sid) {
           setIsSudo(true);
         }
       }
@@ -298,7 +297,7 @@ async function GetUserSentUpdates() {
 
 
     return (
-      <Provider store={store}>
+      <>
         <SafeAreaView>
           <View style={{
             marginTop: 50,
@@ -461,7 +460,7 @@ async function GetUserSentUpdates() {
             )}
           </View>
         </SafeAreaView>
-      </Provider>
+      </>
     );
     
 }

@@ -1,6 +1,6 @@
-import { View, Text, TouchableOpacity } from "react-native"; // Importing components from react-native
+import { View, Text, TouchableOpacity,Image } from "react-native"; // Importing components from react-native
 import styles from "../Styling/styles"; //  Importing the styles from the styles file
-import { createNativeStackNavigator } from "@react-navigation/native-stack"; // Importing the createNativeStackNavigator from @react-navigation/native-stack
+import { createNativeStackNavigator } from "@react-navigation/native-stack"; // Importing the createNativeStackNavigator from @react-navigation/stack
 import { NavigationContainer } from "@react-navigation/native"; // Importing the NavigationContainer from @react-navigation/native
 import Examt from "../Timetables/examtimetable"; // Importing the exam timetable component
 import CourseTimetables from "../Timetables/coursetimetables"; // Importing the course timetables component
@@ -16,11 +16,11 @@ function MePage({ navigation }) {
       <View style={styles.meTopSection}>
         <View style={styles.meTopButtonView}>
           <TouchableOpacity style={styles.meTopButtons}>
+            
             <Text
               style={styles.meTopButtonText}
               onPress={() => navigation.navigate("Course")}
-            >
-              Course Timetables
+            > Course Timetables
             </Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.meTopButtons}>

@@ -1,7 +1,7 @@
 import * as React from "react"; // Importing components from react
 import Lobby from "./Screens/lobby"; // Importing the lobby component
 import { NavigationContainer } from "@react-navigation/native"; // Importing the NavigationContainer from @react-navigation/native
-import { createNativeStackNavigator } from "@react-navigation/native-stack"; // Importing the createNativeStackNavigator from @react-navigation/native-stack
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Button, View, Text, Image } from "react-native"; // Importing components from react-native
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"; // Importing the createBottomTabNavigator from @react-navigation/bottom-tabs
 
@@ -10,11 +10,12 @@ import Settings from "./Screens/settings";
 import Timetables from "./Screens/timetables";
 // Rest of the import statements
 import Login from "./Screens/login";
-import { Provider, useSelector } from "react-redux";
 // Importing the store from the redux store
-import { store } from "./redux/store";
 import Register from "./Screens/register";
 import { StatusBar } from "expo-status-bar";
+import { useContext } from "react";
+import { userContext } from "./store/user";
+import UserContextProvider from "./store/user";
 
 // Create a stack navigator
 const Stack = createNativeStackNavigator();
@@ -40,11 +41,10 @@ function LobbyTitle() {
 }
 
 function App1({ navigation }) {
-  const { sin } = useSelector((state) => state.userReducer);
-
+  const { isLoggedIn } = useContext(userContext);
   return (
     <>
-      {sin ? (
+      {isLoggedIn ? (
         <NavigationContainer independent>
           <Tab.Navigator initialRouteName="Lobby">
             <Tab.Screen
@@ -52,10 +52,20 @@ function App1({ navigation }) {
               component={Lobby}
               gestureEnabled
               options={{
-                headerTitle: () => <LobbyTitle />,
+                headerTitle: (
+                  <Text
+                    style={{
+                      fontWeight: "700",
+                      fontFamily: "FredokaBold",
+                    }}
+                  >
+                    Buddy
+                  </Text>
+                ),
+                headerTintColor: "#00f9",
                 tabBarIcon: (color, size) => (
                   <Image
-                    source={require("./assets/documenticon.jpeg")}
+                    source={require("./assets/home-button.png")}
                     style={{
                       width: 25,
                       height: 25,
@@ -70,11 +80,13 @@ function App1({ navigation }) {
                   borderTopWidth: 1,
                 },
                 headerShadowVisible: false,
-                headerTintColor: "#000",
+                headerTintColor: "#fff",
                 headerStyle: {
                   elevation: 0,
                   shadowOpacity: 0,
+                  height: 110,
                   borderBottomWidth: 0,
+                  backgroundColor: "#00f9",
                 },
               }}
             />
@@ -84,13 +96,19 @@ function App1({ navigation }) {
               name="Timetables"
               options={{
                 headerTitle: () => (
-                  <Text style={{ fontFamily: "FredokaBold", fontSize: 20 }}>
+                  <Text
+                    style={{
+                      fontFamily: "FredokaBold",
+                      fontSize: 20,
+                      color: "white",
+                    }}
+                  >
                     Timetables
                   </Text>
                 ),
                 tabBarIcon: (color, size) => (
                   <Image
-                    source={require("./assets/timetableicon.jpeg")}
+                    source={require("./assets/schedule.png")}
                     style={{
                       width: 25,
                       height: 25,
@@ -105,11 +123,13 @@ function App1({ navigation }) {
                   borderTopWidth: 2,
                 },
                 headerShadowVisible: false,
-                headerTintColor: "#000",
+                headerTintColor: "#fff",
                 headerStyle: {
                   elevation: 0,
                   shadowOpacity: 0,
+                  height: 110,
                   borderBottomWidth: 0,
+                  backgroundColor: "#00f9",
                 },
               }}
             />
@@ -119,13 +139,19 @@ function App1({ navigation }) {
               component={Settings}
               options={{
                 headerTitle: () => (
-                  <Text style={{ fontFamily: "FredokaBold", fontSize: 20 }}>
+                  <Text
+                    style={{
+                      fontFamily: "FredokaBold",
+                      fontSize: 20,
+                      color: "white",
+                    }}
+                  >
                     Settings
                   </Text>
                 ),
                 tabBarIcon: () => (
                   <Image
-                    source={require("./assets/settingsgearicon.png")}
+                    source={require("./assets/cogwheel.png")}
                     style={{
                       width: 25,
                       height: 25,
@@ -140,11 +166,13 @@ function App1({ navigation }) {
                   borderTopWidth: 2,
                 },
                 headerShadowVisible: false,
-                headerTintColor: "#000",
+                headerTintColor: "#fff",
                 headerStyle: {
                   elevation: 0,
                   shadowOpacity: 0,
+                  height: 110,
                   borderBottomWidth: 0,
+                  backgroundColor: "#00f9",
                 },
               }}
             />
@@ -170,9 +198,10 @@ function App1({ navigation }) {
 }
 
 export default function App() {
-  return (<>
-    <StatusBar style="dark" />
-    <Provider store={store}>
+  return (
+    <UserContextProvider>
+      <StatusBar style="dark" />
+
       <NavigationContainer>
         <Stack.Navigator>
           <Stack.Screen
@@ -188,12 +217,14 @@ export default function App() {
           <Stack.Screen
             name="App1"
             component={App1}
-            options={{ headerShown: false }}
+            options={{
+              headerShown: false,
+              headerTintColor: "#00f9",
+            }}
           />
         </Stack.Navigator>
       </NavigationContainer>
-    </Provider>
-    </>
+    </UserContextProvider>
   );
 }
 

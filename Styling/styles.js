@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
   dashboardName: {
     color: 'black',
     fontFamily: 'FredokaBold',
-    fontSize:22,
+    fontSize:28,
     position: 'absolute',
     top: -0,
     left: 50,
@@ -490,7 +490,7 @@ const styles = StyleSheet.create({
     width: 300,
     height: 40,
     paddingHorizontal: 10,
-    color: 'blackf'
+    color: 'black'
   },
   regButtonView: {
     flexDirection: 'row',
