@@ -97,15 +97,15 @@ const PastQuestions = ({ navigation }) => {
       />
       <View>
         <View>
+          <>
           <TouchableOpacity
             style={{
               width: 70,
               height: 30,
-              position: "absolute",
-              top: -65,
+              marginLeft:240,
               display: "flex",
               justifyContent: "center",
-              right: -130,
+
               backgroundColor: "#7979FF8e",
               zIndex: 1,
             }}
@@ -121,7 +121,6 @@ const PastQuestions = ({ navigation }) => {
               Search
             </Text>
           </TouchableOpacity>
-          <>
             {loading ? (
               <View
                 style={{
