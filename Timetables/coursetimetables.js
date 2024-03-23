@@ -11,7 +11,7 @@ import { View, Text, TouchableOpacity } from 'react-native' // Importing compone
 import { createNativeStackNavigator } from '@react-navigation/native-stack' // Importing the createNativeStackNavigator from @react-navigation/stack
 import styles from '../Styling/styles' // Importing the styles from the styles file
 import { NavigationContainer } from '@react-navigation/native' // Importing the NavigationContainer from @react-navigation/native
-import PdfComp from '../Components/timetable' // Importing the timetable component
+import PdfComp from '../Components/pdf' // Importing the timetable component
 
 // Create a stack navigator
 const Stack = createNativeStackNavigator()

@@ -1,5 +1,5 @@
 import React from 'react' // Importing components from react
-import PdfComp from '../Components/timetable' // Importing the pdf component
+import PdfComp from '../Components/pdf' // Importing the pdf component
 import { useContext } from 'react'
 import { userContext } from '../store/user'
 

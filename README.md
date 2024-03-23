@@ -55,7 +55,6 @@ Retrieve essential documents such as timetables, handbooks, and other important 
 ## Technologies Used
 
 - React Native: Building interactive user interfaces on mobile
-- Node.js: Server-side JavaScript runtime
 - Express.js: Web application framework for Node.js
 - MongoDB: NoSQL database for storing app data
 
